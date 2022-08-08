@@ -1,5 +1,15 @@
+import { Helmet } from "react-helmet-async";
+
 function App() {
-  return <div>Meals</div>;
+  return (
+    <>
+      <Helmet>
+        <title>Meals</title>
+      </Helmet>
+
+      <div>Meals</div>
+    </>
+  );
 }
 
 export default App;
