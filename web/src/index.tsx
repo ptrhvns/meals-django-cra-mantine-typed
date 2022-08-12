@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { MantineProvider } from "@mantine/core";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -13,7 +14,15 @@ root.render(
   <React.StrictMode>
     <HelmetProvider>
       <BrowserRouter>
-        <App />
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            loader: "dots",
+          }}
+        >
+          <App />
+        </MantineProvider>
       </BrowserRouter>
     </HelmetProvider>
   </React.StrictMode>
