@@ -14,13 +14,7 @@ root.render(
   <React.StrictMode>
     <HelmetProvider>
       <BrowserRouter>
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{
-            loader: "dots",
-          }}
-        >
+        <MantineProvider withGlobalStyles withNormalizeCSS>
           <App />
         </MantineProvider>
       </BrowserRouter>
