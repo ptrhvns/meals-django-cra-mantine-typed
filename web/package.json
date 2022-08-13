@@ -19,6 +19,7 @@
     "@types/node": "^18.7.3",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/react-router-dom": "^5.3.3",
     "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
     "prettier": "^2.7.1",
