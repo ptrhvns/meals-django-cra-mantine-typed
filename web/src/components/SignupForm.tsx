@@ -8,12 +8,15 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
+import { ApiResponse, useApi } from "../hooks/useApi";
 import {
   faCircleExclamation,
   faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { forOwn, head, pick } from "lodash";
 import { useForm } from "@mantine/form";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const useStyles = createStyles((theme) => ({
@@ -32,9 +35,11 @@ const useStyles = createStyles((theme) => ({
 }));
 
 function SignupForm() {
-  const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  const [alert, setAlert] = useState<string | undefined>(undefined);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const navigate = useNavigate();
   const { classes } = useStyles();
+  const { post } = useApi();
 
   const form = useForm({
     initialValues: {
@@ -53,21 +58,34 @@ function SignupForm() {
         onSubmit={form.onSubmit(async (values) => {
           setIsSubmitting(true);
 
-          console.log("DEBUG values", values); // TODO remove
+          const response: ApiResponse = await post({
+            data: pick(values, ["email", "password", "username"]),
+            route: "signup",
+          });
 
-          // TODO remove
-          setTimeout(() => {
-            setIsSubmitting(false);
-            setAlertMessage("Form submission is not implemented yet.");
-          }, 1000);
+          setIsSubmitting(false);
+
+          if (response.isError) {
+            setAlert(response.message);
+
+            forOwn(response.errors, (value, key) =>
+              form.setFieldError(key, head(value))
+            );
+
+            return;
+          }
+
+          navigate("/login", { replace: true });
         })}
       >
-        {alertMessage && (
+        {alert && (
           <Alert
             color="red"
             icon={<FontAwesomeIcon icon={faCircleExclamation} />}
+            onClose={() => setAlert(undefined)}
+            withCloseButton
           >
-            {alertMessage}
+            {alert}
           </Alert>
         )}
 
@@ -94,8 +112,8 @@ function SignupForm() {
         />
 
         <Text className={classes.termsNotice} mt="xl" size="sm">
-          By signing up, you agree to this site's Terms and Conditions and
-          Privacy Policy.
+          By signing up, you agree to our Terms and Conditions and Privacy
+          Policy.
         </Text>
 
         <Button disabled={isSubmitting} mt="xl" type="submit">
