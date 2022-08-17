@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_extensions",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -60,7 +61,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -79,13 +80,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
+DATABASES = {"default": env.db()}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -127,3 +122,78 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# AUTH_USER_MODEL = "main.models.User"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication"
+    ],
+    "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
+    "TEST_REQUEST_DEFAULT_FORMAT": "json",
+}
+
+SITE_TITLE = "Meals"
+
+if DEBUG:
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "console": {
+                "datefmt": "%Y-%m-%dT%H:%M:%S%z",
+                "format": "{asctime} | {levelname} | {filename}:{lineno} | {name} | {message}",
+                "style": "{",
+            }
+        },
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "formatter": "console",
+            },
+        },
+        "loggers": {
+            "django": {
+                "formatters": ["console"],
+                "handlers": ["console"],
+                "level": "INFO",
+                "propagate": False,
+            },
+        },
+        "root": {
+            "handlers": ["console"],
+            "level": "INFO",
+        },
+    }
+else:
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "file": {
+                "datefmt": "%Y-%m-%dT%H:%M:%S%z",
+                "format": "{asctime} | {levelname} | {filename}:{lineno} | {name} | {message}",
+                "style": "{",
+            }
+        },
+        "handlers": {
+            "file": {
+                "class": "logging.FileHandler",
+                "filename": env("LOGFILE"),
+                "formatter": "file",
+                "level": "INFO",
+            }
+        },
+        "loggers": {
+            "django": {
+                "formatters": ["file"],
+                "handlers": ["file"],
+                "level": "INFO",
+                "propagate": False,
+            },
+        },
+        "root": {
+            "handlers": ["file"],
+            "level": "INFO",
+        },
+    }
