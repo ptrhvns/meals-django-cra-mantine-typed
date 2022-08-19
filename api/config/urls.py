@@ -16,6 +16,7 @@ Including another URLconf
 from django import urls
 from django.conf import settings
 from django.contrib import admin
+from django.urls.resolvers import URLPattern, URLResolver
 
 from main import views
 
@@ -24,7 +25,9 @@ handler403 = views.forbidden
 handler404 = views.not_found
 handler500 = views.internal_server_error
 
-urlpatterns = []
+urlpatterns: list[URLPattern | URLResolver] = [
+    urls.path("api/", urls.include("main.urls")),
+]
 
 if settings.DEBUG:
-    urlpatterns.append(urls.path("admin/", admin.site.urls))
+    urlpatterns += [urls.path("admin/", admin.site.urls)]
