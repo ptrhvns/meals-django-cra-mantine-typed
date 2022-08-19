@@ -4,12 +4,14 @@ import {
   Button,
   createStyles,
   LoadingOverlay,
+  Modal,
   PasswordInput,
   Text,
   TextInput,
 } from "@mantine/core";
 import { ApiResponse, useApi } from "../hooks/useApi";
 import {
+  faCircleCheck,
   faCircleExclamation,
   faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons";
@@ -37,6 +39,7 @@ const useStyles = createStyles((theme) => ({
 function SignupForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [success, setSuccess] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
   const { classes } = useStyles();
   const { post } = useApi();
@@ -50,78 +53,92 @@ function SignupForm() {
   });
 
   return (
-    <Box className={classes.wrapper}>
-      <LoadingOverlay visible={isSubmitting} />
-
-      <form
-        className={classes.form}
-        onSubmit={form.onSubmit(async (values) => {
-          setIsSubmitting(true);
-
-          const response: ApiResponse = await post({
-            data: pick(values, ["email", "password", "username"]),
-            route: "signup",
-          });
-
-          setIsSubmitting(false);
-
-          if (response.isError) {
-            setAlert(response.message);
-
-            forOwn(response.errors, (value, key) =>
-              form.setFieldError(key, head(value))
-            );
-
-            return;
-          }
-
-          navigate("/login", { replace: true });
-        })}
+    <>
+      <Modal
+        centered={true}
+        onClose={() => navigate("/login", { replace: true })}
+        opened={!!success}
+        padding="sm"
+        title="Sign up"
       >
-        {alert && (
-          <Alert
-            color="red"
-            icon={<FontAwesomeIcon icon={faCircleExclamation} />}
-            onClose={() => setAlert(undefined)}
-            withCloseButton
-          >
-            {alert}
-          </Alert>
-        )}
+        <Alert color="green" icon={<FontAwesomeIcon icon={faCircleCheck} />}>
+          {success}
+        </Alert>
+      </Modal>
 
-        <TextInput
-          disabled={isSubmitting}
-          label="Username"
-          mt="md"
-          {...form.getInputProps("username")}
-        />
+      <Box className={classes.wrapper}>
+        <LoadingOverlay visible={isSubmitting} />
 
-        <TextInput
-          disabled={isSubmitting}
-          label="Email"
-          mt="md"
-          type="email"
-          {...form.getInputProps("email")}
-        />
+        <form
+          className={classes.form}
+          onSubmit={form.onSubmit(async (values) => {
+            setIsSubmitting(true);
 
-        <PasswordInput
-          disabled={isSubmitting}
-          label="Password"
-          mt="md"
-          {...form.getInputProps("password")}
-        />
+            const response: ApiResponse = await post({
+              data: pick(values, ["email", "password", "username"]),
+              route: "signup",
+            });
 
-        <Text className={classes.termsNotice} mt="xl" size="sm">
-          By signing up, you agree to our Terms and Conditions and Privacy
-          Policy.
-        </Text>
+            setIsSubmitting(false);
 
-        <Button disabled={isSubmitting} mt="xl" type="submit">
-          <FontAwesomeIcon icon={faPlusCircle} />
-          <Text ml="xs">Sign up</Text>
-        </Button>
-      </form>
-    </Box>
+            if (response.isError) {
+              setAlert(response.message);
+
+              forOwn(response.errors, (value, key) =>
+                form.setFieldError(key, head(value))
+              );
+
+              return;
+            }
+
+            setSuccess(response.message);
+          })}
+        >
+          {alert && (
+            <Alert
+              color="red"
+              icon={<FontAwesomeIcon icon={faCircleExclamation} />}
+              onClose={() => setAlert(undefined)}
+              withCloseButton
+            >
+              {alert}
+            </Alert>
+          )}
+
+          <TextInput
+            disabled={isSubmitting}
+            label="Username"
+            mt="md"
+            {...form.getInputProps("username")}
+          />
+
+          <TextInput
+            disabled={isSubmitting}
+            label="Email"
+            mt="md"
+            type="email"
+            {...form.getInputProps("email")}
+          />
+
+          <PasswordInput
+            disabled={isSubmitting}
+            label="Password"
+            mt="md"
+            {...form.getInputProps("password")}
+          />
+
+          <Text className={classes.termsNotice} mt="xl" size="sm">
+            By signing up, you agree to our Terms and Conditions and Privacy
+            Policy.
+          </Text>
+
+          <Button disabled={isSubmitting} mt="xl" type="submit">
+            <FontAwesomeIcon icon={faPlusCircle} />
+            <Text ml="xs">Sign up</Text>
+          </Button>
+        </form>
+      </Box>
+    </>
   );
 }
 

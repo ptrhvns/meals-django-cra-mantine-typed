@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import re
 from pathlib import Path
 
 from environ import Env  # type: ignore[import]
@@ -134,7 +135,7 @@ REST_FRAMEWORK = {
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
 }
 
-SITE_TITLE = "Meals"
+SITE_TITLE = "Meals Typed"
 
 if DEBUG:
     LOGGING = {
@@ -198,3 +199,14 @@ else:
             "level": "INFO",
         },
     }
+
+EMAIL_ADDRESSES = {"support": env("EMAIL_SUPPORT")}
+
+CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+CELERY_TASK_DEFAULT_QUEUE = re.sub(r"\W+", "_", SITE_TITLE.lower())
+CELERY_TIMEZONE = TIME_ZONE
+
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+BASE_CLIENT_URI = env("BASE_CLIENT_URI")
