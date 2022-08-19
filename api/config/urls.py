@@ -16,6 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from main import views
+
+handler400 = views.bad_request
+handler403 = views.forbidden
+handler404 = views.not_found
+handler500 = views.internal_server_error
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
 ]
