@@ -18,12 +18,12 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls.resolvers import URLPattern, URLResolver
 
-from main import views
+from main.views import error_handlers
 
-handler400 = views.bad_request
-handler403 = views.forbidden
-handler404 = views.not_found
-handler500 = views.internal_server_error
+handler400 = error_handlers.bad_request
+handler403 = error_handlers.forbidden
+handler404 = error_handlers.not_found
+handler500 = error_handlers.internal_server_error
 
 urlpatterns: list[URLPattern | URLResolver] = [
     urls.path("api/", urls.include("main.urls")),
