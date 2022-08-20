@@ -128,8 +128,8 @@ function SignupForm() {
           />
 
           <Text className={classes.termsNotice} mt="xl" size="sm">
-            By signing up, you agree to our Terms and Conditions and Privacy
-            Policy.
+            By signing up for an account, you agree to our Terms and Conditions
+            and Privacy Policy.
           </Text>
 
           <Button disabled={isSubmitting} mt="xl" type="submit">
