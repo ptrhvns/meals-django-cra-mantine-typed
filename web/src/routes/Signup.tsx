@@ -1,5 +1,13 @@
 import SignupForm from "../components/SignupForm";
-import { Box, Center, createStyles, Paper, Text, Title } from "@mantine/core";
+import {
+  Box,
+  Center,
+  createStyles,
+  Divider,
+  Paper,
+  Text,
+  Title,
+} from "@mantine/core";
 import { buildTitle } from "../lib/utils/dom";
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -63,6 +71,8 @@ function Signup() {
             </Text>
 
             <SignupForm />
+
+            <Divider my="xl" />
 
             <Text className={classes.loginLink} mt="xl">
               Already have an account? <Link to="/login">Log in</Link>.
