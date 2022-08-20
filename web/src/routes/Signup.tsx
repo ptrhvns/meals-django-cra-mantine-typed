@@ -13,7 +13,7 @@ const useStyles = createStyles((theme) => ({
   },
   pageContentWrapper: {
     backgroundColor: theme.colors.gray[1],
-    height: "100vh",
+    minHeight: "100vh",
   },
   subHeader: {
     color: theme.colors.gray[7],
@@ -41,7 +41,7 @@ function Signup() {
         <title>{buildTitle("Sign up")}</title>
       </Helmet>
 
-      <Center className={classes.pageContentWrapper}>
+      <Center className={classes.pageContentWrapper} py="md">
         <Box className={classes.pageContent}>
           <Text
             className={classes.siteLink}
