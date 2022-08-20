@@ -1,5 +1,6 @@
 import SignupForm from "../components/SignupForm";
 import {
+  Anchor,
   Box,
   Center,
   createStyles,
@@ -31,6 +32,10 @@ const useStyles = createStyles((theme) => ({
     display: "inline-block",
     textAlign: "center",
     width: "100%",
+
+    "&:hover": {
+      color: theme.colors.gray[9],
+    },
   },
   title: {
     color: theme.colors.blue[6],
@@ -75,7 +80,11 @@ function Signup() {
             <Divider my="xl" />
 
             <Text className={classes.loginLink} mt="xl">
-              Already have an account? <Link to="/login">Log in</Link>.
+              Already have an account?{" "}
+              <Anchor component={Link} to="/login">
+                Log in
+              </Anchor>
+              .
             </Text>
           </Paper>
         </Box>
