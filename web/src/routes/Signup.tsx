@@ -27,6 +27,9 @@ const useStyles = createStyles((theme) => ({
   title: {
     color: theme.colors.blue[6],
   },
+  loginLink: {
+    color: theme.colors.gray[7],
+  },
 }));
 
 function Signup() {
@@ -60,6 +63,10 @@ function Signup() {
             </Text>
 
             <SignupForm />
+
+            <Text className={classes.loginLink} mt="xl">
+              Already have an account? <Link to="/login">Log in</Link>.
+            </Text>
           </Paper>
         </Box>
       </Center>
