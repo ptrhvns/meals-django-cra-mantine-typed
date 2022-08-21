@@ -1,17 +1,7 @@
+import PageCenteredPaper from "../components/PageCenteredPaper";
 import SignupForm from "../components/SignupForm";
-import {
-  Anchor,
-  Box,
-  Center,
-  createStyles,
-  Divider,
-  Paper,
-  Text,
-  Title,
-} from "@mantine/core";
+import { Anchor, createStyles, Divider, Text, Title } from "@mantine/core";
 import { buildTitle } from "../lib/utils/dom";
-import { faUtensils } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
@@ -54,41 +44,27 @@ function Signup() {
         <title>{buildTitle("Sign up")}</title>
       </Helmet>
 
-      <Center className={classes.pageContentWrapper} py="md">
-        <Box className={classes.pageContent}>
-          <Text
-            className={classes.siteLink}
-            component={Link}
-            size="xl"
-            to="/"
-            weight={700}
-          >
-            <FontAwesomeIcon icon={faUtensils} /> Meals
-          </Text>
+      <PageCenteredPaper>
+        <Title className={classes.title} order={1}>
+          Sign up
+        </Title>
 
-          <Paper m="md" px="sm" pt="xs" pb="xl" shadow="md">
-            <Title className={classes.title} order={1}>
-              Sign up
-            </Title>
+        <Text className={classes.subHeader} mt="xs">
+          Make meals easy, and save time.
+        </Text>
 
-            <Text className={classes.subHeader} mt="xs">
-              Make meals easy, and save time.
-            </Text>
+        <SignupForm />
 
-            <SignupForm />
+        <Divider my="xl" />
 
-            <Divider my="xl" />
-
-            <Text className={classes.loginLink} mt="xl">
-              Already have an account?{" "}
-              <Anchor component={Link} to="/login">
-                Log in
-              </Anchor>
-              .
-            </Text>
-          </Paper>
-        </Box>
-      </Center>
+        <Text className={classes.loginLink} mt="xl">
+          Already have an account?{" "}
+          <Anchor component={Link} to="/login">
+            Log in
+          </Anchor>
+          .
+        </Text>
+      </PageCenteredPaper>
     </>
   );
 }
