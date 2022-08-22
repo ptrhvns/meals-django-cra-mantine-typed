@@ -1,7 +1,7 @@
 import PageCenteredPaper from "../components/PageCenteredPaper";
 import SignupForm from "../components/SignupForm";
-import { Anchor, createStyles, Divider, Text, Title } from "@mantine/core";
 import Subheader from "../components/Subheader";
+import { Anchor, Divider, Text, Title } from "@mantine/core";
 import { buildTitle } from "../lib/utils/dom";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
