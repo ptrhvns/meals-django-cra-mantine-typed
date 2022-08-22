@@ -14,7 +14,21 @@ root.render(
   <React.StrictMode>
     <HelmetProvider>
       <BrowserRouter>
-        <MantineProvider withGlobalStyles withNormalizeCSS>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            components: {
+              Title: {
+                styles: (theme) => ({
+                  root: {
+                    "&:is(h1)": { color: theme.colors.blue[6] },
+                  },
+                }),
+              },
+            },
+          }}
+        >
           <App />
         </MantineProvider>
       </BrowserRouter>
