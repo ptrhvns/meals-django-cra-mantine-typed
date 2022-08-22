@@ -1,6 +1,7 @@
 import PageCenteredPaper from "../components/PageCenteredPaper";
 import SignupForm from "../components/SignupForm";
 import { Anchor, createStyles, Divider, Text, Title } from "@mantine/core";
+import Subheader from "../components/Subheader";
 import { buildTitle } from "../lib/utils/dom";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -13,9 +14,6 @@ const useStyles = createStyles((theme) => ({
   pageContentWrapper: {
     backgroundColor: theme.colors.gray[1],
     minHeight: "100vh",
-  },
-  subHeader: {
-    color: theme.colors.gray[7],
   },
   siteLink: {
     color: theme.colors.gray[7],
@@ -49,9 +47,7 @@ function Signup() {
           Sign Up
         </Title>
 
-        <Text className={classes.subHeader} mt="xs">
-          Make meals easy, and save time.
-        </Text>
+        <Subheader mt="xs">Make meals easy, and save time.</Subheader>
 
         <SignupForm />
 
