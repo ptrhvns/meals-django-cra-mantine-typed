@@ -41,12 +41,12 @@ function Signup() {
   return (
     <>
       <Helmet>
-        <title>{buildTitle("Sign up")}</title>
+        <title>{buildTitle("Sign Up")}</title>
       </Helmet>
 
       <PageCenteredPaper>
         <Title className={classes.title} order={1}>
-          Sign up
+          Sign Up
         </Title>
 
         <Text className={classes.subHeader} mt="xs">
