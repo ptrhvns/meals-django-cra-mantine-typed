@@ -100,7 +100,8 @@ function SignupConfirmation() {
               </>
             ) : (
               <>
-                You may now{" "}
+                You may now use the username and password you previously created
+                to{" "}
                 <Anchor component={Link} to="/login">
                   log in
                 </Anchor>{" "}
