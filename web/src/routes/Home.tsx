@@ -1,35 +1,51 @@
 import Navbar from "../components/Navbar";
-import { Box, Button, Center, Container, Text, Title } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Center,
+  Container,
+  createStyles,
+  Text,
+  Title,
+} from "@mantine/core";
 import { buildTitle } from "../lib/utils/dom";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
+const useStyles = createStyles((theme) => ({
+  heroButton: { fontSize: theme.fontSizes.md, width: "13rem" },
+  heroContent: { textAlign: "center" },
+  heroSubheader: { color: theme.colors.gray[7] },
+  heroTitle: { color: theme.colors.blue[6] },
+  heroWrapper: { height: "clamp(20rem, 60vh, 40rem)" },
+}));
+
 function Home() {
+  const { classes } = useStyles();
+
   return (
     <>
       <Helmet>
         <title>{buildTitle("Home")}</title>
       </Helmet>
+
       <Navbar />
+
       <Container>
-        <Center sx={{ height: "clamp(20rem, 60vh, 40rem)" }}>
-          <Box sx={{ textAlign: "center" }}>
-            <Title order={1} sx={(theme) => ({ color: theme.colors.blue[6] })}>
+        <Center className={classes.heroWrapper}>
+          <Box className={classes.heroContent}>
+            <Title className={classes.heroTitle} order={1}>
               Meals made easy.
             </Title>
-            <Text
-              mt="xs"
-              sx={(theme) => ({
-                color: theme.fn.lighten(theme.colors.gray[7], 0.2),
-              })}
-            >
-              Manage recipes, menus, shopping lists, grocery stores, and much
-              more.
+
+            <Text className={classes.heroSubheader} mt="xs" size="lg">
+              Manage recipes, menus, shopping lists, and much more.
             </Text>
+
             <Button
+              className={classes.heroButton}
               component={Link}
               mt="xl"
-              sx={(theme) => ({ fontSize: theme.fontSizes.md, width: "13rem" })}
               to="/signup"
             >
               Sign up
