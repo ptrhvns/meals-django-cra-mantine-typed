@@ -1,8 +1,8 @@
-// import useAuthn from "./useAuthn"; // TODO
-// import { useNavigate } from "react-router-dom"; // TODO
 import Cookies from "js-cookie";
+import useAuthn from "./useAuthn";
 import { isEmpty, omit } from "lodash";
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 // This helper function ensures that TypeScript can infer the type of the key as
 // a union of all of the keys in the given object literal, but that the type of
@@ -23,10 +23,9 @@ const API_ROUTES = asRouteDictionary({
 
 // istanbul ignore next
 // prettier-ignore
-// TODO
-// const WEB_ROUTES = asRouteDictionary({
-//  login: () => '/login'
-// });
+const WEB_ROUTES = asRouteDictionary({
+ login: () => '/login'
+});
 
 interface ApiArguments {
   data?: object;
@@ -59,8 +58,8 @@ async function getJson(res: Response): Promise<object> {
 }
 
 export function useApi(): UseApiReturn {
-  // const navigate = useNavigate(); // TODO
-  // const { logout } = useAuthn(); // TODO
+  const navigate = useNavigate();
+  const { logout } = useAuthn();
 
   const send = useCallback(
     async ({
@@ -113,8 +112,7 @@ export function useApi(): UseApiReturn {
         !response.ok &&
         (response.status === 401 || response.status === 403)
       ) {
-        // TODO
-        // logout(() => navigate(WEB_ROUTES.login()));
+        logout(() => navigate(WEB_ROUTES.login()));
         return {
           isError: true,
           message: "Your request was not authorized. Try logging in.",
@@ -148,7 +146,7 @@ export function useApi(): UseApiReturn {
 
       return json || {};
     },
-    []
+    [logout, navigate]
   );
 
   const get = useCallback(
