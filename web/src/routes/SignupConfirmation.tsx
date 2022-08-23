@@ -32,7 +32,7 @@ function SignupConfirmation() {
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string | undefined>(undefined);
   const params = useParams();
-  const shouldConfirm = useRef(true);
+  const shouldConfirm = useRef<boolean>(true);
   const { classes } = useStyles();
   const { post } = useApi();
 
