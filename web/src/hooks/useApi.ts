@@ -17,6 +17,7 @@ const asRouteDictionary = <T>(dictionary: {
 const API_ROUTES = asRouteDictionary({
   csrfToken: () => "/api/csrf_token/",
   login: () => "/api/login/",
+  logout: () => "/api/logout/",
   signup: () => "/api/signup/",
   signupConfirmation: () => "/api/signup_confirmation/",
 });
