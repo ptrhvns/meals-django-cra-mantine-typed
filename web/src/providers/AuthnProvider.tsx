@@ -10,7 +10,7 @@ function AuthnProvider({ children }: AuthnProviderProps) {
     !!localStorage.getItem("isAuthenticated")
   );
 
-  const login = (callback: () => void): void => {
+  const login = (callback?: () => void): void => {
     localStorage.setItem("isAuthenticated", "true");
     setIsAuthenticated(true);
 
@@ -19,7 +19,7 @@ function AuthnProvider({ children }: AuthnProviderProps) {
     }
   };
 
-  const logout = (callback: () => void): void => {
+  const logout = (callback?: () => void): void => {
     localStorage.removeItem("isAuthenticated");
     setIsAuthenticated(false);
 
