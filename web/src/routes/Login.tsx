@@ -1,5 +1,34 @@
+import LoginForm from "../components/LoginForm";
+import PageCenteredPaper from "../components/PageCenteredPaper";
+import { Anchor, Divider, Text, Title } from "@mantine/core";
+import { buildTitle } from "../lib/utils/dom";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+
 function Login() {
-  return <div>Login</div>;
+  return (
+    <>
+      <Helmet>
+        <title>{buildTitle("Log In")}</title>
+      </Helmet>
+
+      <PageCenteredPaper>
+        <Title order={1}>Log In</Title>
+
+        <LoginForm />
+
+        <Divider my="xl" />
+
+        <Text color="dimmed" mt="xl">
+          Don't have an account?{" "}
+          <Anchor component={Link} to="/signup">
+            Sign up
+          </Anchor>
+          .
+        </Text>
+      </PageCenteredPaper>
+    </>
+  );
 }
 
 export default Login;

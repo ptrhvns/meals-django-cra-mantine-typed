@@ -1,39 +1,40 @@
 import App from "./App";
-import React from "react";
+import AuthnProvider from "./providers/AuthnProvider";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, MantineTheme } from "@mantine/core";
+import { StrictMode } from "react";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
+const theme = {
+  components: {
+    Title: {
+      styles: (theme: MantineTheme) => ({
+        root: {
+          "&:is(h1)": { color: theme.colors.blue[6] },
+        },
+      }),
+    },
+  },
+};
+
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <HelmetProvider>
       <BrowserRouter>
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{
-            components: {
-              Title: {
-                styles: (theme) => ({
-                  root: {
-                    "&:is(h1)": { color: theme.colors.blue[6] },
-                  },
-                }),
-              },
-            },
-          }}
-        >
-          <App />
-        </MantineProvider>
+        <AuthnProvider>
+          <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
+            <App />
+          </MantineProvider>
+        </AuthnProvider>
       </BrowserRouter>
     </HelmetProvider>
-  </React.StrictMode>
+  </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

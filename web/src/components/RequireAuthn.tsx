@@ -1,0 +1,20 @@
+import useAuthn from "../hooks/useAuthn";
+import { Navigate, useLocation } from "react-router-dom";
+import { ReactNode } from "react";
+
+interface RequireAuthnProps {
+  children: ReactNode;
+}
+
+function RequireAuthn({ children }: RequireAuthnProps) {
+  const authn = useAuthn();
+  const location = useLocation();
+
+  if (!authn.isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return <>{children}</>;
+}
+
+export default RequireAuthn;
