@@ -97,6 +97,7 @@ function LoginForm() {
         />
 
         <Checkbox
+          checked
           label="Remember me"
           mt="md"
           {...form.getInputProps("remember_me")}
