@@ -36,7 +36,7 @@ interface ApiArguments {
 }
 
 export interface ApiResponse {
-  data?: object;
+  data?: any;
   errors?: { [key: string]: string[] };
   isError?: boolean;
   message?: string;
