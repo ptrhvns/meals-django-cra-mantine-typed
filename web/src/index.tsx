@@ -17,6 +17,7 @@ const theme = {
       styles: (theme: MantineTheme) => ({
         root: {
           "&:is(h1)": { color: theme.colors.blue[6] },
+          "&:is(h2)": { color: theme.colors.blue[6] },
         },
       }),
     },
