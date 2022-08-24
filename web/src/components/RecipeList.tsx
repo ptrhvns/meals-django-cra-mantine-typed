@@ -3,8 +3,8 @@ import {
   Anchor,
   Box,
   Button,
-  List,
   Skeleton,
+  Table,
   Text,
   Title,
 } from "@mantine/core";
@@ -87,15 +87,24 @@ function RecipeList() {
       {!isLoading && !error && !isEmpty(recipes) && (
         <Box mt="xl">
           {/* TODO handle pagination (next_page and previous_page) */}
-          <List>
-            {recipes?.map((recipe) => (
-              <List.Item key={recipe.id}>
-                <Anchor component={Link} to={`/recipe/${recipe.id}`}>
-                  {recipe.title}
-                </Anchor>
-              </List.Item>
-            ))}
-          </List>
+          <Table>
+            <thead>
+              <tr>
+                <th>Title</th>
+              </tr>
+            </thead>
+            <tbody>
+              {recipes?.map((recipe) => (
+                <tr key={recipe.id}>
+                  <td>
+                    <Anchor component={Link} to={`/recipe/${recipe.id}`}>
+                      {recipe.title}
+                    </Anchor>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         </Box>
       )}
     </>
