@@ -1,8 +1,6 @@
 import Dashboard from "./routes/Dashboard";
 import Home from "./routes/Home";
 import Login from "./routes/Login";
-import RequireAuthn from "./components/RequireAuthn";
-import RequireGuest from "./components/RequireGuest";
 import Signup from "./routes/Signup";
 import SignupConfirmation from "./routes/SignupConfirmation";
 import { Helmet } from "react-helmet-async";
@@ -16,49 +14,13 @@ function App() {
       </Helmet>
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <RequireGuest>
-              <Home />
-            </RequireGuest>
-          }
-        />
-
-        <Route
-          path="/dashboard"
-          element={
-            <RequireAuthn>
-              <Dashboard />
-            </RequireAuthn>
-          }
-        />
-
-        <Route
-          path="/login"
-          element={
-            <RequireGuest>
-              <Login />
-            </RequireGuest>
-          }
-        />
-
-        <Route
-          path="/signup"
-          element={
-            <RequireGuest>
-              <Signup />
-            </RequireGuest>
-          }
-        />
-
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route
           path="/signup-confirmation/:token"
-          element={
-            <RequireGuest>
-              <SignupConfirmation />
-            </RequireGuest>
-          }
+          element={<SignupConfirmation />}
         />
       </Routes>
     </>

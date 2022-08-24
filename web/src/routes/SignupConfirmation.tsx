@@ -1,4 +1,5 @@
 import PageCenteredPaper from "../components/PageCenteredPaper";
+import RequireGuest from "../components/RequireGuest";
 import {
   Alert,
   Anchor,
@@ -61,7 +62,7 @@ function SignupConfirmation() {
   }, [params, post]);
 
   return (
-    <>
+    <RequireGuest>
       <Helmet>
         <title>{buildTitle("Sign Up Confirmation")}</title>
       </Helmet>
@@ -111,7 +112,7 @@ function SignupConfirmation() {
           </Alert>
         )}
       </PageCenteredPaper>
-    </>
+    </RequireGuest>
   );
 }
 

@@ -1,5 +1,6 @@
 import LoginForm from "../components/LoginForm";
 import PageCenteredPaper from "../components/PageCenteredPaper";
+import RequireGuest from "../components/RequireGuest";
 import { Anchor, Divider, Text, Title } from "@mantine/core";
 import { buildTitle } from "../lib/utils/dom";
 import { Helmet } from "react-helmet-async";
@@ -7,7 +8,7 @@ import { Link } from "react-router-dom";
 
 function Login() {
   return (
-    <>
+    <RequireGuest>
       <Helmet>
         <title>{buildTitle("Log In")}</title>
       </Helmet>
@@ -27,7 +28,7 @@ function Login() {
           .
         </Text>
       </PageCenteredPaper>
-    </>
+    </RequireGuest>
   );
 }
 

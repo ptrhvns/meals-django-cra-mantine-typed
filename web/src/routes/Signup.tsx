@@ -1,4 +1,5 @@
 import PageCenteredPaper from "../components/PageCenteredPaper";
+import RequireGuest from "../components/RequireGuest";
 import SignupForm from "../components/SignupForm";
 import Subheader from "../components/Subheader";
 import { Anchor, Divider, Text, Title } from "@mantine/core";
@@ -8,7 +9,7 @@ import { Link } from "react-router-dom";
 
 function Signup() {
   return (
-    <>
+    <RequireGuest>
       <Helmet>
         <title>{buildTitle("Sign Up")}</title>
       </Helmet>
@@ -30,7 +31,7 @@ function Signup() {
           .
         </Text>
       </PageCenteredPaper>
-    </>
+    </RequireGuest>
   );
 }
 

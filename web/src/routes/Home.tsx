@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import RequireGuest from "../components/RequireGuest";
 import {
   Box,
   Button,
@@ -24,7 +25,7 @@ function Home() {
   const { classes } = useStyles();
 
   return (
-    <>
+    <RequireGuest>
       <Helmet>
         <title>{buildTitle("Home")}</title>
       </Helmet>
@@ -53,7 +54,7 @@ function Home() {
           </Box>
         </Center>
       </Container>
-    </>
+    </RequireGuest>
   );
 }
 
