@@ -18,7 +18,7 @@ class RecipesSerializer(ModelSerializer):
 @api_view(http_method_names=["GET"])
 @permission_classes([IsAuthenticated])  # type: ignore[list-item]
 def recipes(request: Request) -> Response:
-    recipes = Recipe.objects.filter(user=request.user).all()
+    recipes = Recipe.objects.filter(user=request.user).order_by("title").all()
     paginator = Paginator(recipes, per_page=10)
     page = paginator.get_page(request.data.get("page", 1))
     serializer = RecipesSerializer(page.object_list, many=True)
