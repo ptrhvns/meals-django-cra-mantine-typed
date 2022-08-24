@@ -78,7 +78,7 @@ function LoginForm() {
             onClose={() => setAlert(undefined)}
             withCloseButton
           >
-            {alert}
+            <Box mr="xl">{alert}</Box>
           </Alert>
         )}
 

@@ -89,26 +89,28 @@ function SignupConfirmation() {
             }
             mt="xl"
           >
-            {message}{" "}
-            {isError ? (
-              <>
-                Please double check the address you visited to make sure it's
-                correct, or you can try{" "}
-                <Anchor component={Link} to="/signup">
-                  signing up
-                </Anchor>{" "}
-                for an account.
-              </>
-            ) : (
-              <>
-                You may now use the username and password you previously created
-                to{" "}
-                <Anchor component={Link} to="/login">
-                  log in
-                </Anchor>{" "}
-                to your new account.
-              </>
-            )}
+            <Box mr="xl">
+              {message}{" "}
+              {isError ? (
+                <>
+                  Please double check the address you visited to make sure it's
+                  correct, or you can try{" "}
+                  <Anchor component={Link} to="/signup">
+                    signing up
+                  </Anchor>{" "}
+                  for an account.
+                </>
+              ) : (
+                <>
+                  You may now use the username and password you previously
+                  created to{" "}
+                  <Anchor component={Link} to="/login">
+                    log in
+                  </Anchor>{" "}
+                  to your new account.
+                </>
+              )}
+            </Box>
           </Alert>
         )}
       </PageCenteredPaper>
