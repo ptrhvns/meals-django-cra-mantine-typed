@@ -11,25 +11,12 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-const theme = {
-  components: {
-    Title: {
-      styles: (theme: MantineTheme) => ({
-        root: {
-          "&:is(h1)": { color: theme.colors.blue[6] },
-          "&:is(h2)": { color: theme.colors.blue[6] },
-        },
-      }),
-    },
-  },
-};
-
 root.render(
   <StrictMode>
     <HelmetProvider>
       <BrowserRouter>
         <AuthnProvider>
-          <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
+          <MantineProvider withGlobalStyles withNormalizeCSS>
             <App />
           </MantineProvider>
         </AuthnProvider>
