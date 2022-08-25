@@ -1,23 +1,64 @@
 import Navbar from "../components/Navbar";
+import RecipeTitle from "../components/RecipeTitle";
 import RequireAuthn from "../components/RequireAuthn";
-import { Alert, Box, Button, Container, Modal, Text } from "@mantine/core";
+import {
+  Alert,
+  Anchor,
+  Box,
+  Breadcrumbs,
+  Button,
+  Container,
+  createStyles,
+  Modal,
+  Text,
+} from "@mantine/core";
 import { buildTitle } from "../lib/utils/dom";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet-async";
+import { Link, useParams } from "react-router-dom";
+import { RecipeType } from "../types";
+import { truncate } from "lodash";
 import { useApi } from "../hooks/useApi";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
+
+const useStyles = createStyles(() => ({
+  wrapper: {
+    position: "relative",
+  },
+}));
 
 function Recipe() {
+  const [alert, setAlert] = useState<string | undefined>(undefined);
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
   const [confirmDeleteAlert, setConfirmDeleteAlert] = useState<
     string | undefined
   >(undefined);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [recipe, setRecipe] = useState<RecipeType | undefined>(undefined);
   const navigate = useNavigate();
-  const { getRouteFn, post } = useApi();
+  const shouldLoad = useRef<boolean>(true);
+  const { classes } = useStyles();
+  const { get, getRouteFn, post } = useApi();
   const { recipeId } = useParams() as { recipeId: string };
+
+  useEffect(() => {
+    if (shouldLoad.current) {
+      (async () => {
+        shouldLoad.current = false;
+        const response = await get({ url: getRouteFn("recipe")({ recipeId }) });
+        setIsLoading(false);
+
+        if (response.isError) {
+          setAlert(response.message);
+          return;
+        }
+
+        setRecipe(response.data);
+      })();
+    }
+  });
 
   return (
     <RequireAuthn>
@@ -68,10 +109,38 @@ function Recipe() {
       </Modal>
 
       <Container>
-        <Box mt="xl">
-          <Button color="red" onClick={() => setConfirmDelete(true)}>
-            Delete recipe
-          </Button>
+        <Box className={classes.wrapper} mt="xl">
+          <Breadcrumbs>
+            <Anchor component={Link} to="/dashboard">
+              Dashboard
+            </Anchor>
+
+            <Anchor component={Link} to={`/recipe/${recipeId}`}>
+              Recipe
+            </Anchor>
+          </Breadcrumbs>
+
+          {alert && (
+            <Alert
+              color="red"
+              icon={<FontAwesomeIcon icon={faCircleExclamation} />}
+              mt="xl"
+              onClose={() => setAlert(undefined)}
+              withCloseButton
+            >
+              <Box mr="xl">{alert}</Box>
+            </Alert>
+          )}
+
+          <Box mt="md">
+            <RecipeTitle isLoading={isLoading} recipe={recipe} />
+          </Box>
+
+          <Box mt="xl">
+            <Button color="red" onClick={() => setConfirmDelete(true)}>
+              Delete recipe
+            </Button>
+          </Box>
         </Box>
       </Container>
     </RequireAuthn>
