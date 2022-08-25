@@ -6,7 +6,7 @@ interface RecipeTitleProps {
   recipe?: RecipeType;
 }
 
-const TITLE_SIZE = "1.75rem";
+const TITLE_SIZE = "1.65rem";
 
 const useStyles = createStyles(() => ({
   title: {

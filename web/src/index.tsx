@@ -11,12 +11,18 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
+const theme = {
+  headings: {
+    fontWeight: 500,
+  },
+};
+
 root.render(
   <StrictMode>
     <HelmetProvider>
       <BrowserRouter>
         <AuthnProvider>
-          <MantineProvider withGlobalStyles withNormalizeCSS>
+          <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
             <App />
           </MantineProvider>
         </AuthnProvider>

@@ -27,10 +27,10 @@ const useStyles = createStyles((theme) => ({
     justifyContent: "space-between",
   },
   logo: {
-    color: theme.colors.blue[6],
+    color: theme.colors[theme.primaryColor][theme.fn.primaryShade()],
 
     "&:hover": {
-      color: theme.colors.blue[8],
+      color: theme.colors[theme.primaryColor][theme.fn.primaryShade() + 2],
     },
   },
   menuTarget: {
@@ -75,7 +75,7 @@ function Navbar() {
             <Text
               className={classes.logo}
               component={Link}
-              size="xl"
+              size={22}
               to="/"
               weight={700}
             >
