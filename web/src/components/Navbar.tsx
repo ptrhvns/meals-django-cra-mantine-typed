@@ -50,7 +50,7 @@ function Navbar() {
   const [error, setError] = useState<string | undefined>(undefined);
   const authn = useAuthn();
   const { classes } = useStyles();
-  const { post } = useApi();
+  const { getRouteFn, post } = useApi();
 
   return (
     <>
@@ -98,7 +98,9 @@ function Navbar() {
                 <Menu.Dropdown>
                   <Menu.Item
                     onClick={async () => {
-                      const response = await post({ route: "logout" });
+                      const response = await post({
+                        url: getRouteFn("logout")(),
+                      });
 
                       if (response.isError) {
                         setError(response.message || "Log out failed.");

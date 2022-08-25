@@ -29,7 +29,7 @@ function RecipeForm() {
   const [submitting, setSubmitting] = useState<boolean>(false);
   const navigate = useNavigate();
   const { classes } = useStyles();
-  const { post } = useApi();
+  const { getRouteFn, post } = useApi();
 
   const form = useForm({
     initialValues: {
@@ -47,7 +47,7 @@ function RecipeForm() {
 
           const response = await post({
             data: pick(values, ["title"]),
-            route: "recipeCreate",
+            url: getRouteFn("recipeCreate")(),
           });
 
           setSubmitting(false);

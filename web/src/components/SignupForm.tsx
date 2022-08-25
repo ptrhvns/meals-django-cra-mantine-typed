@@ -42,7 +42,7 @@ function SignupForm() {
   const [success, setSuccess] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
   const { classes } = useStyles();
-  const { post } = useApi();
+  const { getRouteFn, post } = useApi();
 
   const form = useForm({
     initialValues: {
@@ -76,7 +76,7 @@ function SignupForm() {
 
             const response: ApiResponse = await post({
               data: pick(values, ["email", "password", "username"]),
-              route: "signup",
+              url: getRouteFn("signup")(),
             });
 
             setIsSubmitting(false);

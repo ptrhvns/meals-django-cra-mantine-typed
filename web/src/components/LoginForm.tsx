@@ -33,7 +33,7 @@ function LoginForm() {
   const authn = useAuthn();
   const navigate = useNavigate();
   const { classes } = useStyles();
-  const { post } = useApi();
+  const { getRouteFn, post } = useApi();
 
   const form = useForm({
     initialValues: {
@@ -53,7 +53,7 @@ function LoginForm() {
 
           const response = await post({
             data: pick(values, ["password", "remember_me", "username"]),
-            route: "login",
+            url: getRouteFn("login")(),
           });
 
           setIsSubmitting(false);

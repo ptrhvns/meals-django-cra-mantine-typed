@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 // the value is expressed concretely. This will help us later to prevent the use
 // of invalid routes.
 const asRouteDictionary = <T>(dictionary: {
-  [K in keyof T]: (routeData?: object) => string;
+  [K in keyof T]: T[K];
 }) => dictionary;
 
 // istanbul ignore next
@@ -19,10 +19,18 @@ const API_ROUTES = asRouteDictionary({
   login: () => "/api/login/",
   logout: () => "/api/logout/",
   recipeCreate: () => "/api/recipe/create/",
+  recipeDestroy: ({ recipeId }: { recipeId: string}) => `/api/recipe/${recipeId}/destroy/`,
   recipes: () => "/api/recipes/",
   signup: () => "/api/signup/",
   signupConfirmation: () => "/api/signup_confirmation/",
 });
+
+type ApiRoutes = typeof API_ROUTES;
+type ApiRouteKeys = keyof typeof API_ROUTES;
+
+function getRouteFn<K extends ApiRouteKeys>(route: K): ApiRoutes[K] {
+  return API_ROUTES[route];
+}
 
 // istanbul ignore next
 // prettier-ignore
@@ -34,7 +42,7 @@ interface ApiArguments {
   data?: object;
   headers_init?: object;
   method: string;
-  route: keyof typeof API_ROUTES; // Prevent the use of invalid routes.
+  url: string;
 }
 
 export interface ApiResponse {
@@ -46,6 +54,7 @@ export interface ApiResponse {
 
 interface UseApiReturn {
   get: (args: Omit<ApiArguments, "method">) => Promise<ApiResponse>;
+  getRouteFn: typeof getRouteFn;
   post: (args: Omit<ApiArguments, "method">) => Promise<ApiResponse>;
   send: (args: ApiArguments) => Promise<ApiResponse>;
 }
@@ -69,7 +78,7 @@ export function useApi(): UseApiReturn {
       data,
       headers_init,
       method,
-      route,
+      url,
     }: ApiArguments): Promise<ApiResponse> => {
       let body: string | null;
 
@@ -88,17 +97,6 @@ export function useApi(): UseApiReturn {
       });
 
       const mode = "same-origin";
-
-      let url: string;
-
-      try {
-        url = API_ROUTES[route]();
-      } catch (error) {
-        return {
-          isError: true,
-          message: "We tried to send your request to an unknown location.",
-        };
-      }
 
       let response: Response;
 
@@ -162,7 +160,7 @@ export function useApi(): UseApiReturn {
     async ({ ...args }: Omit<ApiArguments, "method">): Promise<ApiResponse> => {
       // API requires a valid CSRF token to process a POST request. Calling get
       // on this route has the side effect of setting that token.
-      await get({ route: "csrfToken" });
+      await get({ url: getRouteFn("csrfToken")() });
 
       return send({
         headers_init: {
@@ -176,5 +174,5 @@ export function useApi(): UseApiReturn {
     [get, send]
   );
 
-  return { get, post, send };
+  return { get, getRouteFn, post, send };
 }

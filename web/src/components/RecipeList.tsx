@@ -28,13 +28,13 @@ function RecipeList() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [recipes, setRecipes] = useState<Recipe[] | undefined>([]);
   const shouldLoad = useRef<boolean>(true);
-  const { get } = useApi();
+  const { get, getRouteFn } = useApi();
 
   useEffect(() => {
     if (shouldLoad.current) {
       (async () => {
         shouldLoad.current = false;
-        const response = await get({ route: "recipes" });
+        const response = await get({ url: getRouteFn("recipes")() });
         setIsLoading(false);
 
         if (response.isError) {

@@ -35,7 +35,7 @@ function SignupConfirmation() {
   const params = useParams();
   const shouldConfirm = useRef<boolean>(true);
   const { classes } = useStyles();
-  const { post } = useApi();
+  const { getRouteFn, post } = useApi();
 
   useEffect(() => {
     if (shouldConfirm.current) {
@@ -44,7 +44,7 @@ function SignupConfirmation() {
 
         const response: ApiResponse = await post({
           data: { token: params.token },
-          route: "signupConfirmation",
+          url: getRouteFn("signupConfirmation")(),
         });
 
         if (response.isError) {
@@ -59,7 +59,7 @@ function SignupConfirmation() {
         setIsConfirming(false);
       })();
     }
-  }, [params, post]);
+  }, [getRouteFn, params, post]);
 
   return (
     <RequireGuest>
