@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   heroButton: {
+    boxShadow: theme.shadows.sm,
     fontSize: theme.fontSizes.md,
     width: "13rem",
   },
