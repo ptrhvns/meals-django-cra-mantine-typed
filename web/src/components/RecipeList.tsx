@@ -51,7 +51,7 @@ function RecipeList() {
     <>
       <Title order={2}>Recipes</Title>
 
-      <Button component={Link} mt="xl" to="/recipe/new">
+      <Button component={Link} mt="md" to="/recipe/new">
         <FontAwesomeIcon icon={faPlusCircle} />
         <Text ml="xs">Create recipe</Text>
       </Button>
@@ -60,7 +60,7 @@ function RecipeList() {
         <Alert
           color="red"
           icon={<FontAwesomeIcon icon={faCircleExclamation} />}
-          mt="xl"
+          mt="md"
           onClose={() => setError(undefined)}
           withCloseButton
         >
@@ -71,7 +71,7 @@ function RecipeList() {
       )}
 
       {isLoading && (
-        <Box mt="xl">
+        <Box mt="md">
           <Skeleton height={16} radius="xl" />
           <Skeleton height={16} mt="sm" radius="xl" />
           <Skeleton height={16} mt="sm" radius="xl" />
@@ -79,13 +79,13 @@ function RecipeList() {
       )}
 
       {!isLoading && !error && isEmpty(recipes) && (
-        <Text color="dimmed" component="p" mt="xl">
+        <Text color="dimmed" component="p" mt="md">
           No recipes have been created yet.
         </Text>
       )}
 
       {!isLoading && !error && !isEmpty(recipes) && (
-        <Box mt="xl">
+        <Box mt="md">
           {/* TODO handle pagination (next_page and previous_page) */}
           <Table>
             <thead>
