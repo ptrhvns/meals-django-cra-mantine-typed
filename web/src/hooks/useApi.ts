@@ -12,16 +12,21 @@ const asRouteDictionary = <T>(dictionary: {
   [K in keyof T]: T[K];
 }) => dictionary;
 
+interface RecipeIdRouteData {
+  recipeId: string;
+}
+
 // istanbul ignore next
 // prettier-ignore
 const API_ROUTES = asRouteDictionary({
   csrfToken: () => "/api/csrf_token/",
   login: () => "/api/login/",
   logout: () => "/api/logout/",
-  recipe: ({ recipeId }: { recipeId: string }) => `/api/recipe/${recipeId}/`,
+  recipe: ({ recipeId }: RecipeIdRouteData) => `/api/recipe/${recipeId}/`,
   recipeCreate: () => "/api/recipe/create/",
-  recipeDestroy: ({ recipeId }: { recipeId: string }) => `/api/recipe/${recipeId}/destroy/`,
+  recipeDestroy: ({ recipeId }: RecipeIdRouteData) => `/api/recipe/${recipeId}/destroy/`,
   recipes: () => "/api/recipes/",
+  recipeTitleUpdate: ({ recipeId }: RecipeIdRouteData) => `/api/recipe_title/${recipeId}/update/`,
   signup: () => "/api/signup/",
   signupConfirmation: () => "/api/signup_confirmation/",
 });

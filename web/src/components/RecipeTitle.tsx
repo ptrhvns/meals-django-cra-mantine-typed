@@ -1,4 +1,5 @@
-import { createStyles, Skeleton, Title } from "@mantine/core";
+import { Anchor, Box, createStyles, Skeleton, Title } from "@mantine/core";
+import { Link } from "react-router-dom";
 import { RecipeType } from "../types";
 
 interface RecipeTitleProps {
@@ -12,6 +13,13 @@ const useStyles = createStyles(() => ({
   title: {
     fontSize: TITLE_SIZE,
   },
+  titleLink: {
+    padding: "0.25rem 0.5rem",
+  },
+  titleWrapper: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
 }));
 
 function RecipeTitle({ isLoading, recipe }: RecipeTitleProps) {
@@ -19,9 +27,20 @@ function RecipeTitle({ isLoading, recipe }: RecipeTitleProps) {
 
   if (recipe) {
     return (
-      <Title className={classes.title} order={2}>
-        {recipe.title}
-      </Title>
+      <Box className={classes.titleWrapper}>
+        <Title className={classes.title} order={2}>
+          {recipe.title}
+        </Title>
+
+        <Anchor
+          className={classes.titleLink}
+          component={Link}
+          title="Edit title"
+          to={`/recipe/${recipe.id}/title/edit`}
+        >
+          Edit
+        </Anchor>
+      </Box>
     );
   }
 

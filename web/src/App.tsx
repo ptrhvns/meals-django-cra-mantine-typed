@@ -3,6 +3,7 @@ import Home from "./routes/Home";
 import Login from "./routes/Login";
 import Recipe from "./routes/Recipe";
 import RecipeNew from "./routes/RecipeNew";
+import RecipeTitleForm from "./routes/RecipeTitleForm";
 import Signup from "./routes/Signup";
 import SignupConfirmation from "./routes/SignupConfirmation";
 import { Helmet } from "react-helmet-async";
@@ -20,6 +21,10 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/recipe/:recipeId" element={<Recipe />} />
+        <Route
+          path="/recipe/:recipeId/title/edit"
+          element={<RecipeTitleForm />}
+        />
         <Route path="/recipe/new" element={<RecipeNew />} />
         <Route path="/signup" element={<Signup />} />
         <Route
