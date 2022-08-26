@@ -16,6 +16,10 @@ interface RecipeIdRouteData {
   recipeId: string;
 }
 
+interface RecipesPageRouteData {
+  page: number;
+}
+
 // istanbul ignore next
 // prettier-ignore
 const API_ROUTES = asRouteDictionary({
@@ -25,7 +29,7 @@ const API_ROUTES = asRouteDictionary({
   recipe: ({ recipeId }: RecipeIdRouteData) => `/api/recipe/${recipeId}/`,
   recipeCreate: () => "/api/recipe/create/",
   recipeDestroy: ({ recipeId }: RecipeIdRouteData) => `/api/recipe/${recipeId}/destroy/`,
-  recipes: () => "/api/recipes/",
+  recipes: ({ page }: RecipesPageRouteData) => `/api/recipes/?page=${page}`,
   recipeTitleUpdate: ({ recipeId }: RecipeIdRouteData) => `/api/recipe_title/${recipeId}/update/`,
   signup: () => "/api/signup/",
   signupConfirmation: () => "/api/signup_confirmation/",
@@ -91,6 +95,7 @@ export function useApi(): UseApiReturn {
       try {
         body = data ? JSON.stringify(data) : null;
       } catch (error) {
+        console.error("Request could not be properly formatted:", error);
         return {
           isError: true,
           message: "Your request could not be properly formatted.",
@@ -109,6 +114,7 @@ export function useApi(): UseApiReturn {
       try {
         response = await fetch(url, { body, headers, method, mode });
       } catch (error) {
+        console.error("Request could not be sent:", error);
         return {
           isError: true,
           message: "Your request could not be sent.",
@@ -145,6 +151,7 @@ export function useApi(): UseApiReturn {
       try {
         json = await getJson(response);
       } catch (error) {
+        console.error("Response was in an invalid format:", error);
         return {
           isError: true,
           message: "The response to your request was in an invalid format.",

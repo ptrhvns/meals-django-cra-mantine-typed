@@ -3,6 +3,7 @@ import {
   Anchor,
   Box,
   Button,
+  Pagination,
   Skeleton,
   Table,
   Text,
@@ -16,9 +17,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { isEmpty } from "lodash";
 import { Link } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-interface Recipe {
+interface PaginationType {
+  page: string;
+  total: string;
+}
+
+interface RecipeType {
   id: string;
   title: string;
 }
@@ -26,26 +32,39 @@ interface Recipe {
 function RecipeList() {
   const [error, setError] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [recipes, setRecipes] = useState<Recipe[] | undefined>([]);
+  const [pagination, setPagination] = useState<PaginationType | undefined>(
+    undefined
+  );
+  const [recipes, setRecipes] = useState<RecipeType[] | undefined>([]);
   const shouldLoad = useRef<boolean>(true);
   const { get, getRouteFn } = useApi();
 
+  const getRecipes = useCallback(
+    async (page: number = 1) => {
+      setIsLoading(true);
+
+      const response = await get({
+        url: getRouteFn("recipes")({ page }),
+      });
+
+      setIsLoading(false);
+
+      if (response.isError) {
+        setError(response.message);
+        return;
+      }
+
+      setPagination(response.data.pagination);
+      setRecipes(response.data.recipes);
+    },
+    [get, getRouteFn]
+  );
+
   useEffect(() => {
     if (shouldLoad.current) {
-      (async () => {
-        shouldLoad.current = false;
-        const response = await get({ url: getRouteFn("recipes")() });
-        setIsLoading(false);
-
-        if (response.isError) {
-          setError(response.message);
-          return;
-        }
-
-        setRecipes(response?.data?.recipes);
-      })();
+      getRecipes();
     }
-  });
+  }, [getRecipes]);
 
   return (
     <>
@@ -72,9 +91,10 @@ function RecipeList() {
 
       {isLoading && (
         <Box mt="md">
-          <Skeleton height={16} radius="xl" />
-          <Skeleton height={16} mt="sm" radius="xl" />
-          <Skeleton height={16} mt="sm" radius="xl" />
+          <Skeleton height={42.7} radius="sm" />
+          <Skeleton height={42.7} mt="sm" radius="sm" />
+          <Skeleton height={42.7} mt="sm" radius="sm" />
+          <Skeleton height={42.7} mt="sm" radius="sm" />
         </Box>
       )}
 
@@ -86,8 +106,7 @@ function RecipeList() {
 
       {!isLoading && !error && !isEmpty(recipes) && (
         <Box mt="md">
-          {/* TODO handle pagination (next_page and previous_page) */}
-          <Table>
+          <Table striped verticalSpacing="xs">
             <thead>
               <tr>
                 <th>Title</th>
@@ -105,6 +124,15 @@ function RecipeList() {
               ))}
             </tbody>
           </Table>
+
+          {pagination && (
+            <Pagination
+              mt="md"
+              onChange={getRecipes}
+              page={parseInt(pagination.page, 10)}
+              total={parseInt(pagination.total, 10)}
+            />
+          )}
         </Box>
       )}
     </>
