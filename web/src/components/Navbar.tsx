@@ -28,6 +28,9 @@ const useStyles = createStyles((theme) => ({
     height: navbarHeight,
     justifyContent: "space-between",
   },
+  header: {
+    boxShadow: theme.shadows.md,
+  },
   logo: {
     color: theme.colors[theme.primaryColor][theme.fn.primaryShade()],
 
@@ -71,7 +74,7 @@ function Navbar() {
         </Alert>
       </Modal>
 
-      <Header height={navbarHeight}>
+      <Header className={classes.header} height={navbarHeight}>
         <Container>
           <div className={classes.content}>
             <Text
