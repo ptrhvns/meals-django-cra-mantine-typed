@@ -19,6 +19,12 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const useStyles = createStyles(() => ({
+  actions: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "1rem",
+    justifyContent: "space-between",
+  },
   wrapper: {
     position: "relative",
   },
@@ -84,10 +90,21 @@ function RecipeForm() {
           {...form.getInputProps("title")}
         />
 
-        <Button disabled={submitting} mt="xl" type="submit">
-          <FontAwesomeIcon icon={faCirclePlus} />
-          <Text ml="xs">Save and continue</Text>
-        </Button>
+        <Box className={classes.actions} mt="xl">
+          <Button disabled={submitting} type="submit">
+            <FontAwesomeIcon icon={faCirclePlus} />
+            <Text ml="xs">Save and continue</Text>
+          </Button>
+
+          <Button
+            color="gray"
+            disabled={submitting}
+            onClick={() => navigate("/dashboard")}
+            variant="outline"
+          >
+            <Text>Dismiss</Text>
+          </Button>
+        </Box>
       </form>
     </Box>
   );
