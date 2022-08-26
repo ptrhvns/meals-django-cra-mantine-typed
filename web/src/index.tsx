@@ -4,25 +4,27 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { MantineProvider, MantineTheme } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 import { StrictMode } from "react";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-const theme = {
-  headings: {
-    fontWeight: 500,
-  },
-};
-
 root.render(
   <StrictMode>
     <HelmetProvider>
       <BrowserRouter>
         <AuthnProvider>
-          <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
+          <MantineProvider
+            withGlobalStyles
+            withNormalizeCSS
+            theme={{
+              headings: {
+                fontWeight: 500,
+              },
+            }}
+          >
             <App />
           </MantineProvider>
         </AuthnProvider>
