@@ -21,7 +21,7 @@ root.render(
             withNormalizeCSS
             theme={{
               headings: {
-                fontWeight: 500,
+                fontWeight: 300,
               },
             }}
           >
