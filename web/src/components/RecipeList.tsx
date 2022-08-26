@@ -20,8 +20,8 @@ import { useApi } from "../hooks/useApi";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface PaginationType {
-  page: string;
-  total: string;
+  page: number;
+  total: number;
 }
 
 interface RecipeType {
@@ -54,8 +54,8 @@ function RecipeList() {
         return;
       }
 
-      setPagination(response.data.pagination);
-      setRecipes(response.data.recipes);
+      setPagination(response.data?.pagination);
+      setRecipes(response.data?.recipes);
     },
     [get, getRouteFn]
   );
@@ -125,12 +125,12 @@ function RecipeList() {
             </tbody>
           </Table>
 
-          {pagination && (
+          {pagination && pagination.total > 1 && (
             <Pagination
               mt="md"
               onChange={getRecipes}
-              page={parseInt(pagination.page, 10)}
-              total={parseInt(pagination.total, 10)}
+              page={pagination.page}
+              total={pagination.total}
             />
           )}
         </Box>
