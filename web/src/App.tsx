@@ -1,6 +1,7 @@
 import Dashboard from "./routes/Dashboard";
 import Home from "./routes/Home";
 import Login from "./routes/Login";
+import NotFound from "./routes/NotFound";
 import Recipe from "./routes/Recipe";
 import RecipeNew from "./routes/RecipeNew";
 import RecipeTitleForm from "./routes/RecipeTitleForm";
@@ -31,6 +32,7 @@ function App() {
           path="/signup-confirmation/:token"
           element={<SignupConfirmation />}
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
