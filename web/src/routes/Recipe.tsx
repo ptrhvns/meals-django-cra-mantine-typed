@@ -23,6 +23,12 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const useStyles = createStyles(() => ({
+  modalActions: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "1rem",
+    justifyContent: "space-between",
+  },
   wrapper: {
     position: "relative",
   },
@@ -88,23 +94,33 @@ function Recipe() {
           </Alert>
         )}
 
-        <Button
-          color="red"
-          onClick={async () => {
-            const response = await post({
-              url: getRouteFn("recipeDestroy")({ recipeId }),
-            });
+        <Box className={classes.modalActions}>
+          <Button
+            color="red"
+            onClick={async () => {
+              const response = await post({
+                url: getRouteFn("recipeDestroy")({ recipeId }),
+              });
 
-            if (response.isError) {
-              setConfirmDeleteAlert(response.message);
-              return;
-            }
+              if (response.isError) {
+                setConfirmDeleteAlert(response.message);
+                return;
+              }
 
-            navigate("/dashboard", { replace: true });
-          }}
-        >
-          Delete recipe
-        </Button>
+              navigate("/dashboard", { replace: true });
+            }}
+          >
+            Delete recipe
+          </Button>
+
+          <Button
+            color="gray"
+            onClick={() => setConfirmDelete(false)}
+            variant="outline"
+          >
+            <Text>Dismiss</Text>
+          </Button>
+        </Box>
       </Modal>
 
       <PageLayout>
