@@ -18,7 +18,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import { RecipeType } from "../types";
-import { truncate } from "lodash";
 import { useApi } from "../hooks/useApi";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
