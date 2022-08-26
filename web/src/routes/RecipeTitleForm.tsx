@@ -29,6 +29,12 @@ import { useForm } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
 
 const useStyles = createStyles(() => ({
+  actions: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "1rem",
+    justifyContent: "space-between",
+  },
   formWrapper: {
     position: "relative",
   },
@@ -152,10 +158,21 @@ function RecipeTitleForm() {
                   {...form.getInputProps("title")}
                 />
 
-                <Button disabled={submitting} mt="xl" type="submit">
-                  <FontAwesomeIcon icon={faCirclePlus} />
-                  <Text ml="xs">Save</Text>
-                </Button>
+                <Box className={classes.actions} mt="xl">
+                  <Button disabled={submitting} type="submit">
+                    <FontAwesomeIcon icon={faCirclePlus} />
+                    <Text ml="xs">Save</Text>
+                  </Button>
+
+                  <Button
+                    color="gray"
+                    disabled={submitting}
+                    onClick={() => navigate(`/recipe/${recipeId}`)}
+                    variant="outline"
+                  >
+                    <Text>Dismiss</Text>
+                  </Button>
+                </Box>
               </form>
             </Box>
           )}
