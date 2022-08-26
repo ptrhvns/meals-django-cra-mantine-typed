@@ -14,11 +14,24 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
-  heroButton: { fontSize: theme.fontSizes.md, width: "13rem" },
-  heroContent: { textAlign: "center" },
-  heroSubheader: { color: theme.colors.gray[7] },
-  heroTitle: { color: theme.colors.blue[6] },
-  heroWrapper: { height: "clamp(20rem, 60vh, 40rem)" },
+  heroButton: {
+    fontSize: theme.fontSizes.md,
+    width: "13rem",
+  },
+  heroContent: {
+    textAlign: "center",
+  },
+  heroSubheader: {
+    color: theme.colors.gray[7],
+  },
+  heroTitle: {
+    color: theme.colors.blue[6],
+    fontSize: "2.25rem",
+    fontWeight: 600,
+  },
+  heroWrapper: {
+    height: "clamp(20rem, 60vh, 40rem)",
+  },
 }));
 
 function Home() {
