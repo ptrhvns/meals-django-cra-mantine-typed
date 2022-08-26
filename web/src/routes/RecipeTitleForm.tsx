@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import PageLayout from "../components/PageLayout";
 import RequireAuthn from "../components/RequireAuthn";
 import {
   Alert,
@@ -6,7 +7,6 @@ import {
   Box,
   Breadcrumbs,
   Button,
-  Container,
   createStyles,
   LoadingOverlay,
   Skeleton,
@@ -32,8 +32,8 @@ const useStyles = createStyles(() => ({
   formWrapper: {
     position: "relative",
   },
-  titleInput: {
-    maxWidth: "40rem",
+  pageLayout: {
+    maxWidth: "35rem",
   },
 }));
 
@@ -78,7 +78,7 @@ function RecipeTitleForm() {
 
       <Navbar />
 
-      <Container>
+      <PageLayout containerClassName={classes.pageLayout}>
         <Box mt="xl">
           <Breadcrumbs>
             <Anchor component={Link} to="/dashboard">
@@ -146,7 +146,6 @@ function RecipeTitleForm() {
                 )}
 
                 <TextInput
-                  className={classes.titleInput}
                   disabled={submitting}
                   label="Title"
                   mt="md"
@@ -161,7 +160,7 @@ function RecipeTitleForm() {
             </Box>
           )}
         </Box>
-      </Container>
+      </PageLayout>
     </RequireAuthn>
   );
 }

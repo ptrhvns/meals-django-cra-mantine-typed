@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import PageLayout from "../components/PageLayout";
 import RecipeTitle from "../components/RecipeTitle";
 import RequireAuthn from "../components/RequireAuthn";
 import {
@@ -7,7 +8,6 @@ import {
   Box,
   Breadcrumbs,
   Button,
-  Container,
   createStyles,
   Modal,
   Text,
@@ -107,8 +107,8 @@ function Recipe() {
         </Button>
       </Modal>
 
-      <Container>
-        <Box className={classes.wrapper} mt="xl">
+      <PageLayout>
+        <Box className={classes.wrapper}>
           <Breadcrumbs>
             <Anchor component={Link} to="/dashboard">
               Dashboard
@@ -141,7 +141,7 @@ function Recipe() {
             </Button>
           </Box>
         </Box>
-      </Container>
+      </PageLayout>
     </RequireAuthn>
   );
 }

@@ -1,8 +1,8 @@
 import Navbar from "../components/Navbar";
+import PageLayout from "../components/PageLayout";
 import RecipeList from "../components/RecipeList";
 import RequireAuthn from "../components/RequireAuthn";
 import { buildTitle } from "../lib/utils/dom";
-import { Container } from "@mantine/core";
 import { Helmet } from "react-helmet-async";
 
 function Dashboard() {
@@ -14,9 +14,9 @@ function Dashboard() {
 
       <Navbar />
 
-      <Container py="md">
+      <PageLayout>
         <RecipeList />
-      </Container>
+      </PageLayout>
     </RequireAuthn>
   );
 }

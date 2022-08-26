@@ -19,11 +19,13 @@ import { Link } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import { useState } from "react";
 
+export const navbarHeight = 55;
+
 const useStyles = createStyles((theme) => ({
   content: {
     alignItems: "center",
     display: "flex",
-    height: "55px",
+    height: navbarHeight,
     justifyContent: "space-between",
   },
   logo: {
@@ -69,7 +71,7 @@ function Navbar() {
         </Alert>
       </Modal>
 
-      <Header height={55}>
+      <Header height={navbarHeight}>
         <Container>
           <div className={classes.content}>
             <Text
