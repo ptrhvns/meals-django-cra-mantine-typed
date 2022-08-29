@@ -1,3 +1,4 @@
+import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
 import Navbar from "../components/Navbar";
 import PageLayout from "../components/PageLayout";
 import RequireAuthn from "../components/RequireAuthn";
@@ -21,8 +22,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { forOwn, head, pick } from "lodash";
+import { handledApiError } from "../lib/utils/api";
+import { handledInvalidData } from "../lib/utils/validation";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
+import { stringifyValue } from "../lib/utils/json";
 import { useApi } from "../hooks/useApi";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "@mantine/form";
@@ -42,6 +46,20 @@ const useStyles = createStyles(() => ({
     maxWidth: "35rem",
   },
 }));
+
+interface ResponseData {
+  id: string;
+  title: string;
+}
+
+const schema: JTDSchemaType<ResponseData> = {
+  properties: {
+    id: { type: "string" },
+    title: { type: "string" },
+  },
+};
+
+const validate = new Ajv().compile(schema);
 
 function RecipeTitleForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
@@ -66,12 +84,12 @@ function RecipeTitleForm() {
         const response = await get({ url: getRouteFn("recipe")({ recipeId }) });
         setLoading(false);
 
-        if (response.isError) {
-          setAlert(response.message);
-          return;
-        }
+        if (handledApiError(response, { setAlert })) return;
 
-        form.setFieldValue("title", response.data?.title);
+        const data = stringifyValue(response.data, "id");
+        if (handledInvalidData<ResponseData>(validate, data, setAlert)) return;
+
+        form.setFieldValue("title", response.data.title);
       })();
     }
   });
