@@ -20,6 +20,10 @@ interface RecipesPageRouteData {
   page: number;
 }
 
+interface SearchRouteData {
+  searchTerm: string;
+}
+
 // istanbul ignore next
 // prettier-ignore
 const API_ROUTES = asRouteDictionary({
@@ -33,6 +37,8 @@ const API_ROUTES = asRouteDictionary({
   recipeTitleUpdate: ({ recipeId }: RecipeIdRouteData) => `/api/recipe_title/${recipeId}/update/`,
   signup: () => "/api/signup/",
   signupConfirmation: () => "/api/signup_confirmation/",
+  tagAssociate: ({ recipeId }: RecipeIdRouteData ) => `/api/tag/recipe/${recipeId}/associate/`,
+  tagSearch: ({ searchTerm }: SearchRouteData) => `/api/tag/search/?search_term=${encodeURI(searchTerm)}`,
 });
 
 type ApiRoutes = typeof API_ROUTES;

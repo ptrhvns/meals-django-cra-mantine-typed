@@ -15,4 +15,6 @@ urlpatterns: list[URLPattern | URLResolver] = [
     path("recipes/", views.recipes, name="recipes"),
     path("signup/", views.signup, name="signup"),
     path("signup_confirmation/", views.signup_confirmation, name="signup_confirmation"),
+    path("tag/recipe/<int:recipe_id>/associate/", views.tag_associate, name="tag_associate"),
+    path("tag/search/", views.tag_search, name="tag_search"),
 ]

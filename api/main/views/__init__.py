@@ -8,6 +8,8 @@ from main.views.recipe_title_update import recipe_title_update
 from main.views.recipes import recipes
 from main.views.signup import signup
 from main.views.signup_confirmation import signup_confirmation
+from main.views.tag_associate import tag_associate
+from main.views.tag_search import tag_search
 
 __all__ = [
     "csrf_token",
@@ -20,4 +22,6 @@ __all__ = [
     "recipes",
     "signup",
     "signup_confirmation",
+    "tag_associate",
+    "tag_search",
 ]

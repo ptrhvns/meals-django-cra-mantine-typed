@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import PageLayout from "../components/PageLayout";
+import RecipeTags from "../components/RecipeTags";
 import RecipeTitle from "../components/RecipeTitle";
 import RequireAuthn from "../components/RequireAuthn";
 import {
@@ -149,6 +150,7 @@ function Recipe() {
 
           <Box mt="md">
             <RecipeTitle isLoading={isLoading} recipe={recipe} />
+            <RecipeTags isLoading={isLoading} recipe={recipe} />
           </Box>
 
           <Box mt="xl">
