@@ -31,3 +31,14 @@ watchdog = {extras = ["watchmedo"], version = "^2.1.9"}
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.bandit]
+exclude_dirs = "main/tests"
+
+[tool.mypy]
+files = ["config/**/*.py", "main/**/*.py"]
+mypy_path = "stubs"
+show_error_codes = true
+strict = true
+warn_unreachable = true
+warn_unused_ignores = true
