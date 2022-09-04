@@ -10,6 +10,7 @@ import {
   Breadcrumbs,
   Button,
   createStyles,
+  Divider,
   Modal,
   Text,
 } from "@mantine/core";
@@ -69,7 +70,7 @@ function Recipe() {
   return (
     <RequireAuthn>
       <Helmet>
-        <title>{buildTitle("Recipe")}</title>
+        <title>{buildTitle(recipe ? recipe.title : "Recipe")}</title>
       </Helmet>
 
       <Navbar />
@@ -152,6 +153,8 @@ function Recipe() {
             <RecipeTitle isLoading={isLoading} recipe={recipe} />
             <RecipeTags isLoading={isLoading} recipe={recipe} />
           </Box>
+
+          <Divider mt="xl" />
 
           <Box mt="xl">
             <Button color="red" onClick={() => setConfirmDelete(true)}>

@@ -5,13 +5,22 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 
-from main.models import Recipe
+from main.models.recipe import Recipe
+from main.models.tag import Tag
+
+
+class TagSerializer(ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ("id", "name")
 
 
 class RecipeSerializer(ModelSerializer):
     class Meta:
         model = Recipe
-        fields = ("id", "title")
+        fields = ("id", "tags", "title")
+
+    tags = TagSerializer(many=True, required=False)
 
 
 @api_view(http_method_names=["GET"])

@@ -1,11 +1,14 @@
 import {
   Anchor,
+  Badge,
   Box,
   createStyles,
   Divider,
   Skeleton,
+  Text,
   Title,
 } from "@mantine/core";
+import { isEmpty, sortBy } from "lodash";
 import { Link } from "react-router-dom";
 import { RecipeType } from "../types";
 
@@ -17,12 +20,24 @@ interface RecipeTagProps {
 const TITLE_SIZE = "1.25rem";
 
 const useStyles = createStyles((theme) => ({
+  badge: {
+    cursor: "pointer",
+
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
   title: {
     color: theme.fn.darken(theme.colors.yellow[9], 0.25),
     fontSize: TITLE_SIZE,
   },
   tagLink: {
     padding: "0.25rem 0.5rem",
+  },
+  tagWrapper: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "0.5rem",
   },
   titleWrapper: {
     display: "flex",
@@ -51,6 +66,24 @@ function RecipeTags({ isLoading, recipe }: RecipeTagProps) {
           >
             Create
           </Anchor>
+        </Box>
+
+        <Box mt="sm">
+          {isEmpty(recipe.tags) ? (
+            <Text color="dimmed">No tags have been created yet.</Text>
+          ) : (
+            <Box className={classes.tagWrapper}>
+              {sortBy(recipe.tags, "name").map((tag) => (
+                <Anchor
+                  key={tag.id}
+                  component={Link}
+                  to={`/recipe/${recipe.id}/tag/${tag.id}/edit`}
+                >
+                  <Badge className={classes.badge}>{tag.name}</Badge>
+                </Anchor>
+              ))}
+            </Box>
+          )}
         </Box>
       </>
     );
