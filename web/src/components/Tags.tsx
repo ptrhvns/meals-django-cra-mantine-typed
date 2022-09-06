@@ -45,7 +45,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function RecipeTags({ isLoading, recipe }: RecipeTagProps) {
+function Tags({ isLoading, recipe }: RecipeTagProps) {
   const { classes } = useStyles();
 
   if (recipe) {
@@ -101,4 +101,4 @@ function RecipeTags({ isLoading, recipe }: RecipeTagProps) {
   return null;
 }
 
-export default RecipeTags;
+export default Tags;
