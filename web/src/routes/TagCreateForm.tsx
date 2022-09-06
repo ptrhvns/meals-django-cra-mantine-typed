@@ -67,7 +67,7 @@ function TagCreateForm() {
   return (
     <RequireAuthn>
       <Helmet>
-        <title>{buildTitle("New Recipe Tag")}</title>
+        <title>{buildTitle("New Tag")}</title>
       </Helmet>
 
       <Navbar />
@@ -89,7 +89,7 @@ function TagCreateForm() {
           </Breadcrumbs>
 
           <Title order={1} mt="md">
-            New Recipe Tag
+            New Tag
           </Title>
 
           <Box className={classes.formWrapper}>
