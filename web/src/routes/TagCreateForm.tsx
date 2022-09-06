@@ -43,7 +43,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function RecipeTagCreateForm() {
+function TagCreateForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [tagMatches, setTagMatches] = useState<string[]>([]);
@@ -168,4 +168,4 @@ function RecipeTagCreateForm() {
   );
 }
 
-export default RecipeTagCreateForm;
+export default TagCreateForm;
