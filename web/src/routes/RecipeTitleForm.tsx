@@ -53,6 +53,7 @@ interface ResponseData {
 }
 
 const schema: JTDSchemaType<ResponseData> = {
+  additionalProperties: true,
   properties: {
     id: { type: "string" },
     title: { type: "string" },
