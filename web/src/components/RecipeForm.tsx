@@ -12,7 +12,8 @@ import {
   faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { forOwn, head, pick } from "lodash";
+import { handledApiError } from "../lib/utils/api";
+import { pick } from "lodash";
 import { useApi } from "../hooks/useApi";
 import { useForm } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
@@ -37,7 +38,7 @@ function RecipeForm() {
   const { classes } = useStyles();
   const { getRouteFn, post } = useApi();
 
-  const form = useForm({
+  const { getInputProps, onSubmit, setFieldError } = useForm({
     initialValues: {
       title: "",
     },
@@ -48,7 +49,7 @@ function RecipeForm() {
       <LoadingOverlay visible={submitting} />
 
       <form
-        onSubmit={form.onSubmit(async (values) => {
+        onSubmit={onSubmit(async (values) => {
           setSubmitting(true);
 
           const response = await post({
@@ -58,13 +59,7 @@ function RecipeForm() {
 
           setSubmitting(false);
 
-          if (response.isError) {
-            setAlert(response.message);
-
-            forOwn(response.errors, (value, key) =>
-              form.setFieldError(key, head(value))
-            );
-
+          if (handledApiError(response, { setAlert, setFieldError })) {
             return;
           }
 
@@ -87,7 +82,7 @@ function RecipeForm() {
           disabled={submitting}
           label="Title"
           mt="md"
-          {...form.getInputProps("title")}
+          {...getInputProps("title")}
         />
 
         <Box className={classes.actions} mt="xl">

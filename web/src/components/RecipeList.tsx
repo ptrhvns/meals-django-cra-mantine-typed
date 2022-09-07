@@ -14,6 +14,7 @@ import {
   faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { handledApiError } from "../lib/utils/api";
 import { isEmpty } from "lodash";
 import { Link } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
@@ -49,8 +50,7 @@ function RecipeList() {
 
       setIsLoading(false);
 
-      if (response.isError) {
-        setError(response.message);
+      if (handledApiError(response, { setAlert: setError })) {
         return;
       }
 

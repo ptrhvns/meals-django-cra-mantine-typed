@@ -5,15 +5,17 @@ import { ReactNode } from "react";
 export function handledApiError(
   response: ApiResponse,
   {
+    defaultAlert,
     setAlert,
     setFieldError,
   }: {
+    defaultAlert?: string;
     setAlert?: (s: string | undefined) => void;
     setFieldError?: (path: string, error: ReactNode) => void;
   }
 ): boolean {
   if (response.isError) {
-    if (setAlert) setAlert(response.message);
+    if (setAlert) setAlert(response.message || defaultAlert);
 
     if (setFieldError) {
       forOwn(response.errors, (value, key) => setFieldError(key, head(value)));

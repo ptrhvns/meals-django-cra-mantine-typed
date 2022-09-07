@@ -20,9 +20,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { ApiResponse, useApi } from "../hooks/useApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { forOwn, head, omit, pick } from "lodash";
+import { handledApiError } from "../lib/utils/api";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
+import { omit, pick } from "lodash";
 import { useDebouncedFunction } from "../hooks/useDebouncedFunction";
 import { useForm } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
@@ -52,7 +53,7 @@ function TagCreateForm() {
   const { get, getRouteFn, post } = useApi();
   const { recipeId } = useParams() as { recipeId: string };
 
-  const form = useForm({
+  const { onSubmit, setFieldError, getInputProps } = useForm({
     initialValues: {
       name: "",
     },
@@ -96,7 +97,7 @@ function TagCreateForm() {
             <LoadingOverlay visible={submitting} />
 
             <form
-              onSubmit={form.onSubmit(async (values) => {
+              onSubmit={onSubmit(async (values) => {
                 setSubmitting(true);
                 const routeFn = getRouteFn("tagAssociate");
 
@@ -107,13 +108,7 @@ function TagCreateForm() {
 
                 setSubmitting(false);
 
-                if (response.isError) {
-                  setAlert(response.message);
-
-                  forOwn(response.errors, (value, key) =>
-                    form.setFieldError(key, head(value))
-                  );
-
+                if (handledApiError(response, { setAlert, setFieldError })) {
                   return;
                 }
 
@@ -138,11 +133,11 @@ function TagCreateForm() {
                 label="Name"
                 mt="md"
                 onChange={async (value: string) => {
-                  form.getInputProps("name").onChange(value);
+                  getInputProps("name").onChange(value);
                   const response = await searchTags(value);
                   setTagMatches(response?.data?.matches || []);
                 }}
-                {...omit(form.getInputProps("name"), "onChange")}
+                {...omit(getInputProps("name"), "onChange")}
               />
 
               <Box className={classes.actions} mt="xl">

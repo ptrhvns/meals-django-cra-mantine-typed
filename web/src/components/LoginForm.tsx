@@ -15,7 +15,8 @@ import {
   faSignInAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { forOwn, head, pick } from "lodash";
+import { handledApiError } from "../lib/utils/api";
+import { pick } from "lodash";
 import { useApi } from "../hooks/useApi";
 import { useForm } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +36,7 @@ function LoginForm() {
   const { classes } = useStyles();
   const { getRouteFn, post } = useApi();
 
-  const form = useForm({
+  const { getInputProps, onSubmit, setFieldError } = useForm({
     initialValues: {
       password: "",
       remember_me: "",
@@ -48,7 +49,7 @@ function LoginForm() {
       <LoadingOverlay visible={isSubmitting} />
 
       <form
-        onSubmit={form.onSubmit(async (values) => {
+        onSubmit={onSubmit(async (values) => {
           setIsSubmitting(true);
 
           const response = await post({
@@ -58,13 +59,7 @@ function LoginForm() {
 
           setIsSubmitting(false);
 
-          if (response.isError) {
-            setAlert(response.message);
-
-            forOwn(response.errors, (value, key) =>
-              form.setFieldError(key, head(value))
-            );
-
+          if (handledApiError(response, { setAlert, setFieldError })) {
             return;
           }
 
@@ -86,21 +81,21 @@ function LoginForm() {
           disabled={isSubmitting}
           label="Username"
           mt="md"
-          {...form.getInputProps("username")}
+          {...getInputProps("username")}
         />
 
         <PasswordInput
           disabled={isSubmitting}
           label="Password"
           mt="md"
-          {...form.getInputProps("password")}
+          {...getInputProps("password")}
         />
 
         <Checkbox
           checked
           label="Remember me"
           mt="md"
-          {...form.getInputProps("remember_me")}
+          {...getInputProps("remember_me")}
         />
 
         <Button disabled={isSubmitting} mt="xl" type="submit">

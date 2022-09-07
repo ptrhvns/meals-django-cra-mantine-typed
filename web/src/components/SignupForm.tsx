@@ -16,7 +16,8 @@ import {
   faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { forOwn, head, pick } from "lodash";
+import { handledApiError } from "../lib/utils/api";
+import { pick } from "lodash";
 import { useForm } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -44,7 +45,7 @@ function SignupForm() {
   const { classes } = useStyles();
   const { getRouteFn, post } = useApi();
 
-  const form = useForm({
+  const { getInputProps, onSubmit, setFieldError } = useForm({
     initialValues: {
       email: "",
       password: "",
@@ -71,7 +72,7 @@ function SignupForm() {
 
         <form
           className={classes.form}
-          onSubmit={form.onSubmit(async (values) => {
+          onSubmit={onSubmit(async (values) => {
             setIsSubmitting(true);
 
             const response: ApiResponse = await post({
@@ -81,13 +82,7 @@ function SignupForm() {
 
             setIsSubmitting(false);
 
-            if (response.isError) {
-              setAlert(response.message);
-
-              forOwn(response.errors, (value, key) =>
-                form.setFieldError(key, head(value))
-              );
-
+            if (handledApiError(response, { setAlert, setFieldError })) {
               return;
             }
 
@@ -109,7 +104,7 @@ function SignupForm() {
             disabled={isSubmitting}
             label="Username"
             mt="md"
-            {...form.getInputProps("username")}
+            {...getInputProps("username")}
           />
 
           <TextInput
@@ -117,14 +112,14 @@ function SignupForm() {
             label="Email"
             mt="md"
             type="email"
-            {...form.getInputProps("email")}
+            {...getInputProps("email")}
           />
 
           <PasswordInput
             disabled={isSubmitting}
             label="Password"
             mt="md"
-            {...form.getInputProps("password")}
+            {...getInputProps("password")}
           />
 
           <Text className={classes.termsNotice} mt="xl" size="sm">

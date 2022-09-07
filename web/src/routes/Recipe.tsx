@@ -3,10 +3,21 @@ import PageLayout from "../components/PageLayout";
 import RecipeTitle from "../components/RecipeTitle";
 import RequireAuthn from "../components/RequireAuthn";
 import Tags from "../components/Tags";
-import { Alert, Anchor, Box, Breadcrumbs, Button, createStyles, Divider, Modal, Text, } from "@mantine/core";
+import {
+  Alert,
+  Anchor,
+  Box,
+  Breadcrumbs,
+  Button,
+  createStyles,
+  Divider,
+  Modal,
+  Text,
+} from "@mantine/core";
 import { buildTitle } from "../lib/utils/dom";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { handledApiError } from "../lib/utils/api";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import { RecipeData } from "../types";
@@ -47,8 +58,7 @@ function Recipe() {
         const response = await get({ url: getRouteFn("recipe")({ recipeId }) });
         setIsLoading(false);
 
-        if (response.isError) {
-          setAlert(response.message);
+        if (handledApiError(response, { setAlert })) {
           return;
         }
 
@@ -94,8 +104,9 @@ function Recipe() {
                 url: getRouteFn("recipeDestroy")({ recipeId }),
               });
 
-              if (response.isError) {
-                setConfirmDeleteAlert(response.message);
+              if (
+                handledApiError(response, { setAlert: setConfirmDeleteAlert })
+              ) {
                 return;
               }
 
