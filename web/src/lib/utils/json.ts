@@ -1,6 +1,17 @@
-import { pick, set } from "lodash";
+import { forOwn, isArray, isPlainObject, isString } from "lodash";
 
-export function stringifyValue(obj: object, path: string): object {
-  const value = pick(obj, path);
-  return value ? set(obj, path, String(value)) : obj;
+export function stringifyIdsDeeply(obj: { id?: string }) {
+  forOwn(obj, (value: any, key: string | Symbol) => {
+    if (isString(key)) {
+      if (isArray(value)) {
+        value.map((v) => stringifyIdsDeeply(v));
+      } else if (isPlainObject(value)) {
+        stringifyIdsDeeply(value);
+      } else {
+        if ("id" === key) {
+          obj[key] = String(value);
+        }
+      }
+    }
+  });
 }

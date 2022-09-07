@@ -1,3 +1,4 @@
+import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
 import Navbar from "../components/Navbar";
 import PageLayout from "../components/PageLayout";
 import RecipeTitle from "../components/RecipeTitle";
@@ -18,9 +19,10 @@ import { buildTitle } from "../lib/utils/dom";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { handledApiError } from "../lib/utils/api";
+import { handledInvalidData } from "../lib/utils/validation";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
-import { RecipeData } from "../types";
+import { stringifyIdsDeeply } from "../lib/utils/json";
 import { useApi } from "../hooks/useApi";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -36,6 +38,21 @@ const useStyles = createStyles(() => ({
     position: "relative",
   },
 }));
+
+interface RecipeData {
+  id: string;
+  title: string;
+}
+
+const schema: JTDSchemaType<RecipeData> = {
+  additionalProperties: true,
+  properties: {
+    id: { type: "string" },
+    title: { type: "string" },
+  },
+};
+
+const validate = new Ajv().compile(schema);
 
 function Recipe() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
@@ -59,6 +76,12 @@ function Recipe() {
         setIsLoading(false);
 
         if (handledApiError(response, { setAlert })) {
+          return;
+        }
+
+        stringifyIdsDeeply(response.data);
+
+        if (handledInvalidData<RecipeData>(validate, response.data, setAlert)) {
           return;
         }
 

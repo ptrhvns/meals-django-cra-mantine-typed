@@ -26,7 +26,7 @@ import { handledInvalidData } from "../lib/utils/validation";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import { pick } from "lodash";
-import { stringifyValue } from "../lib/utils/json";
+import { stringifyIdsDeeply } from "../lib/utils/json";
 import { useApi } from "../hooks/useApi";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "@mantine/form";
@@ -89,9 +89,9 @@ function RecipeTitleForm() {
           return;
         }
 
-        const data = stringifyValue(response.data, "id");
+        stringifyIdsDeeply(response.data);
 
-        if (handledInvalidData<RecipeData>(validate, data, setAlert)) {
+        if (handledInvalidData<RecipeData>(validate, response.data, setAlert)) {
           return;
         }
 
