@@ -21,11 +21,11 @@ import {
   faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { forOwn, head, pick } from "lodash";
 import { handledApiError } from "../lib/utils/api";
 import { handledInvalidData } from "../lib/utils/validation";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
+import { pick } from "lodash";
 import { stringifyValue } from "../lib/utils/json";
 import { useApi } from "../hooks/useApi";
 import { useEffect, useRef, useState } from "react";
@@ -47,12 +47,12 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-interface ResponseData {
+interface RecipeData {
   id: string;
   title: string;
 }
 
-const schema: JTDSchemaType<ResponseData> = {
+const schema: JTDSchemaType<RecipeData> = {
   additionalProperties: true,
   properties: {
     id: { type: "string" },
@@ -72,7 +72,7 @@ function RecipeTitleForm() {
   const { get, getRouteFn, post } = useApi();
   const { recipeId } = useParams() as { recipeId: string };
 
-  const form = useForm({
+  const { getInputProps, onSubmit, setFieldError, setFieldValue } = useForm({
     initialValues: {
       title: "",
     },
@@ -85,12 +85,17 @@ function RecipeTitleForm() {
         const response = await get({ url: getRouteFn("recipe")({ recipeId }) });
         setLoading(false);
 
-        if (handledApiError(response, { setAlert })) return;
+        if (handledApiError(response, { setAlert })) {
+          return;
+        }
 
         const data = stringifyValue(response.data, "id");
-        if (handledInvalidData<ResponseData>(validate, data, setAlert)) return;
 
-        form.setFieldValue("title", response.data.title);
+        if (handledInvalidData<RecipeData>(validate, data, setAlert)) {
+          return;
+        }
+
+        setFieldValue("title", response.data.title);
       })();
     }
   });
@@ -135,7 +140,7 @@ function RecipeTitleForm() {
               <LoadingOverlay visible={submitting} />
 
               <form
-                onSubmit={form.onSubmit(async (values) => {
+                onSubmit={onSubmit(async (values) => {
                   setSubmitting(true);
 
                   const response = await post({
@@ -145,13 +150,7 @@ function RecipeTitleForm() {
 
                   setSubmitting(false);
 
-                  if (response.isError) {
-                    setAlert(response.message);
-
-                    forOwn(response.errors, (value, key) =>
-                      form.setFieldError(key, head(value))
-                    );
-
+                  if (handledApiError(response, { setAlert, setFieldError })) {
                     return;
                   }
 
@@ -174,7 +173,7 @@ function RecipeTitleForm() {
                   disabled={submitting}
                   label="Title"
                   mt="md"
-                  {...form.getInputProps("title")}
+                  {...getInputProps("title")}
                 />
 
                 <Box className={classes.actions} mt="xl">
