@@ -1,4 +1,4 @@
-import { AuthnContext, AuthnInterface } from "../contexts/AuthnContext";
+import { AuthnContext, AuthnData } from "../contexts/AuthnContext";
 import React, { useState } from "react";
 
 interface AuthnProviderProps {
@@ -28,7 +28,7 @@ function AuthnProvider({ children }: AuthnProviderProps) {
     }
   };
 
-  const value: AuthnInterface = { isAuthenticated, login, logout };
+  const value: AuthnData = { isAuthenticated, login, logout };
 
   return (
     <AuthnContext.Provider value={value}>{children}</AuthnContext.Provider>
