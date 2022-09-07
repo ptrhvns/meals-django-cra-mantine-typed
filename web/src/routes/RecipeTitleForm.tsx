@@ -82,7 +82,7 @@ function RecipeTitleForm() {
     if (shouldLoad.current) {
       (async () => {
         shouldLoad.current = false;
-        const response = await get({ url: getRouteFn("recipe")({ recipeId }) });
+        const response = await get({ url: getRouteFn("recipe")(recipeId) });
         setLoading(false);
 
         if (handledApiError(response, { setAlert })) {
@@ -145,7 +145,7 @@ function RecipeTitleForm() {
 
                   const response = await post({
                     data: pick(values, ["title"]),
-                    url: getRouteFn("recipeTitleUpdate")({ recipeId }),
+                    url: getRouteFn("recipeTitleUpdate")(recipeId),
                   });
 
                   setSubmitting(false);

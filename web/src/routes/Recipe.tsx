@@ -72,7 +72,7 @@ function Recipe() {
     if (shouldLoad.current) {
       (async () => {
         shouldLoad.current = false;
-        const response = await get({ url: getRouteFn("recipe")({ recipeId }) });
+        const response = await get({ url: getRouteFn("recipe")(recipeId) });
         setIsLoading(false);
 
         if (handledApiError(response, { setAlert })) {
@@ -124,7 +124,7 @@ function Recipe() {
             color="red"
             onClick={async () => {
               const response = await post({
-                url: getRouteFn("recipeDestroy")({ recipeId }),
+                url: getRouteFn("recipeDestroy")(recipeId),
               });
 
               if (

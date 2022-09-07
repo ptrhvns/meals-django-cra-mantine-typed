@@ -60,9 +60,7 @@ function TagCreateForm() {
   });
 
   const searchTags = useDebouncedFunction(200, (value: string) =>
-    get({
-      url: getRouteFn("tagSearch")({ searchTerm: value }),
-    })
+    get({ url: getRouteFn("tagSearch")(value) })
   ) as (value: string) => Promise<ApiResponse> | undefined;
 
   return (
@@ -103,7 +101,7 @@ function TagCreateForm() {
 
                 const response = await post({
                   data: pick(values, ["name"]),
-                  url: routeFn({ recipeId }),
+                  url: routeFn(recipeId),
                 });
 
                 setSubmitting(false);

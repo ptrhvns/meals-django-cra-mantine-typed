@@ -75,7 +75,7 @@ function RecipeList() {
       setIsLoading(true);
 
       const response = await get({
-        url: getRouteFn("recipes")({ page }),
+        url: getRouteFn("recipes")(page),
       });
 
       setIsLoading(false);

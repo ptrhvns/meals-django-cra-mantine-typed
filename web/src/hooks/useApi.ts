@@ -12,33 +12,20 @@ const asRouteDictionary = <T>(dictionary: {
   [K in keyof T]: T[K];
 }) => dictionary;
 
-interface RecipeIdRouteData {
-  recipeId: string;
-}
-
-interface RecipesPageRouteData {
-  page: number;
-}
-
-interface SearchRouteData {
-  searchTerm: string;
-}
-
-// istanbul ignore next
 // prettier-ignore
 const API_ROUTES = asRouteDictionary({
   csrfToken: () => "/api/csrf_token/",
   login: () => "/api/login/",
   logout: () => "/api/logout/",
-  recipe: ({ recipeId }: RecipeIdRouteData) => `/api/recipe/${recipeId}/`,
+  recipe: (recipeId: string) => `/api/recipe/${recipeId}/`,
   recipeCreate: () => "/api/recipe/create/",
-  recipeDestroy: ({ recipeId }: RecipeIdRouteData) => `/api/recipe/${recipeId}/destroy/`,
-  recipes: ({ page }: RecipesPageRouteData) => `/api/recipes/?page=${page}`,
-  recipeTitleUpdate: ({ recipeId }: RecipeIdRouteData) => `/api/recipe_title/${recipeId}/update/`,
+  recipeDestroy: (recipeId : string) => `/api/recipe/${recipeId}/destroy/`,
+  recipes: (page: number) => `/api/recipes/?page=${page}`,
+  recipeTitleUpdate: (recipeId: string) => `/api/recipe_title/${recipeId}/update/`,
   signup: () => "/api/signup/",
   signupConfirmation: () => "/api/signup_confirmation/",
-  tagAssociate: ({ recipeId }: RecipeIdRouteData ) => `/api/tag/recipe/${recipeId}/associate/`,
-  tagSearch: ({ searchTerm }: SearchRouteData) => `/api/tag/search/?search_term=${encodeURI(searchTerm)}`,
+  tagAssociate: (recipeId: string ) => `/api/tag/recipe/${recipeId}/associate/`,
+  tagSearch: (searchTerm: string) => `/api/tag/search/?search_term=${encodeURI(searchTerm)}`,
 });
 
 type ApiRoutes = typeof API_ROUTES;
@@ -48,7 +35,6 @@ function getRouteFn<K extends ApiRouteKeys>(route: K): ApiRoutes[K] {
   return API_ROUTES[route];
 }
 
-// istanbul ignore next
 // prettier-ignore
 const WEB_ROUTES = asRouteDictionary({
  login: () => '/login'
