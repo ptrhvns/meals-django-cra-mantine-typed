@@ -10,11 +10,11 @@ import {
 } from "@mantine/core";
 import { isEmpty, sortBy } from "lodash";
 import { Link } from "react-router-dom";
-import { RecipeType } from "../types";
+import { RecipeData } from "../types";
 
 interface RecipeTagProps {
   isLoading: boolean;
-  recipe?: RecipeType;
+  recipe?: RecipeData;
 }
 
 const TITLE_SIZE = "1.25rem";

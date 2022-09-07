@@ -3,23 +3,13 @@ import PageLayout from "../components/PageLayout";
 import RecipeTitle from "../components/RecipeTitle";
 import RequireAuthn from "../components/RequireAuthn";
 import Tags from "../components/Tags";
-import {
-  Alert,
-  Anchor,
-  Box,
-  Breadcrumbs,
-  Button,
-  createStyles,
-  Divider,
-  Modal,
-  Text,
-} from "@mantine/core";
+import { Alert, Anchor, Box, Breadcrumbs, Button, createStyles, Divider, Modal, Text, } from "@mantine/core";
 import { buildTitle } from "../lib/utils/dom";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
-import { RecipeType } from "../types";
+import { RecipeData } from "../types";
 import { useApi } from "../hooks/useApi";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -43,7 +33,7 @@ function Recipe() {
     string | undefined
   >(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [recipe, setRecipe] = useState<RecipeType | undefined>(undefined);
+  const [recipe, setRecipe] = useState<RecipeData | undefined>(undefined);
   const navigate = useNavigate();
   const shouldLoad = useRef<boolean>(true);
   const { classes } = useStyles();
