@@ -30,7 +30,7 @@ const useStyles = createStyles(() => ({
 
 function LoginForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
   const authn = useAuthn();
   const navigate = useNavigate();
   const { classes } = useStyles();
@@ -46,18 +46,18 @@ function LoginForm() {
 
   return (
     <Box className={classes.wrapper}>
-      <LoadingOverlay visible={isSubmitting} />
+      <LoadingOverlay visible={submitting} />
 
       <form
         onSubmit={onSubmit(async (values) => {
-          setIsSubmitting(true);
+          setSubmitting(true);
 
           const response = await post({
             data: pick(values, ["password", "remember_me", "username"]),
             url: getRouteFn("login")(),
           });
 
-          setIsSubmitting(false);
+          setSubmitting(false);
 
           if (handledApiError(response, { setAlert, setFieldError })) {
             return;
@@ -78,14 +78,14 @@ function LoginForm() {
         )}
 
         <TextInput
-          disabled={isSubmitting}
+          disabled={submitting}
           label="Username"
           mt="md"
           {...getInputProps("username")}
         />
 
         <PasswordInput
-          disabled={isSubmitting}
+          disabled={submitting}
           label="Password"
           mt="md"
           {...getInputProps("password")}
@@ -98,7 +98,7 @@ function LoginForm() {
           {...getInputProps("remember_me")}
         />
 
-        <Button disabled={isSubmitting} mt="xl" type="submit">
+        <Button disabled={submitting} mt="xl" type="submit">
           <FontAwesomeIcon icon={faSignInAlt} />
           <Text ml="xs">Log in</Text>
         </Button>

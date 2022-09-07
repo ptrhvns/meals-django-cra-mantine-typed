@@ -12,7 +12,7 @@ import { isEmpty, sortBy } from "lodash";
 import { Link } from "react-router-dom";
 
 interface RecipeTagProps {
-  isLoading: boolean;
+  loading: boolean;
   recipe?: {
     id: string;
     tags?: { id: number; name: string }[];
@@ -47,7 +47,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function Tags({ isLoading, recipe }: RecipeTagProps) {
+function Tags({ loading, recipe }: RecipeTagProps) {
   const { classes } = useStyles();
 
   if (recipe) {
@@ -91,7 +91,7 @@ function Tags({ isLoading, recipe }: RecipeTagProps) {
     );
   }
 
-  if (isLoading) {
+  if (loading) {
     return (
       <>
         <Divider mt="md" pt="md" />

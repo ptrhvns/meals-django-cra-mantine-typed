@@ -39,7 +39,7 @@ const useStyles = createStyles((theme) => ({
 
 function SignupForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
   const [success, setSuccess] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
   const { classes } = useStyles();
@@ -68,19 +68,19 @@ function SignupForm() {
       </Modal>
 
       <Box className={classes.wrapper}>
-        <LoadingOverlay visible={isSubmitting} />
+        <LoadingOverlay visible={submitting} />
 
         <form
           className={classes.form}
           onSubmit={onSubmit(async (values) => {
-            setIsSubmitting(true);
+            setSubmitting(true);
 
             const response: ApiResponse = await post({
               data: pick(values, ["email", "password", "username"]),
               url: getRouteFn("signup")(),
             });
 
-            setIsSubmitting(false);
+            setSubmitting(false);
 
             if (handledApiError(response, { setAlert, setFieldError })) {
               return;
@@ -101,14 +101,14 @@ function SignupForm() {
           )}
 
           <TextInput
-            disabled={isSubmitting}
+            disabled={submitting}
             label="Username"
             mt="md"
             {...getInputProps("username")}
           />
 
           <TextInput
-            disabled={isSubmitting}
+            disabled={submitting}
             label="Email"
             mt="md"
             type="email"
@@ -116,7 +116,7 @@ function SignupForm() {
           />
 
           <PasswordInput
-            disabled={isSubmitting}
+            disabled={submitting}
             label="Password"
             mt="md"
             {...getInputProps("password")}
@@ -127,7 +127,7 @@ function SignupForm() {
             and Privacy Policy.
           </Text>
 
-          <Button disabled={isSubmitting} mt="xl" type="submit">
+          <Button disabled={submitting} mt="xl" type="submit">
             <FontAwesomeIcon icon={faPlusCircle} />
             <Text ml="xs">Sign up</Text>
           </Button>

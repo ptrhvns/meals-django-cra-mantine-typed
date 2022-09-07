@@ -9,7 +9,7 @@ interface RequireGuestProps {
 function RequireGuest({ children }: RequireGuestProps) {
   const authn = useAuthn();
 
-  if (authn.isAuthenticated) {
+  if (authn.authenticated) {
     return <Navigate to="/dashboard" replace />;
   }
 

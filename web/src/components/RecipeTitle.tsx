@@ -2,7 +2,7 @@ import { Anchor, Box, createStyles, Skeleton, Title } from "@mantine/core";
 import { Link } from "react-router-dom";
 
 interface RecipeTitleProps {
-  isLoading: boolean;
+  loading: boolean;
   recipe?: { id: string; title: string };
 }
 
@@ -21,7 +21,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function RecipeTitle({ isLoading, recipe }: RecipeTitleProps) {
+function RecipeTitle({ loading, recipe }: RecipeTitleProps) {
   const { classes } = useStyles();
 
   if (recipe) {
@@ -43,7 +43,7 @@ function RecipeTitle({ isLoading, recipe }: RecipeTitleProps) {
     );
   }
 
-  if (isLoading) {
+  if (loading) {
     return <Skeleton height={TITLE_SIZE} radius="md" />;
   }
 

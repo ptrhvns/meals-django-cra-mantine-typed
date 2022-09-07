@@ -62,7 +62,7 @@ const validate = new Ajv().compile(schema);
 
 function RecipeList() {
   const [error, setError] = useState<string | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [pagination, setPagination] = useState<PaginationData | undefined>(
     undefined
   );
@@ -72,13 +72,13 @@ function RecipeList() {
 
   const getRecipes = useCallback(
     async (page: number = 1) => {
-      setIsLoading(true);
+      setLoading(true);
 
       const response = await get({
         url: getRouteFn("recipes")(page),
       });
 
-      setIsLoading(false);
+      setLoading(false);
 
       if (handledApiError(response, { setAlert: setError })) {
         return;
@@ -125,7 +125,7 @@ function RecipeList() {
         </Alert>
       )}
 
-      {isLoading && (
+      {loading && (
         <Box mt="md">
           <Skeleton height={42.7} radius="sm" />
           <Skeleton height={42.7} mt="sm" radius="sm" />
@@ -134,13 +134,13 @@ function RecipeList() {
         </Box>
       )}
 
-      {!isLoading && !error && isEmpty(recipes) && (
+      {!loading && !error && isEmpty(recipes) && (
         <Text color="dimmed" component="p" mt="md">
           No recipes have been created yet.
         </Text>
       )}
 
-      {!isLoading && !error && !isEmpty(recipes) && (
+      {!loading && !error && !isEmpty(recipes) && (
         <Box mt="md">
           <Table striped verticalSpacing="xs">
             <thead>

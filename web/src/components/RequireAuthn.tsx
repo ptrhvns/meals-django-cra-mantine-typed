@@ -10,7 +10,7 @@ function RequireAuthn({ children }: RequireAuthnProps) {
   const authn = useAuthn();
   const location = useLocation();
 
-  if (!authn.isAuthenticated) {
+  if (!authn.authenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

@@ -29,8 +29,8 @@ const useStyles = createStyles((_theme) => ({
 }));
 
 function SignupConfirmation() {
-  const [isConfirming, setIsConfirming] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(false);
+  const [confirming, setConfirming] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
   const [message, setMessage] = useState<string | undefined>(undefined);
   const params = useParams();
   const shouldConfirm = useRef<boolean>(true);
@@ -48,7 +48,7 @@ function SignupConfirmation() {
         });
 
         if (response.isError) {
-          setIsError(true);
+          setError(true);
           setMessage(
             join(compact([response.message, head(response.errors?.token)]), " ")
           );
@@ -56,7 +56,7 @@ function SignupConfirmation() {
           setMessage(response.message);
         }
 
-        setIsConfirming(false);
+        setConfirming(false);
       })();
     }
   }, [getRouteFn, params, post]);
@@ -70,7 +70,7 @@ function SignupConfirmation() {
       <PageCenteredPaper>
         <Title order={1}>Sign Up Confirmation</Title>
 
-        {isConfirming ? (
+        {confirming ? (
           <Alert color="gray" mt="xl">
             <Box className={classes.confirmingContent}>
               <Loader color="gray" size="sm" />
@@ -79,9 +79,9 @@ function SignupConfirmation() {
           </Alert>
         ) : (
           <Alert
-            color={isError ? "red" : "green"}
+            color={error ? "red" : "green"}
             icon={
-              isError ? (
+              error ? (
                 <FontAwesomeIcon icon={faCircleExclamation} />
               ) : (
                 <FontAwesomeIcon icon={faCircleCheck} />
@@ -91,7 +91,7 @@ function SignupConfirmation() {
           >
             <Box mr="xl">
               {message}{" "}
-              {isError ? (
+              {error ? (
                 <>
                   Please double check the address you visited to make sure it's
                   correct, or you can try{" "}

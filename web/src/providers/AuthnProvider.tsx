@@ -6,13 +6,13 @@ interface AuthnProviderProps {
 }
 
 function AuthnProvider({ children }: AuthnProviderProps) {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-    !!localStorage.getItem("isAuthenticated")
+  const [authenticated, setAuthenticated] = useState<boolean>(
+    !!localStorage.getItem("authenticated")
   );
 
   const login = (callback?: () => void): void => {
-    localStorage.setItem("isAuthenticated", "true");
-    setIsAuthenticated(true);
+    localStorage.setItem("authenticated", "true");
+    setAuthenticated(true);
 
     if (callback) {
       callback();
@@ -20,15 +20,15 @@ function AuthnProvider({ children }: AuthnProviderProps) {
   };
 
   const logout = (callback?: () => void): void => {
-    localStorage.removeItem("isAuthenticated");
-    setIsAuthenticated(false);
+    localStorage.removeItem("authenticated");
+    setAuthenticated(false);
 
     if (callback) {
       callback();
     }
   };
 
-  const value: AuthnData = { isAuthenticated, login, logout };
+  const value: AuthnData = { authenticated: authenticated, login, logout };
 
   return (
     <AuthnContext.Provider value={value}>{children}</AuthnContext.Provider>

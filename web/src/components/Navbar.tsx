@@ -88,7 +88,7 @@ function Navbar() {
               <FontAwesomeIcon icon={faUtensils} /> Meals
             </Text>
 
-            {authn.isAuthenticated ? (
+            {authn.authenticated ? (
               <Menu
                 closeOnClickOutside
                 exitTransitionDuration={0}

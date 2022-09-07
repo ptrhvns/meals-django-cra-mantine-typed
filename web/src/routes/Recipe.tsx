@@ -60,7 +60,7 @@ function Recipe() {
   const [confirmDeleteAlert, setConfirmDeleteAlert] = useState<
     string | undefined
   >(undefined);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [recipe, setRecipe] = useState<RecipeData | undefined>(undefined);
   const navigate = useNavigate();
   const shouldLoad = useRef<boolean>(true);
@@ -73,7 +73,7 @@ function Recipe() {
       (async () => {
         shouldLoad.current = false;
         const response = await get({ url: getRouteFn("recipe")(recipeId) });
-        setIsLoading(false);
+        setLoading(false);
 
         if (handledApiError(response, { setAlert })) {
           return;
@@ -174,8 +174,8 @@ function Recipe() {
           )}
 
           <Box mt="md">
-            <RecipeTitle isLoading={isLoading} recipe={recipe} />
-            <Tags isLoading={isLoading} recipe={recipe} />
+            <RecipeTitle loading={loading} recipe={recipe} />
+            <Tags loading={loading} recipe={recipe} />
           </Box>
 
           <Divider mt="xl" />
