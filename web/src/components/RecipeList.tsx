@@ -19,12 +19,12 @@ import { Link } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-interface PaginationType {
+interface PaginationData {
   page: number;
   total: number;
 }
 
-interface RecipeType {
+interface RecipeData {
   id: string;
   title: string;
 }
@@ -32,10 +32,10 @@ interface RecipeType {
 function RecipeList() {
   const [error, setError] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [pagination, setPagination] = useState<PaginationType | undefined>(
+  const [pagination, setPagination] = useState<PaginationData | undefined>(
     undefined
   );
-  const [recipes, setRecipes] = useState<RecipeType[] | undefined>([]);
+  const [recipes, setRecipes] = useState<RecipeData[] | undefined>([]);
   const shouldLoad = useRef<boolean>(true);
   const { get, getRouteFn } = useApi();
 
