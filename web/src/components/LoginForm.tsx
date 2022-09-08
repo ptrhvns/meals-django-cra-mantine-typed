@@ -15,7 +15,7 @@ import {
   faSignInAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { handledApiError } from "../lib/utils/api";
+import { handledApiError } from "../lib/utils";
 import { pick } from "lodash";
 import { useApi } from "../hooks/useApi";
 import { useForm } from "@mantine/form";

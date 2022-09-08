@@ -13,14 +13,13 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { buildTitle } from "../lib/utils/dom";
+import { buildTitle, handledApiError } from "../lib/utils";
 import {
   faCircleExclamation,
   faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { ApiResponse, useApi } from "../hooks/useApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { handledApiError } from "../lib/utils/api";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import { omit, pick } from "lodash";

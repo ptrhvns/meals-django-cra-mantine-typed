@@ -3,7 +3,7 @@ import PageLayout from "../components/PageLayout";
 import RecipeForm from "../components/RecipeForm";
 import RequireAuthn from "../components/RequireAuthn";
 import { Anchor, Breadcrumbs, createStyles, Title, Text } from "@mantine/core";
-import { buildTitle } from "../lib/utils/dom";
+import { buildTitle } from "../lib/utils";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 

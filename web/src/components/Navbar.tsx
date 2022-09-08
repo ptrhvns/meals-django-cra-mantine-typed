@@ -15,7 +15,7 @@ import {
   faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { handledApiError } from "../lib/utils/api";
+import { handledApiError } from "../lib/utils";
 import { Link } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import { useState } from "react";

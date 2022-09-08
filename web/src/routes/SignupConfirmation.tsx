@@ -10,7 +10,7 @@ import {
   Title,
 } from "@mantine/core";
 import { ApiResponse, useApi } from "../hooks/useApi";
-import { buildTitle } from "../lib/utils/dom";
+import { buildTitle } from "../lib/utils";
 import { compact, head, join } from "lodash";
 import {
   faCircleCheck,

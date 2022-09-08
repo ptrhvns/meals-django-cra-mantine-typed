@@ -1,6 +1,6 @@
 import PageCenteredPaper from "../components/PageCenteredPaper";
 import { Alert, Anchor, Title } from "@mantine/core";
-import { buildTitle } from "../lib/utils/dom";
+import { buildTitle } from "../lib/utils";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 

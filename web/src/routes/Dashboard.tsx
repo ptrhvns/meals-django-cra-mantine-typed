@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import PageLayout from "../components/PageLayout";
 import RecipeList from "../components/RecipeList";
 import RequireAuthn from "../components/RequireAuthn";
-import { buildTitle } from "../lib/utils/dom";
+import { buildTitle } from "../lib/utils";
 import { Helmet } from "react-helmet-async";
 
 function Dashboard() {
