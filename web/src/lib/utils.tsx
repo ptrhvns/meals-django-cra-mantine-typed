@@ -70,7 +70,9 @@ export function handledInvalidData<T>(
 
 /**
  * Recursively convert the value for all properties with the name "id" to a
- * string.
+ * string. This is necessary because the API will return IDs as numbers, whereas
+ * the JSON Type Definition schema used to validate API responses only supports
+ * uint32 which is smaller than the IDs could be. So, we turn IDs into strings.
  *
  * @param {{id?: string}} obj - object possibly containing an "id" field; can
  *    have nested objects and arrays, usually the "response.data" object in an
