@@ -4,10 +4,13 @@ import { isEmpty, omit } from "lodash";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-// This helper function ensures that TypeScript can infer the type of the key as
-// a union of all of the keys in the given object literal, but that the type of
-// the value is expressed concretely. This will help us later to prevent the use
-// of invalid routes.
+/**
+ * This helper function ensures that TypeScript can infer the type of the keys
+ * of the object literal passed to it (the route dictionary) as a union of all
+ * of the string literal keys themselves. This will help those who use the route
+ * dictionary to avoid accessing the dictionary with invalid keys.
+ *
+ */
 const asRouteDictionary = <T>(dictionary: {
   [K in keyof T]: T[K];
 }) => dictionary;
