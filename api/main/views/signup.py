@@ -4,7 +4,6 @@ from typing import Any, cast
 
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
-from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -12,6 +11,7 @@ from rest_framework.serializers import CharField, EmailField, ModelSerializer
 from rest_framework.validators import UniqueValidator
 
 from main.lib import client
+from main.lib.responses import created_response, invalid_request_data_response
 from main.models.token import Token
 from main.models.user import User
 from main.tasks.send_signup_confirmation import send_signup_confirmation
@@ -49,13 +49,7 @@ def signup(request: Request) -> Response:
     serializer = SignupSerializer(data=request.data)
 
     if not serializer.is_valid():
-        return Response(
-            {
-                "errors": serializer.errors,
-                "message": _("The information you provided was invalid."),
-            },
-            status=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        )
+        return invalid_request_data_response(serializer)
 
     user = serializer.save()
 
@@ -75,11 +69,8 @@ def signup(request: Request) -> Response:
 
     send_signup_confirmation.delay(user.id, site_url, confirmation_url)
 
-    return Response(
-        {
-            "message": _(
-                "You were signed up successfully. Check your email to confirm your account."
-            )
-        },
-        status=status.HTTP_201_CREATED,
+    return created_response(
+        message=_(
+            "You were signed up successfully. Check your email to confirm your account."
+        )
     )

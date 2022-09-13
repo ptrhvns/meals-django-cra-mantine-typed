@@ -5,6 +5,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from main.client import MAX_AUTOCOMPLETE_MATCHES
+from main.lib.responses import data_response
 from main.models import Tag
 
 
@@ -12,10 +13,10 @@ from main.models import Tag
 @permission_classes([IsAuthenticated])  # type: ignore[list-item]
 def tag_search(request: Request) -> Response:
     if not (search_term := request.query_params.get("search_term")):
-        return Response({"data": {"matches": []}})
+        return data_response(data={"matches": []})
 
     tags = Tag.objects.filter(name__icontains=search_term, user=request.user).order_by(
         Length("name").asc()
     )[:MAX_AUTOCOMPLETE_MATCHES]
 
-    return Response({"data": {"matches": [t.name for t in tags]}})
+    return data_response(data={"matches": [t.name for t in tags]})

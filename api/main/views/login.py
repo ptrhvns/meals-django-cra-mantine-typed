@@ -3,13 +3,16 @@ from logging import getLogger
 from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
-from django.utils.translation import gettext_lazy as _
-from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.serializers import CharField, Serializer
 
+from main.lib.responses import (
+    invalid_request_data_response,
+    no_content_response,
+    unprocessable_entity_response,
+)
 from main.models.user import User
 
 logger = getLogger(__name__)
@@ -35,13 +38,7 @@ def login(request: Request) -> Response:
             "login failed with invalid request data for username %(username)s",
             {"username": username},
         )
-        return Response(
-            {
-                "errors": serializer.errors,
-                "message": _("The information you provided was invalid."),
-            },
-            status=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        )
+        return invalid_request_data_response(serializer)
 
     # Authentication will fail if user isn't active.
     user = authenticate(
@@ -55,15 +52,9 @@ def login(request: Request) -> Response:
             "login failed authentication check for username %(username)s",
             {"username": username},
         )
-        return Response(
-            {
-                "message": _(
-                    "We couldn't authentication you. Your username or"
-                    " password might be wrong, or there might be an"
-                    " issue with your account."
-                )
-            },
-            status=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        return unprocessable_entity_response(
+            message="We couldn't authenticate you. Your username or password"
+            " might be wrong, or there might be an issue with your account."
         )
 
     logger.info("login succeeded for username %(username)s", {"username": username})
@@ -74,4 +65,4 @@ def login(request: Request) -> Response:
     else:
         request.session.set_expiry(0)
 
-    return Response(status=status.HTTP_204_NO_CONTENT)
+    return no_content_response()

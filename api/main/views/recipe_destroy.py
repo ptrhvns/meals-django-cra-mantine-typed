@@ -1,10 +1,10 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 
+from main.lib.responses import no_content_response
 from main.models import Recipe
 
 
@@ -13,4 +13,4 @@ from main.models import Recipe
 def recipe_destroy(request: Request, recipe_id: int) -> Response:
     recipe = get_object_or_404(Recipe, pk=recipe_id, user=request.user)
     recipe.delete()
-    return Response(status=status.HTTP_204_NO_CONTENT)
+    return no_content_response()

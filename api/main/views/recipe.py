@@ -5,6 +5,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 
+from main.lib.responses import data_response
 from main.models.recipe import Recipe
 from main.models.tag import Tag
 
@@ -28,4 +29,4 @@ class RecipeSerializer(ModelSerializer):
 def recipe(request: Request, recipe_id: int) -> Response:
     recipe = get_object_or_404(Recipe, pk=recipe_id, user=request.user)
     serializer = RecipeSerializer(recipe)
-    return Response({"data": serializer.data})
+    return data_response(data=serializer.data)
