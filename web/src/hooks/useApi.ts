@@ -28,8 +28,11 @@ const API_ROUTES = asRouteDictionary({
   recipeTitleUpdate: (recipeId: string) => `/api/recipe_title/${recipeId}/update/`,
   signup: () => "/api/signup/",
   signupConfirmation: () => "/api/signup_confirmation/",
+  tag: (tagId: string) => `/api/tag/${tagId}/`,
   tagAssociate: (recipeId: string ) => `/api/tag/recipe/${recipeId}/associate/`,
+  tagDissociate: (recipeId: string, tagId: string) => `/api/tag/${tagId}/recipe/${recipeId}/dissociate/`,
   tagSearch: (searchTerm: string) => `/api/tag/search/?search_term=${encodeURI(searchTerm)}`,
+  tagUpdate: (tagId: string) => `/api/tag/${tagId}/update/`,
 });
 
 type ApiRoutes = typeof API_ROUTES;
