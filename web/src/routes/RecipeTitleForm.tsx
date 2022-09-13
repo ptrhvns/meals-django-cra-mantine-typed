@@ -111,7 +111,7 @@ function RecipeTitleForm() {
       <Navbar />
 
       <PageLayout containerClassName={classes.pageLayout}>
-        <Box mt="xl">
+        <Box my="md">
           <Breadcrumbs>
             <Anchor component={Link} to="/dashboard">
               Dashboard
