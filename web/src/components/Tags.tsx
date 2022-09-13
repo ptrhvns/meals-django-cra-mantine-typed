@@ -95,7 +95,16 @@ function Tags({ loading, recipe }: RecipeTagProps) {
     return (
       <>
         <Divider mt="md" pt="md" />
-        <Skeleton height={TITLE_SIZE} />;
+
+        <Box className={classes.titleWrapper}>
+          <Title className={classes.title} order={3}>
+            Tags
+          </Title>
+        </Box>
+
+        <Box mt="sm">
+          <Skeleton height={TITLE_SIZE} />
+        </Box>
       </>
     );
   }

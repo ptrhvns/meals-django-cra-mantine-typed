@@ -132,8 +132,8 @@ function RecipeTitleForm() {
 
           {loading && (
             <>
-              <Skeleton height={21.7} mt="md" width={25} />
-              <Skeleton height={36} mt="0.25rem" width={560} />
+              <Skeleton height={20} mt="md" width={75} />
+              <Skeleton height={30} mt="0.5rem" />
             </>
           )}
 
