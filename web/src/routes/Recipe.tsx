@@ -21,7 +21,10 @@ import {
   handledInvalidData,
   stringifyIdsDeeply,
 } from "../lib/utils";
-import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleExclamation,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
@@ -138,7 +141,8 @@ function Recipe() {
               navigate("/dashboard", { replace: true });
             }}
           >
-            Delete recipe
+            <FontAwesomeIcon icon={faTrash} />
+            <Text ml="xs">Delete recipe</Text>
           </Button>
 
           <Button
@@ -184,7 +188,8 @@ function Recipe() {
 
           <Box mt="xl">
             <Button color="red" onClick={() => setConfirmDelete(true)}>
-              Delete recipe
+              <FontAwesomeIcon icon={faTrash} />
+              <Text ml="xs">Delete recipe</Text>
             </Button>
           </Box>
         </Box>

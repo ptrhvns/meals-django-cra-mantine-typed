@@ -10,6 +10,8 @@ import {
   Title,
 } from "@mantine/core";
 import { buildTitle } from "../lib/utils";
+import { faUtensils } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
@@ -63,7 +65,8 @@ function Home() {
               mt="xl"
               to="/signup"
             >
-              Sign up
+              <FontAwesomeIcon icon={faUtensils} />
+              <Text ml="xs">Sign up</Text>
             </Button>
           </Box>
         </Center>
