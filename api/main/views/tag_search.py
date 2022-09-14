@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from main.client import MAX_AUTOCOMPLETE_MATCHES
+from main.lib.client import MAX_AUTOCOMPLETE_MATCHES
 from main.lib.responses import data_response
 from main.models import Tag
 

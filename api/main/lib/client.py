@@ -1,10 +1,14 @@
-from typing import TypedDict
+from typing import Final, TypedDict
 
 from django.conf import settings
 
+# The default limit for the Mantine Autocomplete component.
+MAX_AUTOCOMPLETE_MATCHES: Final = 5
 
-# Help prevent the use of invalid routes.
+
 class ClientRouteDict(TypedDict):
+    """Help prevent the use if invalid routes."""
+
     home: str
     signup_confirmation: str
 
