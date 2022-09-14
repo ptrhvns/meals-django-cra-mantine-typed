@@ -28,6 +28,13 @@ djangorestframework-types = "^0.8.0"
 celery-types = "^0.13.1"
 watchdog = {extras = ["watchmedo"], version = "^2.1.9"}
 
+[tool.poetry.group.dev.dependencies]
+pytest-django = "^4.5.2"
+pytest-clarity = "^1.0.1"
+pytest-mock = "^3.8.2"
+factory-boy = "^3.2.1"
+pytest-celery = "^0.0.0"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
