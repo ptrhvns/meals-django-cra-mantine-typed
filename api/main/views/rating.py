@@ -5,28 +5,19 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 
+from main import models
 from main.lib.responses import data_response
-from main.models.recipe import Recipe
-from main.models.tag import Tag
 
 
-class TagSerializer(ModelSerializer):
+class RecipeRatingSerializer(ModelSerializer):
     class Meta:
-        model = Tag
-        fields = ("id", "name")
-
-
-class RecipeSerializer(ModelSerializer):
-    class Meta:
-        model = Recipe
-        fields = ("id", "rating", "tags", "title")
-
-    tags = TagSerializer(many=True, required=False)
+        model = models.Recipe
+        fields = ("rating",)
 
 
 @api_view(http_method_names=["GET"])
 @permission_classes([IsAuthenticated])  # type: ignore[list-item]
-def recipe(request: Request, recipe_id: int) -> Response:
-    recipe = get_object_or_404(Recipe, pk=recipe_id, user=request.user)
-    serializer = RecipeSerializer(recipe)
+def rating(request: Request, recipe_id: int) -> Response:
+    recipe = get_object_or_404(models.Recipe, pk=recipe_id, user=request.user)
+    serializer = RecipeRatingSerializer(recipe)
     return data_response(data=serializer.data)

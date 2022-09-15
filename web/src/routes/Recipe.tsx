@@ -1,6 +1,7 @@
 import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
 import Navbar from "../components/Navbar";
 import PageLayout from "../components/PageLayout";
+import Rating from "../components/Rating";
 import RecipeTitle from "../components/RecipeTitle";
 import RequireAuthn from "../components/RequireAuthn";
 import Tags from "../components/Tags";
@@ -46,6 +47,7 @@ const useStyles = createStyles(() => ({
 
 interface RecipeData {
   id: string;
+  rating: number | null;
   title: string;
 }
 
@@ -53,6 +55,7 @@ const schema: JTDSchemaType<RecipeData> = {
   additionalProperties: true,
   properties: {
     id: { type: "string" },
+    rating: { nullable: true, type: "uint8" },
     title: { type: "string" },
   },
 };
@@ -182,6 +185,7 @@ function Recipe() {
           <Box mt="md">
             <RecipeTitle loading={loading} recipe={recipe} />
             <Tags loading={loading} recipe={recipe} />
+            <Rating loading={loading} recipe={recipe} />
           </Box>
 
           <Divider mt="xl" />

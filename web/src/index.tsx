@@ -7,6 +7,8 @@ import { HelmetProvider } from "react-helmet-async";
 import { MantineProvider } from "@mantine/core";
 import { StrictMode } from "react";
 
+import '@smastrom/react-rating/style.css';
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

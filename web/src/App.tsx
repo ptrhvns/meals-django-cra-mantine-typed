@@ -2,6 +2,7 @@ import Dashboard from "./routes/Dashboard";
 import Home from "./routes/Home";
 import Login from "./routes/Login";
 import NotFound from "./routes/NotFound";
+import RatingEditForm from "./routes/RatingEditForm";
 import Recipe from "./routes/Recipe";
 import RecipeNew from "./routes/RecipeNew";
 import RecipeTitleForm from "./routes/RecipeTitleForm";
@@ -27,6 +28,11 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/recipe/:recipeId" element={<Recipe />} />
+
+        <Route
+          path="/recipe/:recipeId/rating/edit"
+          element={<RatingEditForm />}
+        />
 
         <Route
           path="/recipe/:recipeId/tag/:tagId/edit"
