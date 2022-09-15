@@ -8,8 +8,8 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { isEmpty, sortBy } from "lodash";
 import { Link } from "react-router-dom";
+import { sortBy } from "lodash";
 
 interface RecipeTagProps {
   loading: boolean;
@@ -50,16 +50,16 @@ const useStyles = createStyles((theme) => ({
 function Tags({ loading, recipe }: RecipeTagProps) {
   const { classes } = useStyles();
 
-  if (recipe) {
-    return (
-      <>
-        <Divider mt="md" pt="md" />
+  return (
+    <>
+      <Divider mt="md" pt="md" />
 
-        <Box className={classes.titleWrapper}>
-          <Title className={classes.title} order={3}>
-            Tags
-          </Title>
+      <Box className={classes.titleWrapper}>
+        <Title className={classes.title} order={3}>
+          Tags
+        </Title>
 
+        {recipe && (
           <Anchor
             className={classes.tagLink}
             component={Link}
@@ -68,48 +68,36 @@ function Tags({ loading, recipe }: RecipeTagProps) {
           >
             Create
           </Anchor>
-        </Box>
+        )}
+      </Box>
 
-        <Box mt="sm">
-          {isEmpty(recipe.tags) ? (
-            <Text color="dimmed">No tags have been created yet.</Text>
-          ) : (
-            <Box className={classes.tagWrapper}>
-              {sortBy(recipe.tags, "name").map((tag) => (
-                <Anchor
-                  key={tag.id}
-                  component={Link}
-                  to={`/recipe/${recipe.id}/tag/${tag.id}/edit`}
-                >
-                  <Badge className={classes.badge}>{tag.name}</Badge>
-                </Anchor>
-              ))}
-            </Box>
-          )}
-        </Box>
-      </>
-    );
-  }
+      <Box mt="sm">
+        {loading && <Skeleton height={TITLE_SIZE} />}
 
-  if (loading) {
-    return (
-      <>
-        <Divider mt="md" pt="md" />
+        {!loading && (
+          <>
+            {!recipe?.tags?.length && (
+              <Text color="dimmed">No tags have been created yet.</Text>
+            )}
 
-        <Box className={classes.titleWrapper}>
-          <Title className={classes.title} order={3}>
-            Tags
-          </Title>
-        </Box>
-
-        <Box mt="sm">
-          <Skeleton height={TITLE_SIZE} />
-        </Box>
-      </>
-    );
-  }
-
-  return null;
+            {recipe?.tags?.length && (
+              <Box className={classes.tagWrapper}>
+                {sortBy(recipe.tags, "name").map((tag) => (
+                  <Anchor
+                    key={tag.id}
+                    component={Link}
+                    to={`/recipe/${recipe.id}/tag/${tag.id}/edit`}
+                  >
+                    <Badge className={classes.badge}>{tag.name}</Badge>
+                  </Anchor>
+                ))}
+              </Box>
+            )}
+          </>
+        )}
+      </Box>
+    </>
+  );
 }
 
 export default Tags;
