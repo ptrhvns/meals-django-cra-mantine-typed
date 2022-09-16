@@ -36,6 +36,7 @@ const API_ROUTES = asRouteDictionary({
   tagDissociate: (recipeId: string, tagId: string) => `/api/tag/${tagId}/recipe/${recipeId}/dissociate/`,
   tagSearch: (searchTerm: string) => `/api/tag/search/?search_term=${encodeURI(searchTerm)}`,
   tagUpdate: (tagId: string) => `/api/tag/${tagId}/update/`,
+  timeCreate: (recipeId: string) => `/api/recipe/${recipeId}/time/create/`,
 });
 
 type ApiRoutes = typeof API_ROUTES;
