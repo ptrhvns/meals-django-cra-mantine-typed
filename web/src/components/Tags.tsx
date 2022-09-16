@@ -33,7 +33,7 @@ const useStyles = createStyles((theme) => ({
     color: theme.fn.darken(theme.colors.yellow[9], 0.25),
     fontSize: TITLE_SIZE,
   },
-  tagLink: {
+  titleLink: {
     padding: "0.25rem 0.5rem",
   },
   tagWrapper: {
@@ -61,7 +61,7 @@ function Tags({ loading, recipe }: RecipeTagProps) {
 
         {recipe && (
           <Anchor
-            className={classes.tagLink}
+            className={classes.titleLink}
             component={Link}
             title="Create tag"
             to={`/recipe/${recipe.id}/tag/new`}

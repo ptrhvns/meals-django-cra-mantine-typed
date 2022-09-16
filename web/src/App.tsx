@@ -10,6 +10,7 @@ import Signup from "./routes/Signup";
 import SignupConfirmation from "./routes/SignupConfirmation";
 import TagCreateForm from "./routes/TagCreateForm";
 import TagEditForm from "./routes/TagEditForm";
+import TimeForm from "./routes/TimeForm";
 import { Helmet } from "react-helmet-async";
 import { Routes, Route } from "react-router-dom";
 
@@ -40,6 +41,8 @@ function App() {
         />
 
         <Route path="/recipe/:recipeId/tag/new" element={<TagCreateForm />} />
+
+        <Route path="/recipe/:recipeId/time/new" element={<TimeForm />} />
 
         <Route
           path="/recipe/:recipeId/title/edit"

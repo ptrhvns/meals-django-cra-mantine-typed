@@ -5,6 +5,7 @@ import Rating from "../components/Rating";
 import RecipeTitle from "../components/RecipeTitle";
 import RequireAuthn from "../components/RequireAuthn";
 import Tags from "../components/Tags";
+import Times from "../components/Times";
 import {
   Alert,
   Anchor,
@@ -186,6 +187,7 @@ function Recipe() {
             <RecipeTitle loading={loading} recipe={recipe} />
             <Tags loading={loading} recipe={recipe} />
             <Rating loading={loading} recipe={recipe} />
+            <Times loading={loading} recipe={recipe} />
           </Box>
 
           <Divider mt="xl" />

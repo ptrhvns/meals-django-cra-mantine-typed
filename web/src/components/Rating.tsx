@@ -32,7 +32,7 @@ const useStyles = createStyles((theme) => ({
     display: "flex",
     gap: "0.5rem",
   },
-  tagLink: {
+  titleLink: {
     padding: "0.25rem 0.5rem",
   },
   title: {
@@ -59,7 +59,7 @@ function Rating({ loading, recipe }: RatingProps) {
 
         {recipe && (
           <Anchor
-            className={classes.tagLink}
+            className={classes.titleLink}
             component={Link}
             title="Edit rating"
             to={`/recipe/${recipe.id}/rating/edit`}
