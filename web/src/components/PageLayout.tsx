@@ -23,7 +23,7 @@ function PageLayout({ children, containerClassName }: PageLayoutProps) {
   const { classes, cx } = useStyles();
 
   return (
-    <Box className={classes.background} p="md">
+    <Box className={classes.background} p="sm">
       <Container className={cx(classes.content, containerClassName)} py="md">
         {children}
       </Container>
