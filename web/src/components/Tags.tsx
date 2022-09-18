@@ -1,3 +1,5 @@
+import RecipeSectionHeader from "./RecipeSectionHeader";
+import RecipeSectionTitle from "./RecipeSectionTitle";
 import {
   Anchor,
   Badge,
@@ -6,7 +8,6 @@ import {
   Divider,
   Skeleton,
   Text,
-  Title,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { sortBy } from "lodash";
@@ -19,19 +20,13 @@ interface RecipeTagProps {
   };
 }
 
-const TITLE_SIZE = "1.25rem";
-
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   badge: {
     cursor: "pointer",
 
     "&:hover": {
       textDecoration: "underline",
     },
-  },
-  title: {
-    color: theme.fn.darken(theme.colors.yellow[9], 0.25),
-    fontSize: TITLE_SIZE,
   },
   titleLink: {
     padding: "0.25rem 0.5rem",
@@ -40,10 +35,6 @@ const useStyles = createStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     gap: "0.5rem",
-  },
-  titleWrapper: {
-    display: "flex",
-    justifyContent: "space-between",
   },
 }));
 
@@ -54,10 +45,8 @@ function Tags({ loading, recipe }: RecipeTagProps) {
     <>
       <Divider mt="md" pt="md" />
 
-      <Box className={classes.titleWrapper}>
-        <Title className={classes.title} order={3}>
-          Tags
-        </Title>
+      <RecipeSectionHeader>
+        <RecipeSectionTitle title="Tags" />
 
         {recipe && (
           <Anchor
@@ -69,10 +58,10 @@ function Tags({ loading, recipe }: RecipeTagProps) {
             Create
           </Anchor>
         )}
-      </Box>
+      </RecipeSectionHeader>
 
       <Box mt="sm">
-        {loading && <Skeleton height={TITLE_SIZE} />}
+        {loading && <Skeleton height={20} />}
 
         {!loading && (
           <>

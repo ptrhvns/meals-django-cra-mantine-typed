@@ -1,4 +1,6 @@
-import { Anchor, Box, createStyles, Divider, Title } from "@mantine/core";
+import RecipeSectionHeader from "./RecipeSectionHeader";
+import RecipeSectionTitle from "./RecipeSectionTitle";
+import { Anchor, createStyles, Divider } from "@mantine/core";
 import { Link } from "react-router-dom";
 
 interface TimesProps {
@@ -8,19 +10,9 @@ interface TimesProps {
   };
 }
 
-const TITLE_SIZE = "1.25rem";
-
-const useStyles = createStyles((theme) => ({
-  title: {
-    color: theme.fn.darken(theme.colors.yellow[9], 0.25),
-    fontSize: TITLE_SIZE,
-  },
+const useStyles = createStyles(() => ({
   titleLink: {
     padding: "0.25rem 0.5rem",
-  },
-  titleWrapper: {
-    display: "flex",
-    justifyContent: "space-between",
   },
 }));
 
@@ -31,10 +23,8 @@ function Times({ loading, recipe }: TimesProps) {
     <>
       <Divider mt="md" pt="md" />
 
-      <Box className={classes.titleWrapper}>
-        <Title className={classes.title} order={3}>
-          Times
-        </Title>
+      <RecipeSectionHeader>
+        <RecipeSectionTitle title="Times" />
 
         {recipe && (
           <Anchor
@@ -46,7 +36,7 @@ function Times({ loading, recipe }: TimesProps) {
             Create
           </Anchor>
         )}
-      </Box>
+      </RecipeSectionHeader>
     </>
   );
 }

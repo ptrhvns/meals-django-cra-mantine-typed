@@ -1,3 +1,5 @@
+import RecipeSectionHeader from "./RecipeSectionHeader";
+import RecipeSectionTitle from "./RecipeSectionTitle";
 import {
   Anchor,
   Box,
@@ -5,7 +7,6 @@ import {
   Divider,
   Skeleton,
   Text,
-  Title,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { Rating as ReactRating } from "@smastrom/react-rating";
@@ -18,12 +19,9 @@ interface RatingProps {
   };
 }
 
-const RATING_WIDTH = "8rem";
-const TITLE_SIZE = "1.25rem";
-
 const useStyles = createStyles((theme) => ({
   rating: {
-    maxWidth: RATING_WIDTH,
+    maxWidth: "8rem",
   },
   ratingText: {
     fontSize: theme.fontSizes.lg,
@@ -35,14 +33,6 @@ const useStyles = createStyles((theme) => ({
   titleLink: {
     padding: "0.25rem 0.5rem",
   },
-  title: {
-    color: theme.fn.darken(theme.colors.yellow[9], 0.25),
-    fontSize: TITLE_SIZE,
-  },
-  titleWrapper: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
 }));
 
 function Rating({ loading, recipe }: RatingProps) {
@@ -52,10 +42,8 @@ function Rating({ loading, recipe }: RatingProps) {
     <>
       <Divider mt="md" pt="md" />
 
-      <Box className={classes.titleWrapper}>
-        <Title className={classes.title} order={3}>
-          Rating
-        </Title>
+      <RecipeSectionHeader>
+        <RecipeSectionTitle title="Rating" />
 
         {recipe && (
           <Anchor
@@ -67,10 +55,10 @@ function Rating({ loading, recipe }: RatingProps) {
             Edit
           </Anchor>
         )}
-      </Box>
+      </RecipeSectionHeader>
 
       <Box mt="sm">
-        {loading && <Skeleton height={TITLE_SIZE} width={RATING_WIDTH} />}
+        {loading && <Skeleton height={30} />}
 
         {!loading && (
           <>
