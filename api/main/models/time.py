@@ -22,7 +22,7 @@ class Time(Model):
     hours = PositiveIntegerField(blank=True, null=True)
     minutes = PositiveIntegerField(blank=True, null=True)
     note = CharField(blank=True, default="", max_length=2**6)
-    recipe = ForeignKey(Recipe, on_delete=CASCADE, related_name="recipe_times")
+    recipe = ForeignKey(Recipe, on_delete=CASCADE, related_name="times")
 
     def __str__(self) -> str:
         d = f"{self.days}d" if self.days else None
