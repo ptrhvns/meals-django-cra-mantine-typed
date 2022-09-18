@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 
 from main.lib.responses import data_response
+from main.models import Time
 from main.models.recipe import Recipe
 from main.models.tag import Tag
 
@@ -16,12 +17,19 @@ class TagSerializer(ModelSerializer):
         fields = ("id", "name")
 
 
+class TimeSerializer(ModelSerializer):
+    class Meta:
+        model = Time
+        fields = ("category", "days", "hours", "id", "minutes", "note")
+
+
 class RecipeSerializer(ModelSerializer):
     class Meta:
         model = Recipe
-        fields = ("id", "rating", "tags", "title")
+        fields = ("id", "rating", "tags", "times", "title")
 
     tags = TagSerializer(many=True, required=False)
+    times = TimeSerializer(many=True, required=False)
 
 
 @api_view(http_method_names=["GET"])
