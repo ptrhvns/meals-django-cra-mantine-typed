@@ -30,6 +30,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
+import { RecipeData } from "../types";
 import { useApi } from "../hooks/useApi";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -46,17 +47,33 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-interface RecipeData {
-  id: string;
-  rating: number | null;
-  title: string;
-}
-
 const schema: JTDSchemaType<RecipeData> = {
   additionalProperties: true,
   properties: {
     id: { type: "string" },
     rating: { nullable: true, type: "uint8" },
+    tags: {
+      nullable: true,
+      elements: {
+        properties: {
+          id: { type: "string" },
+          name: { type: "string" },
+        },
+      },
+    },
+    times: {
+      nullable: true,
+      elements: {
+        properties: {
+          category: { type: "string" },
+          days: { nullable: true, type: "uint16" },
+          hours: { nullable: true, type: "uint16" },
+          id: { type: "string" },
+          minutes: { nullable: true, type: "uint16" },
+          note: { nullable: true, type: "string" },
+        },
+      },
+    },
     title: { type: "string" },
   },
 };

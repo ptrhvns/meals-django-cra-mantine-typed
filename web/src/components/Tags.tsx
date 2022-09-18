@@ -10,14 +10,12 @@ import {
   Text,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
+import { RecipeData } from "../types";
 import { sortBy } from "lodash";
 
 interface RecipeTagProps {
   loading: boolean;
-  recipe?: {
-    id: string;
-    tags?: { id: number; name: string }[];
-  };
+  recipe?: RecipeData;
 }
 
 const useStyles = createStyles(() => ({

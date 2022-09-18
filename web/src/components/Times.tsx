@@ -2,12 +2,11 @@ import RecipeSectionHeader from "./RecipeSectionHeader";
 import RecipeSectionTitle from "./RecipeSectionTitle";
 import { Anchor, createStyles, Divider } from "@mantine/core";
 import { Link } from "react-router-dom";
+import { RecipeData } from "../types";
 
 interface TimesProps {
   loading: boolean;
-  recipe?: {
-    id: string;
-  };
+  recipe?: RecipeData;
 }
 
 const useStyles = createStyles(() => ({

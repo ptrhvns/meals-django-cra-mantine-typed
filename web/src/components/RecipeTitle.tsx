@@ -1,9 +1,10 @@
 import { Anchor, Box, createStyles, Skeleton, Title } from "@mantine/core";
 import { Link } from "react-router-dom";
+import { RecipeData } from "../types";
 
 interface RecipeTitleProps {
   loading: boolean;
-  recipe?: { id: string; title: string };
+  recipe?: RecipeData;
 }
 
 const TITLE_SIZE = "1.5rem";

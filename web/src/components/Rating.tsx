@@ -10,13 +10,11 @@ import {
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { Rating as ReactRating } from "@smastrom/react-rating";
+import { RecipeData } from "../types";
 
 interface RatingProps {
   loading: boolean;
-  recipe?: {
-    id: string;
-    rating: number | null;
-  };
+  recipe?: RecipeData;
 }
 
 const useStyles = createStyles((theme) => ({
