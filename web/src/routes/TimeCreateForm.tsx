@@ -52,7 +52,13 @@ function TimeCreateForm() {
   const { recipeId } = useParams() as { recipeId: string };
 
   const { getInputProps, onSubmit, setFieldError } = useForm({
-    initialValues: {},
+    initialValues: {
+      category: "",
+      days: "",
+      hours: "",
+      minutes: "",
+      note: "",
+    },
   });
 
   return (
@@ -93,11 +99,11 @@ function TimeCreateForm() {
 
                 const response = await post({
                   data: pick(values, [
+                    "category",
                     "days",
                     "hours",
                     "minutes",
                     "note",
-                    "category",
                   ]),
                   url: routeFn(recipeId),
                 });
