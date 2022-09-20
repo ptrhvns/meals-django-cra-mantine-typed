@@ -232,9 +232,9 @@ function RatingEditForm() {
             className={cx(classes.ratingWrapper, classes.overlayWrapper)}
             mt="xl"
           >
-            {loading && <Skeleton className={classes.skeleton} height={30} />}
-
-            {!loading && (
+            {loading ? (
+              <Skeleton className={classes.skeleton} height={30} />
+            ) : (
               <>
                 <LoadingOverlay visible={submitting} />
 

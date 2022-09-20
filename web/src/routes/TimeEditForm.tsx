@@ -263,7 +263,7 @@ function TimeEditForm() {
                 </Alert>
               )}
 
-              {loading && (
+              {loading ? (
                 <>
                   <Box mt="md">
                     <Skeleton height={20} width={55} />
@@ -280,9 +280,7 @@ function TimeEditForm() {
                     <Skeleton height={35} mt="0.3rem" />
                   </Box>
                 </>
-              )}
-
-              {!loading && (
+              ) : (
                 <>
                   <NativeSelect
                     data={[

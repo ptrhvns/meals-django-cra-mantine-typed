@@ -59,15 +59,11 @@ function Tags({ loading, recipe }: RecipeTagProps) {
       </RecipeSectionHeader>
 
       <Box mt="sm">
-        {loading && <Skeleton height={20} />}
-
-        {!loading && (
+        {loading ? (
+          <Skeleton height={20} />
+        ) : (
           <>
-            {!recipe?.tags?.length && (
-              <Text color="dimmed">No tags have been created yet.</Text>
-            )}
-
-            {recipe?.tags?.length && (
+            {recipe?.tags?.length ? (
               <Box className={classes.tagWrapper}>
                 {sortBy(recipe.tags, "name").map((tag) => (
                   <Anchor
@@ -79,6 +75,8 @@ function Tags({ loading, recipe }: RecipeTagProps) {
                   </Anchor>
                 ))}
               </Box>
+            ) : (
+              <Text color="dimmed">No tags have been created yet.</Text>
             )}
           </>
         )}

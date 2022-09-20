@@ -56,15 +56,11 @@ function Rating({ loading, recipe }: RatingProps) {
       </RecipeSectionHeader>
 
       <Box mt="sm">
-        {loading && <Skeleton height={30} />}
-
-        {!loading && (
+        {loading ? (
+          <Skeleton height={30} />
+        ) : (
           <>
-            {!recipe?.rating && (
-              <Text color="dimmed">A rating hasn't been set yet.</Text>
-            )}
-
-            {recipe?.rating && (
+            {recipe?.rating ? (
               <Box className={classes.ratingWrapper}>
                 <ReactRating
                   className={classes.rating}
@@ -75,6 +71,8 @@ function Rating({ loading, recipe }: RatingProps) {
                   ({recipe?.rating || 0})
                 </Text>
               </Box>
+            ) : (
+              <Text color="dimmed">A rating hasn't been set yet.</Text>
             )}
           </>
         )}

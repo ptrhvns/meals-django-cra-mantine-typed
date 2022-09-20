@@ -215,14 +215,12 @@ function TagEditForm() {
             Edit Tag
           </Title>
 
-          {loading && (
+          {loading ? (
             <>
               <Skeleton height={20} mt="md" width={75} />
               <Skeleton height={30} mt="0.5rem" />
             </>
-          )}
-
-          {!loading && (
+          ) : (
             <Box className={classes.formWrapper}>
               <LoadingOverlay visible={submitting} />
 
