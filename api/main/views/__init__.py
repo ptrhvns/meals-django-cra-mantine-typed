@@ -18,6 +18,7 @@ from main.views.tag_search import tag_search
 from main.views.tag_update import tag_update
 from main.views.time import time
 from main.views.time_create import time_create
+from main.views.time_destroy import time_destroy
 from main.views.time_update import time_update
 
 __all__ = [
@@ -41,5 +42,6 @@ __all__ = [
     "tag_update",
     "time",
     "time_create",
+    "time_destroy",
     "time_update",
 ]

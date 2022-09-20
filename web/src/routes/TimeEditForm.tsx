@@ -10,6 +10,7 @@ import {
   Button,
   createStyles,
   LoadingOverlay,
+  Modal,
   NativeSelect,
   SimpleGrid,
   Skeleton,
@@ -26,11 +27,12 @@ import {
 import {
   faCircleExclamation,
   faCirclePlus,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { forOwn, pick } from "lodash";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { forOwn, pick } from "lodash";
 import { TimeData } from "../types";
 import { useApi } from "../hooks/useApi";
 import { useEffect, useRef, useState } from "react";
@@ -45,6 +47,12 @@ const useStyles = createStyles(() => ({
   },
   formWrapper: {
     position: "relative",
+  },
+  modalActions: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "1rem",
+    justifyContent: "space-between",
   },
   pageLayout: {
     maxWidth: "35rem",
@@ -67,6 +75,9 @@ const validateTimeData = new Ajv().compile(timeDataSchema);
 
 function TimeEditForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
+  const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
+  const [deleteAlert, setDeleteAlert] = useState<string | undefined>(undefined);
+  const [deleting, setDeleting] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -127,6 +138,67 @@ function TimeEditForm() {
       </Helmet>
 
       <Navbar />
+
+      <Modal
+        centered={true}
+        onClose={() => setConfirmDelete(false)}
+        opened={confirmDelete}
+        padding="sm"
+        title="Delete Time"
+      >
+        <Box className={classes.formWrapper}>
+          <LoadingOverlay visible={deleting} />
+
+          <Text component="p">
+            Are you sure you want to delete this time from this recipe?
+          </Text>
+
+          {deleteAlert && (
+            <Alert
+              color="red"
+              icon={<FontAwesomeIcon icon={faCircleExclamation} />}
+              mb="lg"
+              onClose={() => setDeleteAlert(undefined)}
+              withCloseButton
+            >
+              <Box mr="xl">{deleteAlert}</Box>
+            </Alert>
+          )}
+
+          <Box className={classes.modalActions}>
+            <Button
+              color="red"
+              disabled={deleting}
+              onClick={async () => {
+                setDeleting(true);
+                const routeFn = getRouteFn("timeDestroy");
+                const response = await post({ url: routeFn(timeId) });
+                setDeleting(false);
+
+                if (handledApiError(response, { setAlert: setDeleteAlert })) {
+                  return;
+                }
+
+                navigate(`/recipe/${recipeId}`, { replace: true });
+              }}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+              <Text ml="xs">Delete</Text>
+            </Button>
+
+            <Button
+              color="gray"
+              onClick={() => {
+                setConfirmDelete(false);
+                setDeleteAlert(undefined);
+              }}
+              variant="outline"
+            >
+              <Text>Dismiss</Text>
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
 
       <PageLayout containerClassName={classes.pageLayout}>
         <Box my="md">
@@ -255,6 +327,16 @@ function TimeEditForm() {
                     <Button disabled={submitting} type="submit">
                       <FontAwesomeIcon icon={faCirclePlus} />
                       <Text ml="xs">Save</Text>
+                    </Button>
+
+                    <Button
+                      color="red"
+                      disabled={submitting}
+                      onClick={() => setConfirmDelete(true)}
+                      type="button"
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                      <Text ml="xs">Delete</Text>
                     </Button>
 
                     <Button

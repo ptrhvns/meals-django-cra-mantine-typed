@@ -51,15 +51,11 @@ function Times({ loading, recipe }: TimesProps) {
       </RecipeSectionHeader>
 
       <Box mt="sm">
-        {loading && <Skeleton height={30} />}
-
-        {!loading && (
+        {loading ? (
+          <Skeleton height={30} />
+        ) : (
           <>
-            {!recipe?.times?.length && (
-              <Text color="dimmed">No times have been created yet.</Text>
-            )}
-
-            {recipe?.times?.length && (
+            {recipe?.times?.length ? (
               <List listStyleType="none" withPadding={false}>
                 {sortBy(recipe.times, "category").map((t) => (
                   <List.Item key={t.id}>
@@ -84,6 +80,8 @@ function Times({ loading, recipe }: TimesProps) {
                   </List.Item>
                 ))}
               </List>
+            ) : (
+              <Text color="dimmed">No times have been created yet.</Text>
             )}
           </>
         )}

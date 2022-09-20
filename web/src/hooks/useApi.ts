@@ -38,6 +38,7 @@ const API_ROUTES = asRouteDictionary({
   tagUpdate: (tagId: string) => `/api/tag/${tagId}/update/`,
   time: (timeId: string) => `/api/time/${timeId}/`,
   timeCreate: (recipeId: string) => `/api/recipe/${recipeId}/time/create/`,
+  timeDestroy: (timeId: string) => `/api/time/${timeId}/destroy/`,
   timeUpdate: (timeId: string) => `/api/time/${timeId}/update/`,
 });
 
