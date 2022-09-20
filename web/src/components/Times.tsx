@@ -9,10 +9,9 @@ import {
   Skeleton,
   Text,
 } from "@mantine/core";
-import { compact, sortBy } from "lodash";
+import { sortBy } from "lodash";
 import { Link } from "react-router-dom";
-import { RecipeData, TimeData } from "../types";
-import { ReactNode } from "react";
+import { RecipeData } from "../types";
 
 interface TimesProps {
   loading: boolean;
@@ -20,39 +19,14 @@ interface TimesProps {
 }
 
 const useStyles = createStyles(() => ({
+  timeUnits: {
+    display: "inline-flex",
+    gap: "0.25rem",
+  },
   titleLink: {
     padding: "0.25rem 0.5rem",
   },
 }));
-
-function formatTime(time: TimeData): ReactNode[] {
-  const category = <Text component="span">{time.category} &mdash;</Text>;
-
-  const days = time.days && (
-    <Text component="span" ml="0.3rem">
-      {time.days}d
-    </Text>
-  );
-
-  const hours = time.hours && (
-    <Text component="span" ml="0.3rem">
-      {time.hours}h
-    </Text>
-  );
-
-  const minutes = time.minutes && (
-    <Text component="span" ml="0.3rem">
-      {time.minutes}m
-    </Text>
-  );
-
-  const note = time.note && (
-    <Text color="dimmed" component="span" ml="0.5rem">
-      {time.note}
-    </Text>
-  );
-  return compact([category, days, hours, minutes, note]);
-}
 
 function Times({ loading, recipe }: TimesProps) {
   const { classes } = useStyles();
@@ -86,9 +60,28 @@ function Times({ loading, recipe }: TimesProps) {
             )}
 
             {recipe?.times?.length && (
-              <List>
+              <List listStyleType="none" withPadding={false}>
                 {sortBy(recipe.times, "category").map((t) => (
-                  <List.Item key={t.id}>{formatTime(t)}</List.Item>
+                  <List.Item key={t.id}>
+                    <Text component="span" italic>
+                      {t.category}
+                    </Text>
+                    <Anchor
+                      className={classes.timeUnits}
+                      component={Link}
+                      ml="xs"
+                      to={`/recipe/${recipe.id}/time/${t.id}/edit`}
+                    >
+                      {t.days && <Text component="span">{t.days}d</Text>}
+                      {t.hours && <Text component="span">{t.hours}h</Text>}
+                      {t.minutes && <Text component="span">{t.minutes}m</Text>}
+                    </Anchor>
+                    {t.note && (
+                      <Text color="dimmed" component="span" ml="xs">
+                        {t.note}
+                      </Text>
+                    )}
+                  </List.Item>
                 ))}
               </List>
             )}

@@ -24,4 +24,6 @@ urlpatterns: list[URLPattern | URLResolver] = [
     path("tag/<int:tag_id>/update/", views.tag_update, name="tag_update"),
     path("tag/recipe/<int:recipe_id>/associate/", views.tag_associate, name="tag_associate"),
     path("tag/search/", views.tag_search, name="tag_search"),
+    path("time/<int:time_id>/", views.time, name="time"),
+    path("time/<int:time_id>/update/", views.time_update, name="time_update"),
 ]

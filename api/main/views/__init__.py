@@ -16,7 +16,9 @@ from main.views.tag_associate import tag_associate
 from main.views.tag_dissociate import tag_dissociate
 from main.views.tag_search import tag_search
 from main.views.tag_update import tag_update
+from main.views.time import time
 from main.views.time_create import time_create
+from main.views.time_update import time_update
 
 __all__ = [
     "csrf_token",
@@ -37,5 +39,7 @@ __all__ = [
     "tag_dissociate",
     "tag_search",
     "tag_update",
+    "time",
     "time_create",
+    "time_update",
 ]
