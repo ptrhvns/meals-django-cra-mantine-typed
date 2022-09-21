@@ -6,6 +6,7 @@ import RatingEditForm from "./routes/RatingEditForm";
 import Recipe from "./routes/Recipe";
 import RecipeNew from "./routes/RecipeNew";
 import RecipeTitleForm from "./routes/RecipeTitleForm";
+import ServingsEditForm from "./routes/ServingsEditForm";
 import Signup from "./routes/Signup";
 import SignupConfirmation from "./routes/SignupConfirmation";
 import TagCreateForm from "./routes/TagCreateForm";
@@ -34,6 +35,11 @@ function App() {
         <Route
           path="/recipe/:recipeId/rating/edit"
           element={<RatingEditForm />}
+        />
+
+        <Route
+          path="/recipe/:recipeId/servings/edit"
+          element={<ServingsEditForm />}
         />
 
         <Route

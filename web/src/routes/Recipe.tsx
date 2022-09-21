@@ -4,6 +4,7 @@ import PageLayout from "../components/PageLayout";
 import Rating from "../components/Rating";
 import RecipeTitle from "../components/RecipeTitle";
 import RequireAuthn from "../components/RequireAuthn";
+import Servings from "../components/Servings";
 import Tags from "../components/Tags";
 import Times from "../components/Times";
 import {
@@ -205,6 +206,7 @@ function Recipe() {
             <Tags loading={loading} recipe={recipe} />
             <Rating loading={loading} recipe={recipe} />
             <Times loading={loading} recipe={recipe} />
+            <Servings loading={loading} recipe={recipe} />
           </Box>
 
           <Divider mt="xl" />
