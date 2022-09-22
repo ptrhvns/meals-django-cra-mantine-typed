@@ -10,6 +10,7 @@ export interface TimeData {
 export interface RecipeData {
   id: string;
   rating: number | null;
+  servings: string | null;
   tags: { id: string; name: string }[] | null;
   times: TimeData[] | null;
   title: string;

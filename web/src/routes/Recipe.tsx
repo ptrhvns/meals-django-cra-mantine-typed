@@ -53,6 +53,7 @@ const schema: JTDSchemaType<RecipeData> = {
   properties: {
     id: { type: "string" },
     rating: { nullable: true, type: "uint8" },
+    servings: { nullable: true, type: "string" },
     tags: {
       nullable: true,
       elements: {

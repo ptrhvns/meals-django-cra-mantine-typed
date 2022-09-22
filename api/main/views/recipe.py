@@ -26,7 +26,7 @@ class TimeSerializer(ModelSerializer):
 class RecipeSerializer(ModelSerializer):
     class Meta:
         model = Recipe
-        fields = ("id", "rating", "tags", "times", "title")
+        fields = ("id", "rating", "servings", "tags", "times", "title")
 
     tags = TagSerializer(many=True, required=False)
     times = TimeSerializer(many=True, required=False)

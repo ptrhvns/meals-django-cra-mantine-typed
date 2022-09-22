@@ -1,6 +1,14 @@
 import RecipeSectionHeader from "./RecipeSectionHeader";
 import RecipeSectionTitle from "./RecipeSectionTitle";
-import { Anchor, createStyles, Divider } from "@mantine/core";
+import {
+  Anchor,
+  Badge,
+  Box,
+  createStyles,
+  Divider,
+  Skeleton,
+  Text,
+} from "@mantine/core";
 import { Link } from "react-router-dom";
 import { RecipeData } from "../types";
 
@@ -17,6 +25,7 @@ const useStyles = createStyles(() => ({
 
 function Servings({ loading, recipe }: ServingsProps) {
   const { classes } = useStyles();
+  const servings = parseFloat(recipe?.servings || "0");
 
   return (
     <>
@@ -36,6 +45,24 @@ function Servings({ loading, recipe }: ServingsProps) {
           </Anchor>
         )}
       </RecipeSectionHeader>
+
+      <Box mt="sm">
+        {loading ? (
+          <Skeleton height={30} />
+        ) : (
+          <>
+            {recipe?.servings ? (
+              <Badge color="gray.7" size="md">
+                {Math.floor(servings) === servings
+                  ? Math.floor(servings)
+                  : servings}
+              </Badge>
+            ) : (
+              <Text color="dimmed">Servings hasn't been set yet.</Text>
+            )}
+          </>
+        )}
+      </Box>
     </>
   );
 }
