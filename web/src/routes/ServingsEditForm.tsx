@@ -10,6 +10,7 @@ import {
   Button,
   createStyles,
   LoadingOverlay,
+  Modal,
   NumberInput,
   Skeleton,
   Text,
@@ -24,6 +25,7 @@ import {
 import {
   faCircleExclamation,
   faCirclePlus,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet-async";
@@ -53,7 +55,13 @@ const useStyles = createStyles(() => ({
     gap: "1rem",
     justifyContent: "space-between",
   },
-  formWrapper: {
+  modalActions: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "1rem",
+    justifyContent: "space-between",
+  },
+  overlayWrapper: {
     position: "relative",
   },
   pageLayout: {
@@ -63,7 +71,10 @@ const useStyles = createStyles(() => ({
 
 function ServingsEditForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
+  const [confirmReset, setConfirmReset] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [resetAlert, setResetAlert] = useState<string | undefined>(undefined);
+  const [resetting, setResetting] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const navigate = useNavigate();
   const shouldLoad = useRef<boolean>(true);
@@ -101,7 +112,7 @@ function ServingsEditForm() {
           return;
         }
 
-        setFieldValue("servings", parseFloat(response.data.servings));
+        setFieldValue("servings", parseFloat(response.data.servings ?? "0"));
       })();
     }
   });
@@ -113,6 +124,65 @@ function ServingsEditForm() {
       </Helmet>
 
       <Navbar />
+
+      <Modal
+        centered={true}
+        onClose={() => setConfirmReset(false)}
+        opened={confirmReset}
+        padding="sm"
+        title="Reset Servings"
+      >
+        <Box className={classes.overlayWrapper}>
+          <LoadingOverlay visible={resetting} />
+
+          <Text component="p">Are you sure you want to reset servings?</Text>
+
+          {resetAlert && (
+            <Alert
+              color="red"
+              icon={<FontAwesomeIcon icon={faCircleExclamation} />}
+              mb="lg"
+              onClose={() => setResetAlert(undefined)}
+              withCloseButton
+            >
+              <Box mr="xl">{resetAlert}</Box>
+            </Alert>
+          )}
+
+          <Box className={classes.modalActions}>
+            <Button
+              color="red"
+              disabled={resetting}
+              onClick={async () => {
+                setResetting(true);
+                const routeFn = getRouteFn("servingsDestroy");
+                const response = await post({ url: routeFn(recipeId) });
+                setResetting(false);
+
+                if (handledApiError(response, { setAlert: setResetAlert })) {
+                  return;
+                }
+
+                navigate(`/recipe/${recipeId}`, { replace: true });
+              }}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+              <Text ml="xs">Reset</Text>
+            </Button>
+
+            <Button
+              color="gray"
+              onClick={() => {
+                setConfirmReset(false);
+                setResetAlert(undefined);
+              }}
+              variant="outline"
+            >
+              <Text>Dismiss</Text>
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
 
       <PageLayout containerClassName={classes.pageLayout}>
         <Box my="md">
@@ -140,7 +210,7 @@ function ServingsEditForm() {
               <Skeleton height={35} mt="0.3rem" />
             </Box>
           ) : (
-            <Box className={classes.formWrapper}>
+            <Box className={classes.overlayWrapper}>
               <LoadingOverlay visible={submitting} />
 
               <form
@@ -189,6 +259,16 @@ function ServingsEditForm() {
                   <Button disabled={submitting} type="submit">
                     <FontAwesomeIcon icon={faCirclePlus} />
                     <Text ml="xs">Save</Text>
+                  </Button>
+
+                  <Button
+                    color="red"
+                    disabled={submitting}
+                    onClick={() => setConfirmReset(true)}
+                    type="button"
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                    <Text ml="xs">Reset</Text>
                   </Button>
 
                   <Button

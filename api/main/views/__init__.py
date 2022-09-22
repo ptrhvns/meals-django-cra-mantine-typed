@@ -10,6 +10,7 @@ from main.views.recipe_destroy import recipe_destroy
 from main.views.recipe_title_update import recipe_title_update
 from main.views.recipes import recipes
 from main.views.servings import servings
+from main.views.servings_destroy import servings_destroy
 from main.views.servings_update import servings_update
 from main.views.signup import signup
 from main.views.signup_confirmation import signup_confirmation
@@ -36,6 +37,7 @@ __all__ = [
     "recipe_title_update",
     "recipes",
     "servings",
+    "servings_destroy",
     "servings_update",
     "signup",
     "signup_confirmation",
