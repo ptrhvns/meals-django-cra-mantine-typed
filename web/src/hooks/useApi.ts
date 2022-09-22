@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 /**
  * This helper function ensures that TypeScript can infer the type of the keys
  * of the object literal passed to it (the route dictionary) as a union of all
- * of the string literal keys themselves. This will help those who use the route
- * dictionary to avoid accessing the dictionary with invalid keys, especially
- * when used with the getRouteFn() function.
+ * of the string literal keys themselves. This will help users of the route
+ * dictionary to avoid accessing the dictionary with invalid keys when used with
+ * the getRouteFn() function.
  *
  */
 const asRouteDictionary = <T>(dictionary: {
@@ -29,6 +29,7 @@ const API_ROUTES = asRouteDictionary({
   recipeDestroy: (recipeId : string) => `/api/recipe/${recipeId}/destroy/`,
   recipes: (page: number) => `/api/recipes/?page=${page}`,
   recipeTitleUpdate: (recipeId: string) => `/api/recipe_title/${recipeId}/update/`,
+  servingsUpdate: (recipeId: string) => `/api/servings/${recipeId}/update/`,
   signup: () => "/api/signup/",
   signupConfirmation: () => "/api/signup_confirmation/",
   tag: (tagId: string) => `/api/tag/${tagId}/`,
