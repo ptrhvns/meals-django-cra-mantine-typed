@@ -9,6 +9,7 @@ from main.views.recipe_create import recipe_create
 from main.views.recipe_destroy import recipe_destroy
 from main.views.recipe_title_update import recipe_title_update
 from main.views.recipes import recipes
+from main.views.servings_update import servings_update
 from main.views.signup import signup
 from main.views.signup_confirmation import signup_confirmation
 from main.views.tag import tag
@@ -33,6 +34,7 @@ __all__ = [
     "recipe_destroy",
     "recipe_title_update",
     "recipes",
+    "servings_update",
     "signup",
     "signup_confirmation",
     "tag",
