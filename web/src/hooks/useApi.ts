@@ -29,6 +29,7 @@ const API_ROUTES = asRouteDictionary({
   recipeDestroy: (recipeId : string) => `/api/recipe/${recipeId}/destroy/`,
   recipes: (page: number) => `/api/recipes/?page=${page}`,
   recipeTitleUpdate: (recipeId: string) => `/api/recipe_title/${recipeId}/update/`,
+  servings: (recipeId: string) => `/api/servings/${recipeId}/`,
   servingsUpdate: (recipeId: string) => `/api/servings/${recipeId}/update/`,
   signup: () => "/api/signup/",
   signupConfirmation: () => "/api/signup_confirmation/",
