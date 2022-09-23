@@ -1,14 +1,7 @@
 import RecipeSection from "./RecipeSection";
 import RecipeSectionHeader from "./RecipeSectionHeader";
 import RecipeSectionTitle from "./RecipeSectionTitle";
-import {
-  Anchor,
-  Badge,
-  Box,
-  createStyles,
-  Skeleton,
-  Text,
-} from "@mantine/core";
+import { Anchor, Box, createStyles, Skeleton, Text } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { RecipeData } from "../types";
 
