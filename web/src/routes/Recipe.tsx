@@ -14,7 +14,6 @@ import {
   Breadcrumbs,
   Button,
   createStyles,
-  Divider,
   Modal,
   Text,
 } from "@mantine/core";
@@ -210,7 +209,7 @@ function Recipe() {
             <Servings loading={loading} recipe={recipe} />
           </Box>
 
-          <Box mt="3rem">
+          <Box mt="1.2rem">
             <Button color="red" onClick={() => setConfirmDelete(true)}>
               <FontAwesomeIcon icon={faTrash} />
               <Text ml="xs">Delete recipe</Text>

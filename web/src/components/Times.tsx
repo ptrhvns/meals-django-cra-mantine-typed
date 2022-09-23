@@ -1,9 +1,10 @@
+import RecipeSection from "./RecipeSection";
 import RecipeSectionHeader from "./RecipeSectionHeader";
 import RecipeSectionTitle from "./RecipeSectionTitle";
 import { Anchor, Box, createStyles, List, Skeleton, Text } from "@mantine/core";
-import { sortBy } from "lodash";
 import { Link } from "react-router-dom";
 import { RecipeData } from "../types";
+import { sortBy } from "lodash";
 
 interface TimesProps {
   loading: boolean;
@@ -24,7 +25,7 @@ function Times({ loading, recipe }: TimesProps) {
   const { classes } = useStyles();
 
   return (
-    <Box mt="2rem">
+    <RecipeSection>
       <RecipeSectionHeader>
         <RecipeSectionTitle title="Times" />
 
@@ -70,7 +71,7 @@ function Times({ loading, recipe }: TimesProps) {
           </>
         )}
       </Box>
-    </Box>
+    </RecipeSection>
   );
 }
 

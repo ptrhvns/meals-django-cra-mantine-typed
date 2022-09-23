@@ -1,3 +1,4 @@
+import RecipeSection from "./RecipeSection";
 import RecipeSectionHeader from "./RecipeSectionHeader";
 import RecipeSectionTitle from "./RecipeSectionTitle";
 import { Anchor, Box, createStyles, Skeleton, Text } from "@mantine/core";
@@ -31,7 +32,7 @@ function Rating({ loading, recipe }: RatingProps) {
   const { classes } = useStyles();
 
   return (
-    <Box mt="2rem">
+    <RecipeSection>
       <RecipeSectionHeader>
         <RecipeSectionTitle title="Rating" />
 
@@ -69,7 +70,7 @@ function Rating({ loading, recipe }: RatingProps) {
           </>
         )}
       </Box>
-    </Box>
+    </RecipeSection>
   );
 }
 

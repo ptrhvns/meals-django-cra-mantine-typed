@@ -1,3 +1,4 @@
+import RecipeSection from "./RecipeSection";
 import RecipeSectionHeader from "./RecipeSectionHeader";
 import RecipeSectionTitle from "./RecipeSectionTitle";
 import {
@@ -27,7 +28,7 @@ function Servings({ loading, recipe }: ServingsProps) {
   const servings = parseFloat(recipe?.servings || "0");
 
   return (
-    <Box mt="2rem">
+    <RecipeSection>
       <RecipeSectionHeader>
         <RecipeSectionTitle title="Servings" />
 
@@ -49,18 +50,18 @@ function Servings({ loading, recipe }: ServingsProps) {
         ) : (
           <>
             {recipe?.servings ? (
-              <Badge color="gray.7" size="md">
+              <Text>
                 {Math.floor(servings) === servings
                   ? Math.floor(servings)
                   : servings}
-              </Badge>
+              </Text>
             ) : (
               <Text color="dimmed">Servings hasn't been set yet.</Text>
             )}
           </>
         )}
       </Box>
-    </Box>
+    </RecipeSection>
   );
 }
 

@@ -1,3 +1,4 @@
+import RecipeSection from "./RecipeSection";
 import RecipeSectionHeader from "./RecipeSectionHeader";
 import RecipeSectionTitle from "./RecipeSectionTitle";
 import {
@@ -39,7 +40,7 @@ function Tags({ loading, recipe }: RecipeTagProps) {
   const { classes } = useStyles();
 
   return (
-    <Box mt="1.5rem">
+    <RecipeSection>
       <RecipeSectionHeader>
         <RecipeSectionTitle title="Tags" />
 
@@ -78,7 +79,7 @@ function Tags({ loading, recipe }: RecipeTagProps) {
           </>
         )}
       </Box>
-    </Box>
+    </RecipeSection>
   );
 }
 
