@@ -1,5 +1,6 @@
 import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
 import Navbar from "../components/Navbar";
+import Notes from "../components/Notes";
 import PageLayout from "../components/PageLayout";
 import Rating from "../components/Rating";
 import RecipeTitle from "../components/RecipeTitle";
@@ -207,6 +208,7 @@ function Recipe() {
             <Rating loading={loading} recipe={recipe} />
             <Times loading={loading} recipe={recipe} />
             <Servings loading={loading} recipe={recipe} />
+            <Notes loading={loading} recipe={recipe} />
           </Box>
 
           <Box mt="1.2rem">

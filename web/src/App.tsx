@@ -1,6 +1,7 @@
 import Dashboard from "./routes/Dashboard";
 import Home from "./routes/Home";
 import Login from "./routes/Login";
+import NotesEditForm from "./routes/NotesEditForm";
 import NotFound from "./routes/NotFound";
 import RatingEditForm from "./routes/RatingEditForm";
 import Recipe from "./routes/Recipe";
@@ -31,6 +32,11 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/recipe/:recipeId" element={<Recipe />} />
+
+        <Route
+          path="/recipe/:recipeId/notes/edit"
+          element={<NotesEditForm />}
+        />
 
         <Route
           path="/recipe/:recipeId/rating/edit"
