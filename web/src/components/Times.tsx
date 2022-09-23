@@ -1,14 +1,6 @@
 import RecipeSectionHeader from "./RecipeSectionHeader";
 import RecipeSectionTitle from "./RecipeSectionTitle";
-import {
-  Anchor,
-  Box,
-  createStyles,
-  Divider,
-  List,
-  Skeleton,
-  Text,
-} from "@mantine/core";
+import { Anchor, Box, createStyles, List, Skeleton, Text } from "@mantine/core";
 import { sortBy } from "lodash";
 import { Link } from "react-router-dom";
 import { RecipeData } from "../types";
@@ -32,9 +24,7 @@ function Times({ loading, recipe }: TimesProps) {
   const { classes } = useStyles();
 
   return (
-    <>
-      <Divider mt="md" pt="md" />
-
+    <Box mt="2rem">
       <RecipeSectionHeader>
         <RecipeSectionTitle title="Times" />
 
@@ -50,7 +40,7 @@ function Times({ loading, recipe }: TimesProps) {
         )}
       </RecipeSectionHeader>
 
-      <Box mt="sm">
+      <Box mt="0.25rem">
         {loading ? (
           <Skeleton height={30} />
         ) : (
@@ -59,24 +49,18 @@ function Times({ loading, recipe }: TimesProps) {
               <List listStyleType="none" withPadding={false}>
                 {sortBy(recipe.times, "category").map((t) => (
                   <List.Item key={t.id}>
-                    <Text component="span" italic>
-                      {t.category}
-                    </Text>
                     <Anchor
                       className={classes.timeUnits}
                       component={Link}
-                      ml="xs"
+                      mx="0.25rem"
                       to={`/recipe/${recipe.id}/time/${t.id}/edit`}
                     >
+                      {t.category}:
                       {t.days && <Text component="span">{t.days}d</Text>}
                       {t.hours && <Text component="span">{t.hours}h</Text>}
                       {t.minutes && <Text component="span">{t.minutes}m</Text>}
+                      {t.note && <Text component="span">({t.note})</Text>}
                     </Anchor>
-                    {t.note && (
-                      <Text color="dimmed" component="span" ml="xs">
-                        {t.note}
-                      </Text>
-                    )}
                   </List.Item>
                 ))}
               </List>
@@ -86,7 +70,7 @@ function Times({ loading, recipe }: TimesProps) {
           </>
         )}
       </Box>
-    </>
+    </Box>
   );
 }
 

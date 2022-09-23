@@ -12,6 +12,7 @@ const TITLE_SIZE = "1.5rem";
 const useStyles = createStyles(() => ({
   title: {
     fontSize: TITLE_SIZE,
+    fontWeight: 500,
   },
   titleLink: {
     padding: "0.25rem 0.5rem",
@@ -27,7 +28,7 @@ function RecipeTitle({ loading, recipe }: RecipeTitleProps) {
 
   if (recipe) {
     return (
-      <Box className={classes.titleWrapper}>
+      <Box className={classes.titleWrapper} mt="1.25rem">
         <Title className={classes.title} order={2}>
           {recipe.title}
         </Title>

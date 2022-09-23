@@ -5,7 +5,6 @@ import {
   Badge,
   Box,
   createStyles,
-  Divider,
   Skeleton,
   Text,
 } from "@mantine/core";
@@ -40,9 +39,7 @@ function Tags({ loading, recipe }: RecipeTagProps) {
   const { classes } = useStyles();
 
   return (
-    <>
-      <Divider mt="md" pt="md" />
-
+    <Box mt="1.5rem">
       <RecipeSectionHeader>
         <RecipeSectionTitle title="Tags" />
 
@@ -58,7 +55,7 @@ function Tags({ loading, recipe }: RecipeTagProps) {
         )}
       </RecipeSectionHeader>
 
-      <Box mt="sm">
+      <Box mt="0.25rem">
         {loading ? (
           <Skeleton height={20} />
         ) : (
@@ -81,7 +78,7 @@ function Tags({ loading, recipe }: RecipeTagProps) {
           </>
         )}
       </Box>
-    </>
+    </Box>
   );
 }
 

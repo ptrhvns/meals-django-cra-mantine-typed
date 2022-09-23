@@ -1,13 +1,6 @@
 import RecipeSectionHeader from "./RecipeSectionHeader";
 import RecipeSectionTitle from "./RecipeSectionTitle";
-import {
-  Anchor,
-  Box,
-  createStyles,
-  Divider,
-  Skeleton,
-  Text,
-} from "@mantine/core";
+import { Anchor, Box, createStyles, Skeleton, Text } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { Rating as ReactRating } from "@smastrom/react-rating";
 import { RecipeData } from "../types";
@@ -19,12 +12,13 @@ interface RatingProps {
 
 const useStyles = createStyles((theme) => ({
   rating: {
-    maxWidth: "8rem",
+    maxWidth: "7rem",
   },
   ratingText: {
-    fontSize: theme.fontSizes.lg,
+    fontSize: theme.fontSizes.md,
   },
   ratingWrapper: {
+    alignItems: "center",
     display: "flex",
     gap: "0.5rem",
   },
@@ -37,9 +31,7 @@ function Rating({ loading, recipe }: RatingProps) {
   const { classes } = useStyles();
 
   return (
-    <>
-      <Divider mt="md" pt="md" />
-
+    <Box mt="2rem">
       <RecipeSectionHeader>
         <RecipeSectionTitle title="Rating" />
 
@@ -55,7 +47,7 @@ function Rating({ loading, recipe }: RatingProps) {
         )}
       </RecipeSectionHeader>
 
-      <Box mt="sm">
+      <Box mt="0.25rem">
         {loading ? (
           <Skeleton height={30} />
         ) : (
@@ -77,7 +69,7 @@ function Rating({ loading, recipe }: RatingProps) {
           </>
         )}
       </Box>
-    </>
+    </Box>
   );
 }
 

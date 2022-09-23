@@ -10,6 +10,7 @@ const useStyles = createStyles((theme) => ({
   title: {
     color: theme.fn.darken(theme.colors.yellow[9], 0.25),
     fontSize: TITLE_SIZE,
+    fontWeight: 500,
   },
 }));
 

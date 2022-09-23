@@ -5,7 +5,6 @@ import {
   Badge,
   Box,
   createStyles,
-  Divider,
   Skeleton,
   Text,
 } from "@mantine/core";
@@ -28,9 +27,7 @@ function Servings({ loading, recipe }: ServingsProps) {
   const servings = parseFloat(recipe?.servings || "0");
 
   return (
-    <>
-      <Divider mt="md" pt="md" />
-
+    <Box mt="2rem">
       <RecipeSectionHeader>
         <RecipeSectionTitle title="Servings" />
 
@@ -46,7 +43,7 @@ function Servings({ loading, recipe }: ServingsProps) {
         )}
       </RecipeSectionHeader>
 
-      <Box mt="sm">
+      <Box mt="0.25rem">
         {loading ? (
           <Skeleton height={30} />
         ) : (
@@ -63,7 +60,7 @@ function Servings({ loading, recipe }: ServingsProps) {
           </>
         )}
       </Box>
-    </>
+    </Box>
   );
 }
 

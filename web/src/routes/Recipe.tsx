@@ -210,9 +210,7 @@ function Recipe() {
             <Servings loading={loading} recipe={recipe} />
           </Box>
 
-          <Divider mt="xl" />
-
-          <Box mt="xl">
+          <Box mt="3rem">
             <Button color="red" onClick={() => setConfirmDelete(true)}>
               <FontAwesomeIcon icon={faTrash} />
               <Text ml="xs">Delete recipe</Text>
