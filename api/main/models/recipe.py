@@ -6,12 +6,14 @@ from django.db.models import (
     ForeignKey,
     Model,
     PositiveSmallIntegerField,
+    TextField,
 )
 
 from main.models.user import User
 
 
 class Recipe(Model):
+    notes = TextField(blank=True)
     rating = PositiveSmallIntegerField(
         blank=True, null=True, validators=[MinValueValidator(1), MaxValueValidator(5)]
     )

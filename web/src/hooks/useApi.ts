@@ -21,6 +21,7 @@ const API_ROUTES = asRouteDictionary({
   csrfToken: () => "/api/csrf_token/",
   login: () => "/api/login/",
   logout: () => "/api/logout/",
+  notesUpdate: (recipeId: string) => `/api/notes/${recipeId}/update/`,
   rating: (recipeId: string ) => `/api/rating/${recipeId}/`,
   ratingDestroy: (recipeId: string) => `/api/rating/${recipeId}/destroy/`,
   ratingUpdate: (recipeId: string) => `/api/rating/${recipeId}/update/`,

@@ -1,6 +1,7 @@
 from main.views.csrf_token import csrf_token
 from main.views.login import login
 from main.views.logout import logout
+from main.views.notes_update import notes_update
 from main.views.rating import rating
 from main.views.rating_destroy import rating_destroy
 from main.views.rating_update import rating_update
@@ -28,6 +29,7 @@ __all__ = [
     "csrf_token",
     "login",
     "logout",
+    "notes_update",
     "rating",
     "rating_destroy",
     "rating_update",

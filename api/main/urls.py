@@ -8,6 +8,7 @@ urlpatterns: list[URLPattern | URLResolver] = [
     path("csrf_token/", views.csrf_token, name="csrf_token"),
     path("login/", views.login, name="login"),
     path("logout/", views.logout, name="logout"),
+    path("notes/<int:recipe_id>/update/", views.notes_update, name="notes_update"),
     path("rating/<int:recipe_id>/", views.rating, name="rating"),
     path("rating/<int:recipe_id>/destroy/", views.rating_destroy, name="rating_destroy"),
     path("rating/<int:recipe_id>/update/", views.rating_update, name="rating_update"),
