@@ -9,22 +9,25 @@ import {
   Button,
   createStyles,
   LoadingOverlay,
+  Modal,
+  Skeleton,
   Text,
   Textarea,
   Title,
 } from "@mantine/core";
 import { buildTitle, handledApiError } from "../lib/utils";
-import { Helmet } from "react-helmet-async";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
-import { useForm } from "@mantine/form";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleExclamation,
   faCirclePlus,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { useApi } from "../hooks/useApi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Helmet } from "react-helmet-async";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { pick } from "lodash";
+import { useApi } from "../hooks/useApi";
+import { useEffect, useRef, useState } from "react";
+import { useForm } from "@mantine/form";
 
 const useStyles = createStyles(() => ({
   actions: {
@@ -36,6 +39,15 @@ const useStyles = createStyles(() => ({
   formWrapper: {
     position: "relative",
   },
+  modalActions: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "1rem",
+    justifyContent: "space-between",
+  },
+  overlayWrapper: {
+    position: "relative",
+  },
   pageLayout: {
     maxWidth: "35rem",
   },
@@ -43,14 +55,36 @@ const useStyles = createStyles(() => ({
 
 function NotesEditForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
+  const [confirmReset, setConfirmReset] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [resetAlert, setResetAlert] = useState<string | undefined>(undefined);
+  const [resetting, setResetting] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const navigate = useNavigate();
+  const shouldLoad = useRef<boolean>(true);
   const { classes } = useStyles();
-  const { getRouteFn, post } = useApi();
+  const { get, getRouteFn, post } = useApi();
   const { recipeId } = useParams() as { recipeId: string };
 
-  const { getInputProps, onSubmit, setFieldError } = useForm({
+  const { getInputProps, onSubmit, setFieldError, setFieldValue } = useForm({
     initialValues: {},
+  });
+
+  useEffect(() => {
+    if (shouldLoad.current) {
+      (async () => {
+        shouldLoad.current = false;
+        const routeFn = getRouteFn("notes");
+        const response = await get({ url: routeFn(recipeId) });
+        setLoading(false);
+
+        if (handledApiError(response, { setAlert })) {
+          return;
+        }
+
+        setFieldValue("notes", response?.data?.notes);
+      })();
+    }
   });
 
   return (
@@ -60,6 +94,65 @@ function NotesEditForm() {
       </Helmet>
 
       <Navbar />
+
+      <Modal
+        centered={true}
+        onClose={() => setConfirmReset(false)}
+        opened={confirmReset}
+        padding="sm"
+        title="Reset Notes"
+      >
+        <Box className={classes.overlayWrapper}>
+          <LoadingOverlay visible={resetting} />
+
+          <Text component="p">Are you sure you want to reset notes?</Text>
+
+          {resetAlert && (
+            <Alert
+              color="red"
+              icon={<FontAwesomeIcon icon={faCircleExclamation} />}
+              mb="lg"
+              onClose={() => setResetAlert(undefined)}
+              withCloseButton
+            >
+              <Box mr="xl">{resetAlert}</Box>
+            </Alert>
+          )}
+
+          <Box className={classes.modalActions}>
+            <Button
+              color="red"
+              disabled={resetting}
+              onClick={async () => {
+                setResetting(true);
+                const routeFn = getRouteFn("notesDestroy");
+                const response = await post({ url: routeFn(recipeId) });
+                setResetting(false);
+
+                if (handledApiError(response, { setAlert: setResetAlert })) {
+                  return;
+                }
+
+                navigate(`/recipe/${recipeId}`, { replace: true });
+              }}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+              <Text ml="xs">Reset</Text>
+            </Button>
+
+            <Button
+              color="gray"
+              onClick={() => {
+                setConfirmReset(false);
+                setResetAlert(undefined);
+              }}
+              variant="outline"
+            >
+              <Text>Dismiss</Text>
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
 
       <PageLayout containerClassName={classes.pageLayout}>
         <Box my="md">
@@ -81,66 +174,83 @@ function NotesEditForm() {
             Edit Notes
           </Title>
 
-          <Box className={classes.formWrapper}>
-            <LoadingOverlay visible={submitting} />
+          {loading ? (
+            <>
+              <Skeleton height={20} mt="md" width={75} />
+              <Skeleton height={120} mt="0.5rem" />
+            </>
+          ) : (
+            <Box className={classes.formWrapper}>
+              <LoadingOverlay visible={submitting} />
 
-            <form
-              onSubmit={onSubmit(async (values) => {
-                setSubmitting(true);
-                const routeFn = getRouteFn("notesUpdate");
+              <form
+                onSubmit={onSubmit(async (values) => {
+                  setSubmitting(true);
+                  const routeFn = getRouteFn("notesUpdate");
 
-                const response = await post({
-                  data: pick(values, ["notes"]),
-                  url: routeFn(recipeId),
-                });
+                  const response = await post({
+                    data: pick(values, ["notes"]),
+                    url: routeFn(recipeId),
+                  });
 
-                setSubmitting(false);
+                  setSubmitting(false);
 
-                if (handledApiError(response, { setAlert, setFieldError })) {
-                  return;
-                }
+                  if (handledApiError(response, { setAlert, setFieldError })) {
+                    return;
+                  }
 
-                navigate(`/recipe/${recipeId}`, { replace: true });
-              })}
-            >
-              {alert && (
-                <Alert
-                  color="red"
-                  icon={<FontAwesomeIcon icon={faCircleExclamation} />}
-                  mt="md"
-                  onClose={() => setAlert(undefined)}
-                  withCloseButton
-                >
-                  <Box mr="xl">{alert}</Box>
-                </Alert>
-              )}
+                  navigate(`/recipe/${recipeId}`, { replace: true });
+                })}
+              >
+                {alert && (
+                  <Alert
+                    color="red"
+                    icon={<FontAwesomeIcon icon={faCircleExclamation} />}
+                    mt="md"
+                    onClose={() => setAlert(undefined)}
+                    withCloseButton
+                  >
+                    <Box mr="xl">{alert}</Box>
+                  </Alert>
+                )}
 
-              <Textarea
-                autosize
-                disabled={submitting}
-                label="Notes"
-                minRows={5}
-                mt="md"
-                {...getInputProps("notes")}
-              />
-
-              <Box className={classes.actions} mt="xl">
-                <Button disabled={submitting} type="submit">
-                  <FontAwesomeIcon icon={faCirclePlus} />
-                  <Text ml="xs">Save</Text>
-                </Button>
-
-                <Button
-                  color="gray"
+                <Textarea
+                  autosize
                   disabled={submitting}
-                  onClick={() => navigate(`/recipe/${recipeId}`)}
-                  variant="outline"
-                >
-                  <Text>Dismiss</Text>
-                </Button>
-              </Box>
-            </form>
-          </Box>
+                  label="Notes"
+                  minRows={5}
+                  mt="md"
+                  {...getInputProps("notes")}
+                />
+
+                <Box className={classes.actions} mt="xl">
+                  <Button disabled={submitting} type="submit">
+                    <FontAwesomeIcon icon={faCirclePlus} />
+                    <Text ml="xs">Save</Text>
+                  </Button>
+
+                  <Button
+                    color="red"
+                    disabled={submitting}
+                    onClick={() => setConfirmReset(true)}
+                    type="button"
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                    <Text ml="xs">Reset</Text>
+                  </Button>
+
+                  <Button
+                    color="gray"
+                    disabled={submitting}
+                    onClick={() => navigate(`/recipe/${recipeId}`)}
+                    variant="outline"
+                  >
+                    <Text>Dismiss</Text>
+                  </Button>
+                </Box>
+              </form>
+            </Box>
+          )}
         </Box>
       </PageLayout>
     </RequireAuthn>

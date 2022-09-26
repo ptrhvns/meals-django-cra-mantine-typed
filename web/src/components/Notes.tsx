@@ -1,7 +1,7 @@
 import RecipeSection from "./RecipeSection";
 import RecipeSectionHeader from "./RecipeSectionHeader";
 import RecipeSectionTitle from "./RecipeSectionTitle";
-import { Anchor, createStyles } from "@mantine/core";
+import { Anchor, Box, createStyles, Skeleton, Text } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { RecipeData } from "../types";
 
@@ -35,6 +35,20 @@ function Notes({ loading, recipe }: NotesProps) {
           </Anchor>
         )}
       </RecipeSectionHeader>
+
+      <Box mt="0.25rem">
+        {loading ? (
+          <Skeleton height={60} />
+        ) : (
+          <>
+            {recipe?.notes ? (
+              <Text>{recipe.notes}</Text>
+            ) : (
+              <Text color="dimmed">Notes haven't been set yet.</Text>
+            )}
+          </>
+        )}
+      </Box>
     </RecipeSection>
   );
 }
