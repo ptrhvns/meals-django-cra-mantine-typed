@@ -1,4 +1,3 @@
-import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
 import Navbar from "../components/Navbar";
 import PageLayout from "../components/PageLayout";
 import RequireAuthn from "../components/RequireAuthn";
@@ -16,12 +15,7 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import {
-  buildTitle,
-  handledApiError,
-  handledInvalidData,
-  stringifyIdsDeeply,
-} from "../lib/utils";
+import { buildTitle, handledApiError } from "../lib/utils";
 import {
   faCircleExclamation,
   faCirclePlus,
@@ -34,19 +28,6 @@ import { pick } from "lodash";
 import { useApi } from "../hooks/useApi";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "@mantine/form";
-
-interface ServingsData {
-  servings: string | null;
-}
-
-const servingsDataSchema: JTDSchemaType<ServingsData> = {
-  additionalProperties: true,
-  properties: {
-    servings: { nullable: true, type: "string" },
-  },
-};
-
-const validateServingsData = new Ajv().compile(servingsDataSchema);
 
 const useStyles = createStyles(() => ({
   actions: {
@@ -97,18 +78,6 @@ function ServingsEditForm() {
         setLoading(false);
 
         if (handledApiError(response, { setAlert })) {
-          return;
-        }
-
-        stringifyIdsDeeply(response.data);
-
-        if (
-          handledInvalidData<ServingsData>(
-            validateServingsData,
-            response.data,
-            setAlert
-          )
-        ) {
           return;
         }
 

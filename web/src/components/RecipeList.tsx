@@ -1,4 +1,3 @@
-import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
 import {
   Alert,
   Anchor,
@@ -15,11 +14,7 @@ import {
   faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  handledApiError,
-  handledInvalidData,
-  stringifyIdsDeeply,
-} from "../lib/utils";
+import { handledApiError } from "../lib/utils";
 import { isEmpty } from "lodash";
 import { Link } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
@@ -34,33 +29,6 @@ interface RecipeData {
   id: string;
   title: string;
 }
-
-interface RecipesData {
-  pagination: PaginationData;
-  recipes: RecipeData[];
-}
-
-const schema: JTDSchemaType<RecipesData> = {
-  additionalProperties: true,
-  properties: {
-    pagination: {
-      properties: {
-        page: { type: "uint32" },
-        total: { type: "uint32" },
-      },
-    },
-    recipes: {
-      elements: {
-        properties: {
-          id: { type: "string" },
-          title: { type: "string" },
-        },
-      },
-    },
-  },
-};
-
-const validate = new Ajv().compile(schema);
 
 function RecipeList() {
   const [error, setError] = useState<string | undefined>(undefined);
@@ -83,12 +51,6 @@ function RecipeList() {
       setLoading(false);
 
       if (handledApiError(response, { setAlert: setError })) {
-        return;
-      }
-
-      stringifyIdsDeeply(response.data);
-
-      if (handledInvalidData<RecipesData>(validate, response.data, setError)) {
         return;
       }
 

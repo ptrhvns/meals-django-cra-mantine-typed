@@ -1,4 +1,3 @@
-import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
 import Navbar from "../components/Navbar";
 import PageLayout from "../components/PageLayout";
 import RequireAuthn from "../components/RequireAuthn";
@@ -18,12 +17,7 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
-import {
-  buildTitle,
-  handledApiError,
-  handledInvalidData,
-  stringifyIdsDeeply,
-} from "../lib/utils";
+import { buildTitle, handledApiError } from "../lib/utils";
 import {
   faCircleExclamation,
   faCirclePlus,
@@ -33,7 +27,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { forOwn, pick } from "lodash";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { TimeData } from "../types";
 import { useApi } from "../hooks/useApi";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "@mantine/form";
@@ -58,20 +51,6 @@ const useStyles = createStyles(() => ({
     maxWidth: "35rem",
   },
 }));
-
-const timeDataSchema: JTDSchemaType<TimeData> = {
-  additionalProperties: true,
-  properties: {
-    category: { type: "string" },
-    days: { nullable: true, type: "uint16" },
-    hours: { nullable: true, type: "uint16" },
-    id: { type: "string" },
-    minutes: { nullable: true, type: "uint16" },
-    note: { nullable: true, type: "string" },
-  },
-};
-
-const validateTimeData = new Ajv().compile(timeDataSchema);
 
 function TimeEditForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
@@ -109,18 +88,6 @@ function TimeEditForm() {
         setLoading(false);
 
         if (handledApiError(response, { setAlert })) {
-          return;
-        }
-
-        stringifyIdsDeeply(response.data);
-
-        if (
-          handledInvalidData<TimeData>(
-            validateTimeData,
-            response.data,
-            setAlert
-          )
-        ) {
           return;
         }
 

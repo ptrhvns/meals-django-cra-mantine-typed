@@ -1,4 +1,3 @@
-import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
 import Navbar from "../components/Navbar";
 import PageLayout from "../components/PageLayout";
 import RequireAuthn from "../components/RequireAuthn";
@@ -17,11 +16,7 @@ import {
   Title,
 } from "@mantine/core";
 import { ApiResponse, useApi } from "../hooks/useApi";
-import {
-  buildTitle,
-  handledInvalidData,
-  stringifyIdsDeeply,
-} from "../lib/utils";
+import { buildTitle } from "../lib/utils";
 import {
   faCircleExclamation,
   faCirclePlus,
@@ -56,19 +51,6 @@ const useStyles = createStyles(() => ({
     maxWidth: "35rem",
   },
 }));
-
-interface TagData {
-  name: string;
-}
-
-const tagDataSchema: JTDSchemaType<TagData> = {
-  additionalProperties: true,
-  properties: {
-    name: { type: "string" },
-  },
-};
-
-const validateTagData = new Ajv().compile(tagDataSchema);
 
 function TagEditForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
@@ -107,14 +89,6 @@ function TagEditForm() {
         setLoading(false);
 
         if (handledApiError(response, { setAlert })) {
-          return;
-        }
-
-        stringifyIdsDeeply(response.data);
-
-        if (
-          handledInvalidData<TagData>(validateTagData, response.data, setAlert)
-        ) {
           return;
         }
 

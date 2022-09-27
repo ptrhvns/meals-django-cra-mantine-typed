@@ -1,4 +1,3 @@
-import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
 import Navbar from "../components/Navbar";
 import PageLayout from "../components/PageLayout";
 import RequireAuthn from "../components/RequireAuthn";
@@ -15,12 +14,7 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
-import {
-  buildTitle,
-  handledApiError,
-  handledInvalidData,
-  stringifyIdsDeeply,
-} from "../lib/utils";
+import { buildTitle, handledApiError } from "../lib/utils";
 import {
   faCircleExclamation,
   faCirclePlus,
@@ -49,21 +43,6 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-interface RecipeData {
-  id: string;
-  title: string;
-}
-
-const schema: JTDSchemaType<RecipeData> = {
-  additionalProperties: true,
-  properties: {
-    id: { type: "string" },
-    title: { type: "string" },
-  },
-};
-
-const validate = new Ajv().compile(schema);
-
 function RecipeTitleForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
@@ -88,12 +67,6 @@ function RecipeTitleForm() {
         setLoading(false);
 
         if (handledApiError(response, { setAlert })) {
-          return;
-        }
-
-        stringifyIdsDeeply(response.data);
-
-        if (handledInvalidData<RecipeData>(validate, response.data, setAlert)) {
           return;
         }
 

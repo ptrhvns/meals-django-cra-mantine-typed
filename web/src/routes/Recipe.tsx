@@ -1,4 +1,3 @@
-import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
 import Navbar from "../components/Navbar";
 import Notes from "../components/Notes";
 import PageLayout from "../components/PageLayout";
@@ -18,12 +17,7 @@ import {
   Modal,
   Text,
 } from "@mantine/core";
-import {
-  buildTitle,
-  handledApiError,
-  handledInvalidData,
-  stringifyIdsDeeply,
-} from "../lib/utils";
+import { buildTitle, handledApiError } from "../lib/utils";
 import {
   faCircleExclamation,
   faTrash,
@@ -48,41 +42,6 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-const schema: JTDSchemaType<RecipeData> = {
-  additionalProperties: true,
-  properties: {
-    id: { type: "string" },
-    notes: { nullable: true, type: "string" },
-    rating: { nullable: true, type: "uint8" },
-    servings: { nullable: true, type: "string" },
-    tags: {
-      nullable: true,
-      elements: {
-        properties: {
-          id: { type: "string" },
-          name: { type: "string" },
-        },
-      },
-    },
-    times: {
-      nullable: true,
-      elements: {
-        properties: {
-          category: { type: "string" },
-          days: { nullable: true, type: "uint16" },
-          hours: { nullable: true, type: "uint16" },
-          id: { type: "string" },
-          minutes: { nullable: true, type: "uint16" },
-          note: { nullable: true, type: "string" },
-        },
-      },
-    },
-    title: { type: "string" },
-  },
-};
-
-const validate = new Ajv().compile(schema);
-
 function Recipe() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
@@ -105,12 +64,6 @@ function Recipe() {
         setLoading(false);
 
         if (handledApiError(response, { setAlert })) {
-          return;
-        }
-
-        stringifyIdsDeeply(response.data);
-
-        if (handledInvalidData<RecipeData>(validate, response.data, setAlert)) {
           return;
         }
 

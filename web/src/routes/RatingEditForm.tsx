@@ -1,4 +1,3 @@
-import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
 import Navbar from "../components/Navbar";
 import PageLayout from "../components/PageLayout";
 import RequireAuthn from "../components/RequireAuthn";
@@ -15,12 +14,7 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import {
-  buildTitle,
-  handledApiError,
-  handledInvalidData,
-  stringifyIdsDeeply,
-} from "../lib/utils";
+import { buildTitle, handledApiError } from "../lib/utils";
 import {
   faCircleExclamation,
   faTrash,
@@ -32,19 +26,6 @@ import { Rating as ReactRating } from "@smastrom/react-rating";
 import { ReactNode } from "react";
 import { useApi } from "../hooks/useApi";
 import { useEffect, useRef, useState } from "react";
-
-interface RatingData {
-  rating: number | null;
-}
-
-const ratingDataSchema: JTDSchemaType<RatingData> = {
-  additionalProperties: true,
-  properties: {
-    rating: { nullable: true, type: "uint8" },
-  },
-};
-
-const validateRatingData = new Ajv().compile(ratingDataSchema);
 
 const RATING_WIDTH = "10rem";
 
@@ -107,18 +88,6 @@ function RatingEditForm() {
         setLoading(false);
 
         if (handledApiError(response, { setAlert })) {
-          return;
-        }
-
-        stringifyIdsDeeply(response.data);
-
-        if (
-          handledInvalidData<RatingData>(
-            validateRatingData,
-            response.data,
-            setAlert
-          )
-        ) {
           return;
         }
 
