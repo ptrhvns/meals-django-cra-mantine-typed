@@ -65,7 +65,7 @@ function Rating({ loading, recipe }: RatingProps) {
                 </Text>
               </Box>
             ) : (
-              <Text color="dimmed">A rating hasn't been set yet.</Text>
+              <Text color="dimmed">No rating yet.</Text>
             )}
           </>
         )}

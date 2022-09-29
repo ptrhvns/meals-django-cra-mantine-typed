@@ -44,7 +44,7 @@ function Notes({ loading, recipe }: NotesProps) {
             {recipe?.notes ? (
               <Text>{recipe.notes}</Text>
             ) : (
-              <Text color="dimmed">Notes haven't been set yet.</Text>
+              <Text color="dimmed">No notes yet.</Text>
             )}
           </>
         )}

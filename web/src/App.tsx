@@ -1,5 +1,6 @@
 import Dashboard from "./routes/Dashboard";
 import EquipmentCreateForm from "./routes/EquipmentCreateForm";
+import EquipmentEditForm from "./routes/EquipmentEditForm";
 import Home from "./routes/Home";
 import Login from "./routes/Login";
 import NotesEditForm from "./routes/NotesEditForm";
@@ -33,6 +34,11 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/recipe/:recipeId" element={<Recipe />} />
+
+        <Route
+          path="/recipe/:recipeId/equipment/:equipmentId/edit"
+          element={<EquipmentEditForm />}
+        />
 
         <Route
           path="/recipe/:recipeId/equipment/new"

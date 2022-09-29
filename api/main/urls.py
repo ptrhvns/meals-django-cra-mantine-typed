@@ -6,6 +6,9 @@ from main import views
 # fmt: off
 urlpatterns: list[URLPattern | URLResolver] = [
     path("csrf_token/", views.csrf_token, name="csrf_token"),
+    path("equipment/<int:equipment_id>/", views.equipment, name="equipment"),
+    path("equipment/<int:equipment_id>/recipe/<int:recipe_id>/dissociate/", views.equipment_dissociate, name="equipment_dissociate"),
+    path("equipment/<int:equipment_id>/update/", views.equipment_update, name="equipment_update"),
     path("equipment/recipe/<int:recipe_id>/associate/", views.equipment_associate, name="equipment_associate"),
     path("equipment/search/", views.equipment_search, name="equipment_search"),
     path("login/", views.login, name="login"),

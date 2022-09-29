@@ -49,7 +49,7 @@ function Servings({ loading, recipe }: ServingsProps) {
                   : servings}
               </Text>
             ) : (
-              <Text color="dimmed">Servings hasn't been set yet.</Text>
+              <Text color="dimmed">No servings yet.</Text>
             )}
           </>
         )}

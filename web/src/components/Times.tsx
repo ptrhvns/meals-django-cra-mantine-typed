@@ -66,7 +66,7 @@ function Times({ loading, recipe }: TimesProps) {
                 ))}
               </List>
             ) : (
-              <Text color="dimmed">No times have been created yet.</Text>
+              <Text color="dimmed">No times yet.</Text>
             )}
           </>
         )}

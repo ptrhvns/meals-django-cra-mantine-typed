@@ -74,7 +74,7 @@ function Tags({ loading, recipe }: RecipeTagProps) {
                 ))}
               </Box>
             ) : (
-              <Text color="dimmed">No tags have been created yet.</Text>
+              <Text color="dimmed">No tags yet.</Text>
             )}
           </>
         )}

@@ -7,8 +7,15 @@ from rest_framework.serializers import ModelSerializer
 
 from main.lib.responses import data_response
 from main.models import Time
+from main.models.equipment import Equipment
 from main.models.recipe import Recipe
 from main.models.tag import Tag
+
+
+class EquipmentSerializer(ModelSerializer):
+    class Meta:
+        model = Equipment
+        fields = ("description", "id")
 
 
 class TagSerializer(ModelSerializer):
@@ -26,8 +33,18 @@ class TimeSerializer(ModelSerializer):
 class RecipeSerializer(ModelSerializer):
     class Meta:
         model = Recipe
-        fields = ("id", "notes", "rating", "servings", "tags", "times", "title")
+        fields = (
+            "equipment",
+            "id",
+            "notes",
+            "rating",
+            "servings",
+            "tags",
+            "times",
+            "title",
+        )
 
+    equipment = EquipmentSerializer(many=True, required=False)
     tags = TagSerializer(many=True, required=False)
     times = TimeSerializer(many=True, required=False)
 

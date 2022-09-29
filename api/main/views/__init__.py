@@ -1,6 +1,9 @@
 from main.views.csrf_token import csrf_token
+from main.views.equipment import equipment
 from main.views.equipment_associate import equipment_associate
+from main.views.equipment_dissociate import equipment_dissociate
 from main.views.equipment_search import equipment_search
+from main.views.equipment_update import equipment_update
 from main.views.login import login
 from main.views.logout import logout
 from main.views.notes import notes
@@ -31,8 +34,11 @@ from main.views.time_update import time_update
 
 __all__ = [
     "csrf_token",
+    "equipment",
     "equipment_associate",
+    "equipment_dissociate",
     "equipment_search",
+    "equipment_update",
     "login",
     "logout",
     "notes",
