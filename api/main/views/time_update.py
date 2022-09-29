@@ -26,7 +26,7 @@ class TimeUpdateSerializer(ModelSerializer):
 
 
 @api_view(http_method_names=["POST"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def time_update(request: Request, time_id: int) -> Response:
     time = shortcuts.get_object_or_404(Time, pk=time_id, recipe__user=request.user)
 

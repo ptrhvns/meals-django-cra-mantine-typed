@@ -18,7 +18,7 @@ class NotesUpdateSerializer(ModelSerializer):
 
 
 @api_view(http_method_names=["POST"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def notes_update(request: Request, recipe_id: int) -> Response:
     recipe = get_object_or_404(Recipe, pk=recipe_id, user=request.user)
     serializer = NotesUpdateSerializer(data=request.data, instance=recipe)

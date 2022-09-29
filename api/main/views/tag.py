@@ -16,7 +16,7 @@ class TagSerializer(ModelSerializer):
 
 
 @api_view(http_method_names=["GET"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def tag(request: Request, tag_id: int) -> Response:
     tag = get_object_or_404(Tag, pk=tag_id, user=request.user)
     serializer = TagSerializer(tag)

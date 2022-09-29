@@ -9,7 +9,7 @@ from main.lib.responses import no_content_response
 
 
 @api_view(http_method_names=["POST"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def rating_destroy(request: Request, recipe_id: int) -> Response:
     recipe = get_object_or_404(models.Recipe, pk=recipe_id, user=request.user)
     recipe.rating = None

@@ -16,7 +16,7 @@ class RecipeRatingSerializer(ModelSerializer):
 
 
 @api_view(http_method_names=["GET"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def rating(request: Request, recipe_id: int) -> Response:
     recipe = get_object_or_404(models.Recipe, pk=recipe_id, user=request.user)
     serializer = RecipeRatingSerializer(recipe)

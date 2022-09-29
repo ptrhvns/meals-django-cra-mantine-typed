@@ -16,7 +16,7 @@ class EquipmentSerializer(ModelSerializer):
 
 
 @api_view(http_method_names=["GET"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def equipment(request: Request, equipment_id: int) -> Response:
     equipment = get_object_or_404(Equipment, pk=equipment_id, user=request.user)
     serializer = EquipmentSerializer(equipment)

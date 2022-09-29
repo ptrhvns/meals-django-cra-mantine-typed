@@ -20,7 +20,7 @@ class ServingsUpdateSerializer(ModelSerializer):
 
 
 @api_view(http_method_names=["POST"])
-@permission_classes([permissions.IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([permissions.IsAuthenticated])
 def servings_update(request: Request, recipe_id: int) -> Response:
     recipe = get_object_or_404(Recipe, pk=recipe_id, user=request.user)
     serializer = ServingsUpdateSerializer(data=request.data, instance=recipe)

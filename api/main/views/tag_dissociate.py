@@ -9,7 +9,7 @@ from main.models import Recipe, Tag
 
 
 @api_view(http_method_names=["POST"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def tag_dissociate(request: Request, tag_id: int, recipe_id: int) -> Response:
     recipe = get_object_or_404(Recipe, pk=recipe_id, user=request.user)
     tag = get_object_or_404(Tag, pk=tag_id, recipes=recipe, user=request.user)

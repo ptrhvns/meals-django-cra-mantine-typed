@@ -21,7 +21,7 @@ class TagUpdateForRecipeSerializer(ModelSerializer):
 
 
 @api_view(http_method_names=["POST"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def tag_update(request: Request, tag_id: int) -> Response:
     tag = get_object_or_404(Tag, pk=tag_id, user=request.user)
     serializer = TagUpdateForRecipeSerializer(instance=tag, data=request.data)

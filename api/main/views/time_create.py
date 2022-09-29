@@ -27,7 +27,7 @@ class RecipeTimeCreateSerializer(ModelSerializer):
 
 
 @api_view(http_method_names=["POST"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def time_create(request: Request, recipe_id: int) -> Response:
     recipe = get_object_or_404(models.Recipe, pk=recipe_id, user=request.user)
 

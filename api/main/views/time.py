@@ -16,7 +16,7 @@ class TimeSerializer(ModelSerializer):
 
 
 @api_view(http_method_names=["GET"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def time(request: Request, time_id: int) -> Response:
     time = get_object_or_404(Time, pk=time_id, recipe__user=request.user)
     serializer = TimeSerializer(time)

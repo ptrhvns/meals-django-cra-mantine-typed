@@ -10,7 +10,7 @@ from main.models.equipment import Equipment
 
 
 @api_view(http_method_names=["GET"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def equipment_search(request: Request) -> Response:
     if not (search_term := request.query_params.get("search_term")):
         return data_response(data={"matches": []})

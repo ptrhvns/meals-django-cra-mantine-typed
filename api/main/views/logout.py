@@ -8,7 +8,7 @@ from main.lib.responses import no_content_response
 
 
 @api_view(http_method_names=["POST"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def logout(request: Request) -> Response:
     auth_logout(request)
     return no_content_response()

@@ -15,7 +15,7 @@ class RecipeCreateSerializer(ModelSerializer):
 
 
 @api_view(http_method_names=["POST"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def recipe_create(request: Request) -> Response:
     serializer = RecipeCreateSerializer(data=request.data)
 

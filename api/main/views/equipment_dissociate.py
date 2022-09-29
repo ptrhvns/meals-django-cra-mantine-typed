@@ -10,7 +10,7 @@ from main.models.recipe import Recipe
 
 
 @api_view(http_method_names=["POST"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def equipment_dissociate(
     request: Request, equipment_id: int, recipe_id: int
 ) -> Response:

@@ -21,7 +21,7 @@ class EquipmentAssociateSerializer(serializers.ModelSerializer):
 
 
 @api_view(http_method_names=["POST"])
-@permission_classes([IsAuthenticated])  # type: ignore[list-item]
+@permission_classes([IsAuthenticated])
 def equipment_associate(request: Request, recipe_id: int) -> Response:
     recipe = get_object_or_404(Recipe, pk=recipe_id, user=request.user)
     serializer = EquipmentAssociateSerializer(data=request.data)
