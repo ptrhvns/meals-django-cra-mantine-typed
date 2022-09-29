@@ -19,6 +19,8 @@ const asRouteDictionary = <T>(dictionary: {
 // prettier-ignore
 const API_ROUTES = asRouteDictionary({
   csrfToken: () => "/api/csrf_token/",
+  equipmentAssociate: (recipeId: string) => `/api/equipment/recipe/${recipeId}/associate/`,
+  equipmentSearch: (searchTerm: string) => `/api/equipment/search/?search_term=${encodeURI(searchTerm)}`,
   login: () => "/api/login/",
   logout: () => "/api/logout/",
   notes: (recipeId: string) => `/api/notes/${recipeId}/`,
