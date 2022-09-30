@@ -3,19 +3,63 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import CharField, ModelSerializer
 
 from main.lib.responses import data_response
 from main.models import Time
+from main.models.brand import Brand
 from main.models.equipment import Equipment
+from main.models.food import Food
+from main.models.ingredient import Ingredient
 from main.models.recipe import Recipe
 from main.models.tag import Tag
+from main.models.unit import Unit
 
 
 class EquipmentSerializer(ModelSerializer):
     class Meta:
         model = Equipment
         fields = ("description", "id")
+
+
+class BrandSerializer(ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = ("id", "name")
+
+    name = CharField(allow_blank=False, allow_null=False, max_length=256)
+
+
+class FoodSerializer(ModelSerializer):
+    class Meta:
+        model = Food
+        fields = ("id", "name")
+
+    name = CharField(allow_blank=False, allow_null=False, max_length=256)
+
+
+class UnitSerializer(ModelSerializer):
+    class Meta:
+        model = Unit
+        fields = ("id", "name")
+
+    name = CharField(allow_blank=False, allow_null=False, max_length=256)
+
+
+class IngredientSerializer(ModelSerializer):
+    class Meta:
+        model = Ingredient
+        fields = (
+            "amount",
+            "brand",
+            "food",
+            "id",
+            "unit",
+        )
+
+    brand = BrandSerializer(required=False)
+    food = FoodSerializer(required=True)
+    unit = UnitSerializer(required=False)
 
 
 class TagSerializer(ModelSerializer):
@@ -36,6 +80,7 @@ class RecipeSerializer(ModelSerializer):
         fields = (
             "equipment",
             "id",
+            "ingredients",
             "notes",
             "rating",
             "servings",
@@ -45,6 +90,7 @@ class RecipeSerializer(ModelSerializer):
         )
 
     equipment = EquipmentSerializer(many=True, required=False)
+    ingredients = IngredientSerializer(many=True, required=False)
     tags = TagSerializer(many=True, required=False)
     times = TimeSerializer(many=True, required=False)
 

@@ -1,9 +1,10 @@
 import RecipeSection from "./RecipeSection";
 import RecipeSectionHeader from "./RecipeSectionHeader";
 import RecipeSectionTitle from "./RecipeSectionTitle";
-import { Anchor, createStyles } from "@mantine/core";
+import { Anchor, Box, createStyles, List, Skeleton, Text } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { RecipeData } from "../types";
+import { compact, join } from "lodash";
 
 interface IngredientsProps {
   loading: boolean;
@@ -35,6 +36,38 @@ function Ingredients({ loading, recipe }: IngredientsProps) {
           </Anchor>
         )}
       </RecipeSectionHeader>
+
+      <Box mt="0.25rem">
+        {loading ? (
+          <>
+            <Skeleton height={20} />
+            <Skeleton height={20} mt="sm" />
+            <Skeleton height={20} mt="sm" />
+          </>
+        ) : (
+          <>
+            {recipe?.ingredients?.length ? (
+              <List>
+                {recipe.ingredients.map((ingredient) => (
+                  <List.Item key={ingredient.id}>
+                    {join(
+                      compact([
+                        ingredient.amount,
+                        ingredient?.unit?.name,
+                        ingredient?.brand?.name,
+                        ingredient?.food?.name,
+                      ]),
+                      " "
+                    )}
+                  </List.Item>
+                ))}
+              </List>
+            ) : (
+              <Text color="dimmed">No ingredients yet.</Text>
+            )}
+          </>
+        )}
+      </Box>
     </RecipeSection>
   );
 }

@@ -23,12 +23,12 @@ from main.models.unit import Unit
 
 class IngredientAssociateSerializer(Serializer):
     amount = CharField(
-        allow_blank=False,
+        allow_blank=True,
         max_length=Ingredient._meta.get_field("amount").max_length,
         required=False,
     )
     brand = CharField(
-        allow_blank=False,
+        allow_blank=True,
         max_length=Brand._meta.get_field("name").max_length,
         required=False,
     )
@@ -38,7 +38,7 @@ class IngredientAssociateSerializer(Serializer):
         required=True,
     )
     unit = CharField(
-        allow_blank=False,
+        allow_blank=True,
         max_length=Unit._meta.get_field("name").max_length,
         required=False,
     )

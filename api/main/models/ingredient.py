@@ -9,7 +9,7 @@ from main.models.unit import Unit
 
 
 class Ingredient(Model):
-    amount = CharField(max_length=16)
+    amount = CharField(blank=True, max_length=16)
     brand: ForeignKey[Brand | None] = ForeignKey(
         Brand,
         blank=True,
