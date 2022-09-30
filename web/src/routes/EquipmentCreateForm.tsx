@@ -52,7 +52,9 @@ function EquipmentCreateForm() {
   const { recipeId } = useParams() as { recipeId: string };
 
   const { getInputProps, onSubmit, setFieldError } = useForm({
-    initialValues: {},
+    initialValues: {
+      description: "",
+    },
   });
 
   const searchEquipment = useDebouncedFunction(200, (value: string) =>
