@@ -5,12 +5,15 @@ from main import views
 
 # fmt: off
 urlpatterns: list[URLPattern | URLResolver] = [
+    path("brand/search/", views.brand_search, name="brand_search"),
     path("csrf_token/", views.csrf_token, name="csrf_token"),
     path("equipment/<int:equipment_id>/", views.equipment, name="equipment"),
     path("equipment/<int:equipment_id>/recipe/<int:recipe_id>/dissociate/", views.equipment_dissociate, name="equipment_dissociate"),
     path("equipment/<int:equipment_id>/update/", views.equipment_update, name="equipment_update"),
     path("equipment/recipe/<int:recipe_id>/associate/", views.equipment_associate, name="equipment_associate"),
     path("equipment/search/", views.equipment_search, name="equipment_search"),
+    path("food/search/", views.food_search, name="food_search"),
+    path("ingredient/recipe/<int:recipe_id>/associate/", views.ingredient_associate, name="ingredient_associate"),
     path("login/", views.login, name="login"),
     path("logout/", views.logout, name="logout"),
     path("notes/<int:recipe_id>/", views.notes, name="notes"),
@@ -38,4 +41,5 @@ urlpatterns: list[URLPattern | URLResolver] = [
     path("time/<int:time_id>/", views.time, name="time"),
     path("time/<int:time_id>/destroy/", views.time_destroy, name="time_destroy"),
     path("time/<int:time_id>/update/", views.time_update, name="time_update"),
+    path("unit/search/", views.unit_search, name="unit_search"),
 ]

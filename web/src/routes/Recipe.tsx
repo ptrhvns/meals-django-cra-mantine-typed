@@ -1,4 +1,5 @@
 import Equipment from "../components/Equipment";
+import Ingredients from "../components/Ingredients";
 import Navbar from "../components/Navbar";
 import Notes from "../components/Notes";
 import PageLayout from "../components/PageLayout";
@@ -165,6 +166,7 @@ function Recipe() {
             <Servings loading={loading} recipe={recipe} />
             <Notes loading={loading} recipe={recipe} />
             <Equipment loading={loading} recipe={recipe} />
+            <Ingredients loading={loading} recipe={recipe} />
           </Box>
 
           <Box mt="1.2rem">

@@ -18,12 +18,15 @@ const asRouteDictionary = <T>(dictionary: {
 
 // prettier-ignore
 const API_ROUTES = asRouteDictionary({
+  brandSearch: (searchTerm: string) => `/api/brand/search/?search_term=${encodeURI(searchTerm)}`,
   csrfToken: () => "/api/csrf_token/",
   equipment: (equipmentId: string) => `/api/equipment/${equipmentId}/`,
   equipmentAssociate: (recipeId: string) => `/api/equipment/recipe/${recipeId}/associate/`,
   equipmentDissociate: (recipeId: string, equipmentId: string) => `/api/equipment/${equipmentId}/recipe/${recipeId}/dissociate/`,
   equipmentSearch: (searchTerm: string) => `/api/equipment/search/?search_term=${encodeURI(searchTerm)}`,
   equipmentUpdate: (equipmentId: string) => `/api/equipment/${equipmentId}/update/`,
+  foodSearch: (searchTerm: string) => `/api/food/search/?search_term=${encodeURI(searchTerm)}`,
+  ingredientAssociate: (recipeId: string) => `/api/ingredient/recipe/${recipeId}/associate/`,
   login: () => "/api/login/",
   logout: () => "/api/logout/",
   notes: (recipeId: string) => `/api/notes/${recipeId}/`,
@@ -51,6 +54,7 @@ const API_ROUTES = asRouteDictionary({
   timeCreate: (recipeId: string) => `/api/recipe/${recipeId}/time/create/`,
   timeDestroy: (timeId: string) => `/api/time/${timeId}/destroy/`,
   timeUpdate: (timeId: string) => `/api/time/${timeId}/update/`,
+  unitSearch: (searchTerm: string) => `/api/unit/search/?search_term=${encodeURI(searchTerm)}`,
 });
 
 type ApiRoutes = typeof API_ROUTES;
