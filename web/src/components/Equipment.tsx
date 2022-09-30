@@ -60,7 +60,7 @@ function Equipment({ loading, recipe }: EquipmentProps) {
                 ))}
               </>
             ) : (
-              <Text color="dimmed">Not equipment yet.</Text>
+              <Text color="dimmed">No equipment yet.</Text>
             )}
           </>
         )}
