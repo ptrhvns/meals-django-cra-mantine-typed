@@ -47,7 +47,7 @@ function Times({ loading, recipe }: TimesProps) {
         ) : (
           <>
             {recipe?.times?.length ? (
-              <List listStyleType="none" withPadding={false}>
+              <List>
                 {sortBy(recipe.times, "category").map((t) => (
                   <List.Item key={t.id}>
                     <Anchor

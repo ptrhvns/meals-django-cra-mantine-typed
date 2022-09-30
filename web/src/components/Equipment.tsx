@@ -1,7 +1,7 @@
 import RecipeSection from "./RecipeSection";
 import RecipeSectionHeader from "./RecipeSectionHeader";
 import RecipeSectionTitle from "./RecipeSectionTitle";
-import { Anchor, Box, createStyles, Skeleton, Text } from "@mantine/core";
+import { Anchor, Box, createStyles, List, Skeleton, Text } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { RecipeData } from "../types";
 import { sortBy } from "lodash";
@@ -48,16 +48,18 @@ function Equipment({ loading, recipe }: EquipmentProps) {
           <>
             {recipe?.equipment?.length ? (
               <>
-                {sortBy(recipe.equipment, "description").map((equipment) => (
-                  <Box key={equipment.id}>
-                    <Anchor
-                      component={Link}
-                      to={`/recipe/${recipe.id}/equipment/${equipment.id}/edit`}
-                    >
-                      {equipment.description}
-                    </Anchor>
-                  </Box>
-                ))}
+                <List>
+                  {sortBy(recipe.equipment, "description").map((equipment) => (
+                    <List.Item key={equipment.id}>
+                      <Anchor
+                        component={Link}
+                        to={`/recipe/${recipe.id}/equipment/${equipment.id}/edit`}
+                      >
+                        {equipment.description}
+                      </Anchor>
+                    </List.Item>
+                  ))}
+                </List>
               </>
             ) : (
               <Text color="dimmed">No equipment yet.</Text>
