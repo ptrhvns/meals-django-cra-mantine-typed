@@ -67,7 +67,9 @@ function NotesEditForm() {
   const { recipeId } = useParams() as { recipeId: string };
 
   const { getInputProps, onSubmit, setFieldError, setFieldValue } = useForm({
-    initialValues: {},
+    initialValues: {
+      notes: "",
+    },
   });
 
   useEffect(() => {
