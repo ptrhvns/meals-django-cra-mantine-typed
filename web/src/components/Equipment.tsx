@@ -47,20 +47,18 @@ function Equipment({ loading, recipe }: EquipmentProps) {
         ) : (
           <>
             {recipe?.equipment?.length ? (
-              <>
-                <List>
-                  {sortBy(recipe.equipment, "description").map((equipment) => (
-                    <List.Item key={equipment.id}>
-                      <Anchor
-                        component={Link}
-                        to={`/recipe/${recipe.id}/equipment/${equipment.id}/edit`}
-                      >
-                        {equipment.description}
-                      </Anchor>
-                    </List.Item>
-                  ))}
-                </List>
-              </>
+              <List>
+                {sortBy(recipe.equipment, "description").map((equipment) => (
+                  <List.Item key={equipment.id}>
+                    <Anchor
+                      component={Link}
+                      to={`/recipe/${recipe.id}/equipment/${equipment.id}/edit`}
+                    >
+                      {equipment.description}
+                    </Anchor>
+                  </List.Item>
+                ))}
+              </List>
             ) : (
               <Text color="dimmed">No equipment yet.</Text>
             )}
