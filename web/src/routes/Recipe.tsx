@@ -1,3 +1,4 @@
+import Directions from "../components/Directions";
 import Equipment from "../components/Equipment";
 import Ingredients from "../components/Ingredients";
 import Navbar from "../components/Navbar";
@@ -167,6 +168,7 @@ export default function Recipe() {
             <Notes loading={loading} recipe={recipe} />
             <Equipment loading={loading} recipe={recipe} />
             <Ingredients loading={loading} recipe={recipe} />
+            <Directions loading={loading} recipe={recipe} />
           </Box>
 
           <Box mt="1.2rem">
