@@ -155,6 +155,7 @@ export function useApi(): UseApiReturn {
         (response.status === 401 || response.status === 403)
       ) {
         logout(() => navigate(WEB_ROUTES.login()));
+        console.error("Request was unauthorized:", response);
         return {
           isError: true,
           message: "Your request was not authorized. Try logging in.",
@@ -170,6 +171,7 @@ export function useApi(): UseApiReturn {
           json = {};
         }
 
+        console.error("Response was an error:", response);
         return {
           isError: true,
           message: json.message ?? "The response to your request was an error.",
