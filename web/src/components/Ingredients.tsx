@@ -50,15 +50,20 @@ function Ingredients({ loading, recipe }: IngredientsProps) {
               <List>
                 {recipe.ingredients.map((ingredient) => (
                   <List.Item key={ingredient.id}>
-                    {join(
-                      compact([
-                        ingredient.amount,
-                        ingredient?.unit?.name,
-                        ingredient?.brand?.name,
-                        ingredient?.food?.name,
-                      ]),
-                      " "
-                    )}
+                    <Anchor
+                      component={Link}
+                      to={`/recipe/${recipe.id}/ingredient/${ingredient.id}/edit`}
+                    >
+                      {join(
+                        compact([
+                          ingredient.amount,
+                          ingredient?.unit?.name,
+                          ingredient?.brand?.name,
+                          ingredient?.food?.name,
+                        ]),
+                        " "
+                      )}
+                    </Anchor>
                   </List.Item>
                 ))}
               </List>

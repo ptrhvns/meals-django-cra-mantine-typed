@@ -6,7 +6,10 @@ from main.views.equipment_dissociate import equipment_dissociate
 from main.views.equipment_search import equipment_search
 from main.views.equipment_update import equipment_update
 from main.views.food_search import food_search
+from main.views.ingredient import ingredient
 from main.views.ingredient_associate import ingredient_associate
+from main.views.ingredient_destroy import ingredient_destroy
+from main.views.ingredient_update import ingredient_update
 from main.views.login import login
 from main.views.logout import logout
 from main.views.notes import notes
@@ -45,7 +48,10 @@ __all__ = [
     "equipment_search",
     "equipment_update",
     "food_search",
+    "ingredient",
     "ingredient_associate",
+    "ingredient_destroy",
+    "ingredient_update",
     "login",
     "logout",
     "notes",

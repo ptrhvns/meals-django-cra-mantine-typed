@@ -3,6 +3,7 @@ import EquipmentCreateForm from "./routes/EquipmentCreateForm";
 import EquipmentEditForm from "./routes/EquipmentEditForm";
 import Home from "./routes/Home";
 import IngredientCreateForm from "./routes/IngredientCreateForm";
+import IngredientEditForm from "./routes/IngredientEditForm";
 import Login from "./routes/Login";
 import NotesEditForm from "./routes/NotesEditForm";
 import NotFound from "./routes/NotFound";
@@ -49,6 +50,11 @@ function App() {
         <Route
           path="/recipe/:recipeId/ingredients/new"
           element={<IngredientCreateForm />}
+        />
+
+        <Route
+          path="/recipe/:recipeId/ingredient/:ingredientId/edit"
+          element={<IngredientEditForm />}
         />
 
         <Route
