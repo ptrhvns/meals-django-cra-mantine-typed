@@ -209,7 +209,7 @@ function RatingEditForm() {
 
                 <ReactRating
                   className={classes.rating}
-                  onChange={async (value) => {
+                  onChange={async (value: number) => {
                     setSubmitting(true);
                     const routeFn = getRouteFn("ratingUpdate");
 
