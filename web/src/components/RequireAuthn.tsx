@@ -6,7 +6,7 @@ interface RequireAuthnProps {
   children: ReactNode;
 }
 
-function RequireAuthn({ children }: RequireAuthnProps) {
+export default function RequireAuthn({ children }: RequireAuthnProps) {
   const authn = useAuthn();
   const location = useLocation();
 
@@ -16,5 +16,3 @@ function RequireAuthn({ children }: RequireAuthnProps) {
 
   return <>{children}</>;
 }
-
-export default RequireAuthn;

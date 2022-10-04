@@ -6,12 +6,10 @@ interface SubheaderProps {
   [key: string]: any;
 }
 
-function Subheader({ children, ...rest }: SubheaderProps) {
+export default function Subheader({ children, ...rest }: SubheaderProps) {
   return (
     <Text color="dimmed" {...rest}>
       {children}
     </Text>
   );
 }
-
-export default Subheader;

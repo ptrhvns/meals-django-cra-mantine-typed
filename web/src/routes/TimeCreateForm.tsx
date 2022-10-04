@@ -43,7 +43,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function TimeCreateForm() {
+export default function TimeCreateForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -190,5 +190,3 @@ function TimeCreateForm() {
     </RequireAuthn>
   );
 }
-
-export default TimeCreateForm;

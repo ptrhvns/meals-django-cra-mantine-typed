@@ -23,7 +23,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function RecipeTitle({ loading, recipe }: RecipeTitleProps) {
+export default function RecipeTitle({ loading, recipe }: RecipeTitleProps) {
   const { classes } = useStyles();
 
   if (recipe) {
@@ -51,5 +51,3 @@ function RecipeTitle({ loading, recipe }: RecipeTitleProps) {
 
   return null;
 }
-
-export default RecipeTitle;

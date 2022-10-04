@@ -42,7 +42,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function EquipmentCreateForm() {
+export default function EquipmentCreateForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [equipmentMatches, setEquipmentMatches] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -158,5 +158,3 @@ function EquipmentCreateForm() {
     </RequireAuthn>
   );
 }
-
-export default EquipmentCreateForm;

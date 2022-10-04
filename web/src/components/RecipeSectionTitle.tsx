@@ -14,7 +14,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function RecipeSectionTitle({ title }: RecipeSectionTitleProps) {
+export default function RecipeSectionTitle({ title }: RecipeSectionTitleProps) {
   const { classes } = useStyles();
 
   return (
@@ -23,5 +23,3 @@ function RecipeSectionTitle({ title }: RecipeSectionTitleProps) {
     </Title>
   );
 }
-
-export default RecipeSectionTitle;

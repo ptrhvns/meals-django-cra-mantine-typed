@@ -53,7 +53,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function NotesEditForm() {
+export default function NotesEditForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [confirmReset, setConfirmReset] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -258,5 +258,3 @@ function NotesEditForm() {
     </RequireAuthn>
   );
 }
-
-export default NotesEditForm;

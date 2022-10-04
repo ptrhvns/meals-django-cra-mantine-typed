@@ -52,7 +52,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function IngredientEditForm() {
+export default function IngredientEditForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [brandMatches, setBrandMatches] = useState<string[]>([]);
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
@@ -332,5 +332,3 @@ function IngredientEditForm() {
     </RequireAuthn>
   );
 }
-
-export default IngredientEditForm;

@@ -31,7 +31,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function RecipeForm() {
+export default function RecipeForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -104,5 +104,3 @@ function RecipeForm() {
     </Box>
   );
 }
-
-export default RecipeForm;

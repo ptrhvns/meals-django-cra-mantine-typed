@@ -52,7 +52,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function TagEditForm() {
+export default function TagEditForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
   const [deleteAlert, setDeleteAlert] = useState<string | undefined>(undefined);
@@ -276,5 +276,3 @@ function TagEditForm() {
     </RequireAuthn>
   );
 }
-
-export default TagEditForm;

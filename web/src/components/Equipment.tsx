@@ -17,7 +17,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function Equipment({ loading, recipe }: EquipmentProps) {
+export default function Equipment({ loading, recipe }: EquipmentProps) {
   const { classes } = useStyles();
 
   return (
@@ -68,5 +68,3 @@ function Equipment({ loading, recipe }: EquipmentProps) {
     </RecipeSection>
   );
 }
-
-export default Equipment;

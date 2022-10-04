@@ -28,7 +28,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function LoginForm() {
+export default function LoginForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const authn = useAuthn();
@@ -106,5 +106,3 @@ function LoginForm() {
     </Box>
   );
 }
-
-export default LoginForm;

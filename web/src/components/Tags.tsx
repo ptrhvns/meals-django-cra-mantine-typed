@@ -36,7 +36,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function Tags({ loading, recipe }: RecipeTagProps) {
+export default function Tags({ loading, recipe }: RecipeTagProps) {
   const { classes } = useStyles();
 
   return (
@@ -82,5 +82,3 @@ function Tags({ loading, recipe }: RecipeTagProps) {
     </RecipeSection>
   );
 }
-
-export default Tags;

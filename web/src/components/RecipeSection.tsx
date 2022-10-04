@@ -13,7 +13,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function RecipeSection({ children }: RecipeSectionProps) {
+export default function RecipeSection({ children }: RecipeSectionProps) {
   const { classes } = useStyles();
 
   return (
@@ -22,5 +22,3 @@ function RecipeSection({ children }: RecipeSectionProps) {
     </Box>
   );
 }
-
-export default RecipeSection;

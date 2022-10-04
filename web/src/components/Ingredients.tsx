@@ -17,7 +17,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function Ingredients({ loading, recipe }: IngredientsProps) {
+export default function Ingredients({ loading, recipe }: IngredientsProps) {
   const { classes } = useStyles();
 
   return (
@@ -76,5 +76,3 @@ function Ingredients({ loading, recipe }: IngredientsProps) {
     </RecipeSection>
   );
 }
-
-export default Ingredients;

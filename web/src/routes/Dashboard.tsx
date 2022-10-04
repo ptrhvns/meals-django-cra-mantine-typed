@@ -5,7 +5,7 @@ import RequireAuthn from "../components/RequireAuthn";
 import { buildTitle } from "../lib/utils";
 import { Helmet } from "react-helmet-async";
 
-function Dashboard() {
+export default function Dashboard() {
   return (
     <RequireAuthn>
       <Helmet>
@@ -20,5 +20,3 @@ function Dashboard() {
     </RequireAuthn>
   );
 }
-
-export default Dashboard;

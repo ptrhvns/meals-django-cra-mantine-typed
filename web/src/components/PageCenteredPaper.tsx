@@ -29,7 +29,7 @@ export interface PageCenteredPaperProps {
   children: React.ReactNode;
 }
 
-function PageCenteredPaper({ children }: PageCenteredPaperProps) {
+export default function PageCenteredPaper({ children }: PageCenteredPaperProps) {
   const { classes } = useStyles();
 
   return (
@@ -52,5 +52,3 @@ function PageCenteredPaper({ children }: PageCenteredPaperProps) {
     </Center>
   );
 }
-
-export default PageCenteredPaper;

@@ -12,10 +12,8 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function RecipeSectionHeader({ children }: RecipeSectionHeaderProps) {
+export default function RecipeSectionHeader({ children }: RecipeSectionHeaderProps) {
   const { classes } = useStyles();
 
   return <Box className={classes.titleWrapper}>{children}</Box>;
 }
-
-export default RecipeSectionHeader;

@@ -7,7 +7,7 @@ import { buildTitle } from "../lib/utils";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
-function Signup() {
+export default function Signup() {
   return (
     <RequireGuest>
       <Helmet>
@@ -34,5 +34,3 @@ function Signup() {
     </RequireGuest>
   );
 }
-
-export default Signup;

@@ -30,7 +30,7 @@ interface RecipeData {
   title: string;
 }
 
-function RecipeList() {
+export default function RecipeList() {
   const [error, setError] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
   const [pagination, setPagination] = useState<PaginationData | undefined>(
@@ -138,5 +138,3 @@ function RecipeList() {
     </>
   );
 }
-
-export default RecipeList;

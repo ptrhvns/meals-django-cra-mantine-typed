@@ -43,7 +43,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function IngredientCreateForm() {
+export default function IngredientCreateForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [brandMatches, setBrandMatches] = useState<string[]>([]);
   const [foodMatches, setFoodMatches] = useState<string[]>([]);
@@ -205,5 +205,3 @@ function IngredientCreateForm() {
     </RequireAuthn>
   );
 }
-
-export default IngredientCreateForm;

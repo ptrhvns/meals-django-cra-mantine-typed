@@ -50,7 +50,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function ServingsEditForm() {
+export default function ServingsEditForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [confirmReset, setConfirmReset] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -257,5 +257,3 @@ function ServingsEditForm() {
     </RequireAuthn>
   );
 }
-
-export default ServingsEditForm;

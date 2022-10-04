@@ -43,7 +43,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function TagCreateForm() {
+export default function TagCreateForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [tagMatches, setTagMatches] = useState<string[]>([]);
@@ -159,5 +159,3 @@ function TagCreateForm() {
     </RequireAuthn>
   );
 }
-
-export default TagCreateForm;

@@ -43,7 +43,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function RecipeTitleForm() {
+export default function RecipeTitleForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -172,5 +172,3 @@ function RecipeTitleForm() {
     </RequireAuthn>
   );
 }
-
-export default RecipeTitleForm;

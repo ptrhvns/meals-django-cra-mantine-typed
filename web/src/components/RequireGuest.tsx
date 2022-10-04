@@ -6,7 +6,7 @@ interface RequireGuestProps {
   children: ReactNode;
 }
 
-function RequireGuest({ children }: RequireGuestProps) {
+export default function RequireGuest({ children }: RequireGuestProps) {
   const authn = useAuthn();
 
   if (authn.authenticated) {
@@ -15,5 +15,3 @@ function RequireGuest({ children }: RequireGuestProps) {
 
   return <>{children}</>;
 }
-
-export default RequireGuest;

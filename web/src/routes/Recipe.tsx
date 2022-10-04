@@ -44,7 +44,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function Recipe() {
+export default function Recipe() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
   const [confirmDeleteAlert, setConfirmDeleteAlert] = useState<
@@ -180,5 +180,3 @@ function Recipe() {
     </RequireAuthn>
   );
 }
-
-export default Recipe;

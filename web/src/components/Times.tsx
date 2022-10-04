@@ -21,7 +21,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function Times({ loading, recipe }: TimesProps) {
+export default function Times({ loading, recipe }: TimesProps) {
   const { classes } = useStyles();
 
   return (
@@ -74,5 +74,3 @@ function Times({ loading, recipe }: TimesProps) {
     </RecipeSection>
   );
 }
-
-export default Times;

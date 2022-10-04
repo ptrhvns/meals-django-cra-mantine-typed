@@ -28,7 +28,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function Rating({ loading, recipe }: RatingProps) {
+export default function Rating({ loading, recipe }: RatingProps) {
   const { classes } = useStyles();
 
   return (
@@ -73,5 +73,3 @@ function Rating({ loading, recipe }: RatingProps) {
     </RecipeSection>
   );
 }
-
-export default Rating;

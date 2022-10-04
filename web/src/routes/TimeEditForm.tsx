@@ -52,7 +52,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function TimeEditForm() {
+export default function TimeEditForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
   const [deleteAlert, setDeleteAlert] = useState<string | undefined>(undefined);
@@ -322,5 +322,3 @@ function TimeEditForm() {
     </RequireAuthn>
   );
 }
-
-export default TimeEditForm;

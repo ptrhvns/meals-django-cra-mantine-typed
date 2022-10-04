@@ -51,7 +51,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function EquipmentEditForm() {
+export default function EquipmentEditForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
   const [deleteAlert, setDeleteAlert] = useState<string | undefined>(undefined);
@@ -277,5 +277,3 @@ function EquipmentEditForm() {
     </RequireAuthn>
   );
 }
-
-export default EquipmentEditForm;

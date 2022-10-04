@@ -13,7 +13,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function RecipeNew() {
+export default function RecipeNew() {
   const { classes } = useStyles();
 
   return (
@@ -46,5 +46,3 @@ function RecipeNew() {
     </RequireAuthn>
   );
 }
-
-export default RecipeNew;

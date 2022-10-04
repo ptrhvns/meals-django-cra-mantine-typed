@@ -52,7 +52,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function Navbar() {
+export default function Navbar() {
   const [error, setError] = useState<string | undefined>(undefined);
   const authn = useAuthn();
   const { classes } = useStyles();
@@ -135,5 +135,3 @@ function Navbar() {
     </>
   );
 }
-
-export default Navbar;

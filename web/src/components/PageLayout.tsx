@@ -19,7 +19,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function PageLayout({ children, containerClassName }: PageLayoutProps) {
+export default function PageLayout({ children, containerClassName }: PageLayoutProps) {
   const { classes, cx } = useStyles();
 
   return (
@@ -30,5 +30,3 @@ function PageLayout({ children, containerClassName }: PageLayoutProps) {
     </Box>
   );
 }
-
-export default PageLayout;

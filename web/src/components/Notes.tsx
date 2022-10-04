@@ -16,7 +16,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function Notes({ loading, recipe }: NotesProps) {
+export default function Notes({ loading, recipe }: NotesProps) {
   const { classes } = useStyles();
 
   return (
@@ -52,5 +52,3 @@ function Notes({ loading, recipe }: NotesProps) {
     </RecipeSection>
   );
 }
-
-export default Notes;

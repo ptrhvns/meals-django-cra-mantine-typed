@@ -28,7 +28,7 @@ const useStyles = createStyles((_theme) => ({
   },
 }));
 
-function SignupConfirmation() {
+export default function SignupConfirmation() {
   const [confirming, setConfirming] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [message, setMessage] = useState<string | undefined>(undefined);
@@ -117,5 +117,3 @@ function SignupConfirmation() {
     </RequireGuest>
   );
 }
-
-export default SignupConfirmation;

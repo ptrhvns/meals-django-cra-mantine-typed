@@ -16,7 +16,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-function Servings({ loading, recipe }: ServingsProps) {
+export default function Servings({ loading, recipe }: ServingsProps) {
   const { classes } = useStyles();
   const servings = parseFloat(recipe?.servings || "0");
 
@@ -57,5 +57,3 @@ function Servings({ loading, recipe }: ServingsProps) {
     </RecipeSection>
   );
 }
-
-export default Servings;

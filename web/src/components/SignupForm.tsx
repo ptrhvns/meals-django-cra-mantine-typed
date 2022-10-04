@@ -37,7 +37,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function SignupForm() {
+export default function SignupForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [success, setSuccess] = useState<string | undefined>(undefined);
@@ -136,5 +136,3 @@ function SignupForm() {
     </>
   );
 }
-
-export default SignupForm;

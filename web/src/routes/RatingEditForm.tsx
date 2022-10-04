@@ -61,7 +61,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function RatingEditForm() {
+export default function RatingEditForm() {
   const [alert, setAlert] = useState<string | undefined>(undefined);
   const [confirmReset, setConfirmReset] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -279,5 +279,3 @@ function RatingEditForm() {
     </RequireAuthn>
   );
 }
-
-export default RatingEditForm;

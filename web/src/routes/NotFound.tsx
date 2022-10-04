@@ -4,7 +4,7 @@ import { buildTitle } from "../lib/utils";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
-function NotFound() {
+export default function NotFound() {
   return (
     <>
       <Helmet>
@@ -26,5 +26,3 @@ function NotFound() {
     </>
   );
 }
-
-export default NotFound;
