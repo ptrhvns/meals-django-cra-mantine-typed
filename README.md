@@ -127,6 +127,7 @@ The following assumes the use of a Linux (Ubuntu 20.04) development environment.
 
   ```sh
   cd api
+  . .venv/bin/activate
   python manage.py migrate
   ```
 
@@ -134,6 +135,7 @@ The following assumes the use of a Linux (Ubuntu 20.04) development environment.
 
   ```sh
   cd api
+  . .venv/bin/activate
   python manage.py createsuperuser
   ```
 
