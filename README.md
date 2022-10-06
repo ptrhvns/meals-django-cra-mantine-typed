@@ -110,7 +110,7 @@ The following assumes the use of a Linux (Ubuntu 20.04) development environment.
   npm install
   ```
 
-- Setup environment variables for api application:
+- Setup environment variables for API application:
 
   ```sh
   cd api
