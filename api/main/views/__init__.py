@@ -1,6 +1,8 @@
 from main.views.brand_search import brand_search
 from main.views.csrf_token import csrf_token
+from main.views.direction import direction
 from main.views.direction_create import direction_create
+from main.views.direction_update import direction_update
 from main.views.equipment import equipment
 from main.views.equipment_associate import equipment_associate
 from main.views.equipment_dissociate import equipment_dissociate
@@ -43,7 +45,9 @@ from main.views.unit_search import unit_search
 __all__ = [
     "brand_search",
     "csrf_token",
+    "direction",
     "direction_create",
+    "direction_update",
     "equipment",
     "equipment_associate",
     "equipment_dissociate",

@@ -20,7 +20,9 @@ function asRouteDictionary<T>(dictionary: { [K in keyof T]: T[K] }) {
 const API_ROUTES = asRouteDictionary({
   brandSearch: (searchTerm: string) => `/api/brand/search/?search_term=${encodeURI(searchTerm)}`,
   csrfToken: () => "/api/csrf_token/",
+  direction: (directionId: string) => `/api/direction/${directionId}/`,
   directionCreate: (recipeId: string) => `/api/recipe/${recipeId}/direction/create/`,
+  directionUpdate: (directionId: string) => `/api/direction/${directionId}/update/`,
   equipment: (equipmentId: string) => `/api/equipment/${equipmentId}/`,
   equipmentAssociate: (recipeId: string) => `/api/equipment/recipe/${recipeId}/associate/`,
   equipmentDissociate: (recipeId: string, equipmentId: string) => `/api/equipment/${equipmentId}/recipe/${recipeId}/dissociate/`,
