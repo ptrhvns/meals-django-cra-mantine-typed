@@ -8,12 +8,19 @@ from rest_framework.serializers import CharField, ModelSerializer
 from main.lib.responses import data_response
 from main.models import Time
 from main.models.brand import Brand
+from main.models.direction import Direction
 from main.models.equipment import Equipment
 from main.models.food import Food
 from main.models.ingredient import Ingredient
 from main.models.recipe import Recipe
 from main.models.tag import Tag
 from main.models.unit import Unit
+
+
+class DirectionSerializer(ModelSerializer):
+    class Meta:
+        model = Direction
+        fields = ("description", "id", "order")
 
 
 class EquipmentSerializer(ModelSerializer):
@@ -78,6 +85,7 @@ class RecipeSerializer(ModelSerializer):
     class Meta:
         model = Recipe
         fields = (
+            "directions",
             "equipment",
             "id",
             "ingredients",
@@ -89,6 +97,7 @@ class RecipeSerializer(ModelSerializer):
             "title",
         )
 
+    directions = DirectionSerializer(many=True, required=False)
     equipment = EquipmentSerializer(many=True, required=False)
     ingredients = IngredientSerializer(many=True, required=False)
     tags = TagSerializer(many=True, required=False)

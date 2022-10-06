@@ -25,5 +25,6 @@ def direction_create(request: Request, recipe_id: int) -> Response:
     if not serializer.is_valid():
         return invalid_request_data_response(serializer)
 
-    serializer.save(recipe=recipe)
+    order = Direction.objects.filter(recipe=recipe).count() + 1
+    serializer.save(order=order, recipe=recipe)
     return created_response(data=serializer.data)

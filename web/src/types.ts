@@ -1,3 +1,9 @@
+export interface DirectionsData {
+  description: string;
+  id: number;
+  order: number;
+}
+
 export interface EquipmentData {
   description: string;
   id: number;
@@ -41,6 +47,7 @@ export interface TimeData {
 }
 
 export interface RecipeData {
+  directions: DirectionsData[] | null;
   equipment: EquipmentData[] | null;
   id: number;
   ingredients: IngredientData[] | null;

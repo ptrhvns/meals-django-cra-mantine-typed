@@ -1,5 +1,6 @@
 import Dashboard from "./routes/Dashboard";
 import DirectionCreateForm from "./routes/DirectionCreateForm";
+import DirectionEditForm from "./routes/DirectionEditForm";
 import EquipmentCreateForm from "./routes/EquipmentCreateForm";
 import EquipmentEditForm from "./routes/EquipmentEditForm";
 import Home from "./routes/Home";
@@ -41,6 +42,11 @@ function App() {
         <Route
           path="/recipe/:recipeId/directions/new"
           element={<DirectionCreateForm />}
+        />
+
+        <Route
+          path="/recipe/:recipeId/direction/:directionId/edit"
+          element={<DirectionEditForm />}
         />
 
         <Route
