@@ -97,8 +97,6 @@ export default function IngredientEditForm() {
         setFieldValue("brand", response.data?.brand?.name);
         setFieldValue("food", response.data?.food?.name);
         setFieldValue("unit", response.data?.unit?.name);
-
-        setLoading(false);
       })();
     }
   });
