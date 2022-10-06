@@ -1,4 +1,5 @@
 from main.models.brand import Brand
+from main.models.direction import Direction
 from main.models.equipment import Equipment
 from main.models.food import Food
 from main.models.ingredient import Ingredient
@@ -11,6 +12,7 @@ from main.models.user import User
 
 __all__ = [
     "Brand",
+    "Direction",
     "Equipment",
     "Food",
     "Ingredient",

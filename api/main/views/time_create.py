@@ -8,9 +8,9 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer, ValidationError
 
-from main import models
 from main.lib.responses import created_response, invalid_request_data_response
-from main.models import Time
+from main.models.recipe import Recipe
+from main.models.time import Time
 
 
 class RecipeTimeCreateSerializer(ModelSerializer):
@@ -29,7 +29,7 @@ class RecipeTimeCreateSerializer(ModelSerializer):
 @api_view(http_method_names=["POST"])
 @permission_classes([IsAuthenticated])
 def time_create(request: Request, recipe_id: int) -> Response:
-    recipe = get_object_or_404(models.Recipe, pk=recipe_id, user=request.user)
+    recipe = get_object_or_404(Recipe, pk=recipe_id, user=request.user)
 
     # Eliminate fields with an empty string (e.g. unset <select> field).
     pruned_data = {k: v for k, v in request.data.items() if v}

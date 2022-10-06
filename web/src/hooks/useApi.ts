@@ -12,14 +12,15 @@ import { useNavigate } from "react-router-dom";
  * the getRouteFn() function.
  *
  */
-const asRouteDictionary = <T>(dictionary: {
-  [K in keyof T]: T[K];
-}) => dictionary;
+function asRouteDictionary<T>(dictionary: { [K in keyof T]: T[K] }) {
+  return dictionary;
+}
 
 // prettier-ignore
 const API_ROUTES = asRouteDictionary({
   brandSearch: (searchTerm: string) => `/api/brand/search/?search_term=${encodeURI(searchTerm)}`,
   csrfToken: () => "/api/csrf_token/",
+  directionCreate: (recipeId: string) => `/api/recipe/${recipeId}/direction/create/`,
   equipment: (equipmentId: string) => `/api/equipment/${equipmentId}/`,
   equipmentAssociate: (recipeId: string) => `/api/equipment/recipe/${recipeId}/associate/`,
   equipmentDissociate: (recipeId: string, equipmentId: string) => `/api/equipment/${equipmentId}/recipe/${recipeId}/dissociate/`,
