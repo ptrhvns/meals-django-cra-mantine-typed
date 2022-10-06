@@ -67,9 +67,9 @@ export default function IngredientEditForm() {
   const { classes } = useStyles();
   const { get, getRouteFn, post } = useApi();
 
-  const { recipeId, ingredientId } = useParams() as {
-    recipeId: string;
+  const { ingredientId, recipeId } = useParams() as {
     ingredientId: string;
+    recipeId: string;
   };
 
   const { getInputProps, onSubmit, setFieldError, setFieldValue } = useForm({
