@@ -19,6 +19,7 @@ Back-end / API:
 - Django
 - mypy
 - PostgreSQL
+- Python
 - Redis
 
 ## Setting Up a Development Environment
