@@ -22,6 +22,7 @@ const API_ROUTES = asRouteDictionary({
   csrfToken: () => "/api/csrf_token/",
   direction: (directionId: string) => `/api/direction/${directionId}/`,
   directionCreate: (recipeId: string) => `/api/recipe/${recipeId}/direction/create/`,
+  directionDestroy: (directionId: string) => `/api/direction/${directionId}/destroy/`,
   directionUpdate: (directionId: string) => `/api/direction/${directionId}/update/`,
   equipment: (equipmentId: string) => `/api/equipment/${equipmentId}/`,
   equipmentAssociate: (recipeId: string) => `/api/equipment/recipe/${recipeId}/associate/`,

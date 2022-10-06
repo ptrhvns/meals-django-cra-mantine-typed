@@ -8,6 +8,7 @@ urlpatterns: list[URLPattern | URLResolver] = [
     path("brand/search/", views.brand_search, name="brand_search"),
     path("csrf_token/", views.csrf_token, name="csrf_token"),
     path("direction/<int:direction_id>/", views.direction, name="direction"),
+    path("direction/<int:direction_id>/destroy/", views.direction_destroy, name="direction_destroy"),
     path("direction/<int:direction_id>/update/", views.direction_update, name="direction_update"),
     path("equipment/<int:equipment_id>/", views.equipment, name="equipment"),
     path("equipment/<int:equipment_id>/recipe/<int:recipe_id>/dissociate/", views.equipment_dissociate, name="equipment_dissociate"),
