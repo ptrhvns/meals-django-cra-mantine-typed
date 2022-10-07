@@ -39,12 +39,12 @@ const API_ROUTES = asRouteDictionary({
   notes: (recipeId: string) => `/api/notes/${recipeId}/`,
   notesDestroy: (recipeId: string) => `/api/notes/${recipeId}/destroy/`,
   notesUpdate: (recipeId: string) => `/api/notes/${recipeId}/update/`,
-  rating: (recipeId: string ) => `/api/rating/${recipeId}/`,
+  rating: (recipeId: string) => `/api/rating/${recipeId}/`,
   ratingDestroy: (recipeId: string) => `/api/rating/${recipeId}/destroy/`,
   ratingUpdate: (recipeId: string) => `/api/rating/${recipeId}/update/`,
   recipe: (recipeId: string) => `/api/recipe/${recipeId}/`,
   recipeCreate: () => "/api/recipe/create/",
-  recipeDestroy: (recipeId : string) => `/api/recipe/${recipeId}/destroy/`,
+  recipeDestroy: (recipeId: string) => `/api/recipe/${recipeId}/destroy/`,
   recipes: (page: number) => `/api/recipes/?page=${page}`,
   recipeTitleUpdate: (recipeId: string) => `/api/recipe_title/${recipeId}/update/`,
   servings: (recipeId: string) => `/api/servings/${recipeId}/`,
@@ -53,7 +53,7 @@ const API_ROUTES = asRouteDictionary({
   signup: () => "/api/signup/",
   signupConfirmation: () => "/api/signup_confirmation/",
   tag: (tagId: string) => `/api/tag/${tagId}/`,
-  tagAssociate: (recipeId: string ) => `/api/tag/recipe/${recipeId}/associate/`,
+  tagAssociate: (recipeId: string) => `/api/tag/recipe/${recipeId}/associate/`,
   tagDissociate: (recipeId: string, tagId: string) => `/api/tag/${tagId}/recipe/${recipeId}/dissociate/`,
   tagSearch: (searchTerm: string) => `/api/tag/search/?search_term=${encodeURI(searchTerm)}`,
   tagUpdate: (tagId: string) => `/api/tag/${tagId}/update/`,
@@ -81,7 +81,7 @@ function getRouteFn<K extends ApiRouteKeys>(routeKey: K): ApiRoutes[K] {
 
 // prettier-ignore
 const WEB_ROUTES = asRouteDictionary({
- login: () => '/login'
+  login: () => '/login'
 });
 
 interface ApiArguments {
