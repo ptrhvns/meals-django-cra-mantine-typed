@@ -42,12 +42,3 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.bandit]
 exclude_dirs = "main/tests"
-
-# [tool.mypy]
-exclude = "main/migrations"
-files = ["main"]
-mypy_path = "stubs"
-show_error_codes = true
-strict = true
-warn_unreachable = true
-warn_unused_ignores = true
