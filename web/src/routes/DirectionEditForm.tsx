@@ -10,6 +10,7 @@ import {
   createStyles,
   LoadingOverlay,
   Modal,
+  NativeSelect,
   Skeleton,
   Text,
   Textarea,
@@ -56,6 +57,7 @@ export default function DirectionCreateForm() {
   const [deleteAlert, setDeleteAlert] = useState<string | undefined>(undefined);
   const [deleting, setDeleting] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [maxOrder, setMaxOrder] = useState<number | undefined>(undefined);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const navigate = useNavigate();
   const shouldLoad = useRef<boolean>(true);
@@ -70,6 +72,7 @@ export default function DirectionCreateForm() {
   const { getInputProps, onSubmit, setFieldError, setFieldValue } = useForm({
     initialValues: {
       description: "",
+      order: "",
     },
   });
 
@@ -86,6 +89,8 @@ export default function DirectionCreateForm() {
         }
 
         setFieldValue("description", response.data?.description);
+        setFieldValue("order", response.data?.order);
+        setMaxOrder(response.data?.max_order);
       })();
     }
   });
@@ -229,6 +234,18 @@ export default function DirectionCreateForm() {
                     minRows={2}
                     mt="md"
                     {...getInputProps("description")}
+                  />
+
+                  <NativeSelect
+                    data={[
+                      ...Array.from(Array(maxOrder || 0).keys(), (n) =>
+                        (n + 1).toString()
+                      ),
+                    ]}
+                    disabled={submitting}
+                    label="Order"
+                    mt="md"
+                    {...getInputProps("order")}
                   />
 
                   <Box className={classes.actions} mt="xl">

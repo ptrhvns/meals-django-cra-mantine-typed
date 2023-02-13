@@ -1,3 +1,4 @@
+from django.db.models import Max
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -20,4 +21,8 @@ class DirectionSerializer(ModelSerializer):
 def direction(request: Request, direction_id: int) -> Response:
     direction = get_object_or_404(Direction, pk=direction_id, recipe__user=request.user)
     serializer = DirectionSerializer(direction)
-    return data_response(data=serializer.data)
+    data = serializer.data
+    data["max_order"] = Direction.objects.filter(recipe=direction.recipe).aggregate(
+        Max("order")
+    )["order__max"]
+    return data_response(data=data)
